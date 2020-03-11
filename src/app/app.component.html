@@ -1,0 +1,153 @@
+<ngx-dhis2-menu></ngx-dhis2-menu>
+<div style="margin-top: 60px;">
+  <div class="container-fluid no-print">
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light app-navbar"
+      appClickOutside
+      (clickOutside)="showMobileMenu = false"
+    >
+      <a class="navbar-brand app-nav-brand" href="#">
+        <img
+          [src]="'assets/icons/logo.png'"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        <span class="hidden-xs">{{ title }}</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-label="Toggle navigation"
+        (click)="toggleMobileMenu($event)"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="mobile-navbar" *ngIf="showMobileMenu" [@open]>
+        <li *ngFor="let page of pages" routerLinkActive="mobile-link-active">
+          <a [routerLink]="[page.link]" (click)="toggleMobileMenu($event)"
+            ><i class="fa fa-{{ page.icon }}"></i>&nbsp;{{ page.name }}</a
+          >
+        </li>
+      </ul>
+      <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li
+            *ngFor="let page of pages"
+            routerLinkActive="app-link-active"
+            class="nav-item"
+          >
+            <a
+              class="nav-link app-nav-link"
+              [routerLink]="[page.link]"
+              [title]="page.tooltip"
+              ><i class="fa fa-{{ page.icon }}"></i>&nbsp;{{ page.name }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--Global filters-->
+    <div class="row global-selection">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <div
+                  class="selection-block"
+                  appClickOutside
+                  (clickOutside)="showOrgUnitFilter = false"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm btn-block filter-btn"
+                    (click)="toggleOrgUnitFilter($event)"
+                    [disabled]="!(orgUnitFilter$ | async)"
+                  >
+                    <img
+                      src="assets/icons/balls-3.svg"
+                      alt=""
+                      *ngIf="!(globalFilter$ | async)"
+                    />
+                    <span *ngIf="!(globalFilter$ | async)"
+                      >Loading selected organisation unit</span
+                    >
+                    <span
+                      *ngIf="
+                        (globalFilter$ | async) && (globalFilter$ | async).ou
+                      "
+                    >
+                      {{ (globalFilter$ | async).ou.name }}
+                    </span>
+                  </button>
+                  <div
+                    class="org-unit-selection"
+                    *ngIf="showOrgUnitFilter"
+                    [@open]
+                  >
+                    <app-org-unit-filter
+                      (onOrgUnitClose)="showOrgUnitFilter = false"
+                      (onOrgUnitUpdate)="updateOrgUnit($event)"
+                      [orgUnitModel]="orgUnitFilter$ | async"
+                    ></app-org-unit-filter>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div
+                  class="selection-block"
+                  appClickOutside
+                  (clickOutside)="showPeriodFilter = false"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm btn-block filter-btn"
+                    (click)="togglePeriodFilter($event)"
+                    [disabled]="
+                      !(globalFilter$ | async) ||
+                      (currentPage$ | async) === 'data-entry'
+                    "
+                  >
+                    <img
+                      src="assets/icons/balls-3.svg"
+                      alt=""
+                      *ngIf="!(globalFilter$ | async)"
+                    />
+                    <span *ngIf="!(globalFilter$ | async)"
+                      >Loading selected period</span
+                    >
+                    <span
+                      *ngIf="
+                        (globalFilter$ | async) && (globalFilter$ | async).pe
+                      "
+                    >
+                      {{ (globalFilter$ | async).pe.name }}
+                    </span>
+                  </button>
+                  <div
+                    class="period-selection"
+                    *ngIf="showPeriodFilter && (globalFilter$ | async)"
+                    [@open]
+                  >
+                    <app-period-filter
+                      (onPeriodFilterClose)="showPeriodFilter = false"
+                      (onPeriodUpdate)="updatePeriod($event)"
+                      [selectedPeriods]="[(globalFilter$ | async).pe]"
+                      [selectedPeriodType]="(globalFilter$ | async).pe.type"
+                      [selectedYear]="(globalFilter$ | async).pe.year"
+                    ></app-period-filter>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of Global filters-->
+  </div>
+  <router-outlet></router-outlet>
+</div>

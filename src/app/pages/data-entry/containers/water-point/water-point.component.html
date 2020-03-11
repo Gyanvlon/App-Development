@@ -1,0 +1,40 @@
+<div class="col-sm-12" *ngIf="isDistributionPointViewVisible">
+  <div *ngIf="authorities" class="panel panel-default">
+    <div
+      *ngIf="
+        authorities.indexOf('M_dhis-web-dataentry') > -1 ||
+        authorities.indexOf('ALL') > -1
+      "
+      class="panel-body"
+    >
+      <h4 class="card-title">Distribution Point</h4>
+      <h6 class="card-subtitle text-muted">
+        These are details of a Distribution Point
+      </h6>
+      <app-loader
+        *ngIf="loading"
+        [loadingMessage]="
+          'Loading distribution point indicators into memory....'
+        "
+      ></app-loader>
+      <div *ngIf="!loading && (attributes$ | async).length > 0">
+        <app-statict-data-entry
+          [authorities]="authorities"
+          [parentId]="parentId"
+          [organisationUnitId]="id"
+          [actionType]="actionType"
+          (addOrUpdateDitributionPoint)="onAddOrUpdateDitributionPoint($event)"
+          (deleteDitributionPoint)="onDeleteDistributionPoint($event)"
+          (hasViewRendered)="onViewDistributionRendered($event)"
+          (cancelEditForm)="cancelEditDistributionPoint($event)"
+          [attributes]="attributes$ | async"
+        ></app-statict-data-entry>
+        <app-event-container
+          [programInfo]="programInfo$ | async"
+          [globalFilters]="globalFilter$ | async"
+          [waterpointId]="id"
+        ></app-event-container>
+      </div>
+    </div>
+  </div>
+</div>

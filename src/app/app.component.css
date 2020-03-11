@@ -1,0 +1,90 @@
+.app-navbar {
+  border-radius: 3px;
+  border: solid 1px #dddddd;
+  position: relative;
+}
+
+.app-nav-brand {
+  color:#0F97D7;
+  font-weight: 600;
+}
+
+.app-nav-brand:hover {
+  color:#0F97D7;
+}
+
+.mobile-navbar {
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 1200;
+  border: solid 1px #dddddd;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  right: 0;
+  top: 60px;
+  border-radius: 3px;
+  width: 200px;
+}
+
+.mobile-navbar > li > a {
+  padding: 10px;
+  color: #777;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.mobile-navbar > li > a:hover, .mobile-link-active {
+  background-color: #eee;
+}
+
+
+.global-selection {
+  margin-top: 30px;
+}
+
+.selection-block {
+  position: relative;
+}
+
+.org-unit-selection,
+.period-selection {
+  position: absolute;
+  z-index: 1200;
+  border: solid 1px #dddddd;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.org-unit-selection {
+  height: 340px;
+}
+
+.period-selection {
+  height: 340px;
+}
+
+.app-nav-link {
+  font-size: 14px !important;
+}
+.app-link-active {
+  color: #222222;
+  border-radius: 3px;
+  background-color: #dddddd;
+  border: solid 1px #dddddd;
+}
+
+.filter-btn {
+  border-color: #dddddd;
+}
+
+.filter-btn:hover, .filter-btn:focus {
+  background-color: #ffffff;
+  color: #222222;
+  box-shadow: none;
+}
+
+.filter-btn img {
+  height: 30px;
+}

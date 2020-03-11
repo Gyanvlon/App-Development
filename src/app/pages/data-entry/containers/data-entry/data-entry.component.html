@@ -1,0 +1,10 @@
+<div>
+  <div *ngIf="authorities" class="container-fluid">
+
+    <div *ngIf="!(authorities.indexOf('M_dhis-web-dataentry') > -1 || authorities.indexOf('ALL') > -1)" class="alert alert-danger">
+      <strong>Permission Error!</strong> You don't have permission to see the Data Entry Module. Please contact administrator.
+    </div>
+  </div>
+  <br/>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,137 @@
+<div *ngIf="_eventMessageObject">
+  <app-message [type]="_eventMessageObject.type" [messageObject]="_eventMessageObject.message"></app-message>
+</div>
+<app-loader
+  [loadingMessage]="savingMessage"
+  [imgHeight]="imgHeight"
+  class="loader-Event"
+  [showInline]="showErrorInline"
+  *ngIf="isEventLoading && (currentEvent || isNewDistributionPointCreated)"
+></app-loader>
+
+<div class="eventForm" *ngIf="currentEvent || isNewDistributionPointCreated">
+  <form class="col-12" novalidate (ngSubmit)="toggleComplete(form.value)" [formGroup]="form">
+    <div *ngFor="let prop of objectProps">
+      <label [attr.for]="prop">{{ prop.label }}</label>
+      <span *ngIf="prop.validation && prop.validation.required" style="color:#a94442" role="alert">*</span>
+
+      <div [ngSwitch]="prop.type" *ngIf="prop.show">
+        <input
+          *ngSwitchCase="'TEXT'"
+          class="form-control"
+          [formControlName]="prop.key"
+          [id]="prop.key"
+          type="text"
+          [attr.disabled]="isEventCompleted || isNewDistributionPointCreated || prop.disabled ? '' : null"
+          (change)="changedInput(prop.key)"
+          [ngClass]="showChangedFieldCss(prop.key)"
+        />
+        <input
+          *ngSwitchCase="'INTEGER_ZERO_OR_POSITIVE'"
+          class="form-control"
+          [formControlName]="prop.key"
+          [id]="prop.key"
+          type="number"
+          min="0"
+          step="1"
+          [attr.disabled]="isEventCompleted || isNewDistributionPointCreated || prop.disabled ? '' : null"
+          (change)="changedInput(prop.key)"
+          [ngClass]="showChangedFieldCss(prop.key)"
+        />
+        <input
+          *ngSwitchCase="'INTEGER_POSITIVE'"
+          class="form-control"
+          [formControlName]="prop.key"
+          [id]="prop.key"
+          type="number"
+          min="1"
+          step="1"
+          [attr.disabled]="isEventCompleted || isNewDistributionPointCreated || prop.disabled ? '' : null"
+          (change)="changedInput(prop.key)"
+          [ngClass]="showChangedFieldCss(prop.key)"
+        />
+        <input
+          *ngSwitchCase="'INTEGER'"
+          class="form-control"
+          [formControlName]="prop.key"
+          [id]="prop.key"
+          type="number"
+          [attr.disabled]="isEventCompleted || isNewDistributionPointCreated || prop.disabled ? '' : null"
+          (change)="changedInput(prop.key)"
+          [ngClass]="showChangedFieldCss(prop.key)"
+        />
+        <input
+          *ngSwitchCase="'NUMBER'"
+          class="form-control"
+          [formControlName]="prop.key"
+          [id]="prop.key"
+          type="number"
+          [attr.disabled]="isEventCompleted || isNewDistributionPointCreated || prop.disabled ? '' : null"
+          (change)="changedInput(prop.key)"
+          [ngClass]="showChangedFieldCss(prop.key)"
+        />
+
+        <div *ngSwitchCase="'radio'">
+          <label *ngFor="let option of prop.options">
+            <input
+              type="radio"
+              class="form-control"
+              [name]="prop.key"
+              [formControlName]="prop.key"
+              [value]="option.value"
+              (change)="changedInput(prop.key)"
+              [ngClass]="showChangedFieldCss(prop.key)"
+            />
+            {{ option.label }}
+          </label>
+        </div>
+
+        <div *ngIf="!(isEventCompleted || isNewDistributionPointCreated || prop.disabled) && prop.type == 'select'">
+          <app-select
+            name="attribute"
+            [selected]="form.get(prop.key).value"
+            [options]="filterOptions(prop.options, prop.hideOutOptions)"
+            [settings]="selectionInputSettings"
+            (valueSelected)="customValueSelected($event, prop.key)"
+            [ngClass]="showChangedFieldCss(prop.key)"
+          >
+          </app-select>
+        </div>
+        <!-- Since you custom select cant be disabled then show disabled normal select -->
+        <div *ngIf="(isEventCompleted || isNewDistributionPointCreated || prop.disabled) && prop.type == 'select'">
+          <select [formControlName]="prop.key" class="form-control" [attr.disabled]="true">
+            <option value="null" *ngIf="!prop.value"> Select {{ prop.label }}</option>
+            <option [value]="prop.value" *ngIf="prop.value">{{ getOptionValue(prop.options, prop.value) }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="error" *ngIf="form.get(prop.key).invalid && (form.get(prop.key).dirty || form.get(prop.key).touched)">
+        <div *ngIf="form.get(prop.key).errors.required">{{ prop.label }} is required.</div>
+      </div>
+      <div class="small text-warning" *ngIf="prop.warning">
+        {{ prop.warning }}
+      </div>
+    </div>
+    <p class="bottom-p">
+      <span class="small" *ngIf="isEventCompleted"
+        >Completed on {{ currentEvent.completedDate || today | date: 'yyyy-MM-dd' }} by
+        {{ currentEvent.completedBy }}</span
+      >
+      <span class="small" *ngIf="!isEventCompleted && currentEvent"
+        >Stored on {{ currentEvent.lastUpdated | date: 'yyyy-MM-dd' }} by {{ currentEvent.storedBy || 'Unknown' }}</span
+      >
+      <button type="submit" [disabled]="isNewDistributionPointCreated || isEventLoading" class="btn btn-warning mt-1">
+        {{
+          isEventCompleted
+            ? isEventSubmitting
+              ? 'Undoing Submit ...'
+              : 'Undo submit'
+            : isEventSubmitting
+            ? 'Submiting ...'
+            : 'Submit'
+        }}
+      </button>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+<div class="container-fluid dashboard-container">
+  <div class="row no-print">
+    <div class="col-12">
+      <app-dashboard-progress></app-dashboard-progress>
+    </div>
+  </div>
+  <div class="row" *ngIf="(currentDashboard$ | async)?.id === 'reports'">
+    <div class="col-12">
+      <app-report [visualizationObjects]="visualizationObjects$ | async" [loading]="visualizationLoading$ | async"
+        [globalFilter]="globalFilters$ | async" [currentUser]="currentUser$ | async"></app-report>
+    </div>
+  </div>
+  <div class="row" *ngIf="(currentDashboard$ | async)?.id !== 'reports'">
+    <div class="col-12">
+      <app-visualization-list [visualizationObjects]="visualizationObjects$ | async" [currentUser]="currentUser$ | async"></app-visualization-list>
+    </div>
+  </div>
+  <div class="row welcoming-block" *ngIf="!(visualizationObjects$ | async) || (visualizationObjects$ | async).length === 0">
+    <div class="col-md-4 offset-md-4 col-sm-8 offset-sm-2 text-center">
+      <img src="assets/icons/logo.png" class="img-fluid" alt="">
+    </div>
+    <div class="col-md-6 offset-md-3" *ngIf="visualizationLoading$ | async">
+      <div style="height: 7px; margin-top: 20px; margin-bottom: 20px;">
+        <app-progress-loader></app-progress-loader>
+      </div>
+    </div>
+    <div class="col-md-8 offset-md-2">
+      <h2 class="text-center"><b>{{welcomingTitle}}</b></h2>
+      <h3 class="text-center" [innerHtml]="welcomingDescription"></h3>
+    </div>
+  </div>
+</div>

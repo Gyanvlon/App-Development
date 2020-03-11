@@ -1,0 +1,182 @@
+<div class="row">
+  <div class="col-md-12">
+    <form>
+      <div>
+        <div class="btn-group pull-right" role="group" aria-label="...">
+          <button *ngIf="isSaving" disabled class="btn btn-success">
+            Saving ...
+          </button>
+          <button
+            *ngIf="!isSaving"
+            (click)="save()"
+            type="submit"
+            [ngClass]="
+              organisationUnitObject && organisationUnitObject.code == ''
+                ? 'btn-custom'
+                : 'btn btn-success'
+            "
+          >
+            <i class="fa fa-save" aria-hidden="true"></i> Save
+          </button>
+          <button
+            (click)="cancel()"
+            [disabled]="isSaving"
+            class="btn btn-danger"
+          >
+            <i class="fa fa-cancel" aria-hidden="true"></i> Cancel
+          </button>
+        </div>
+        <br />
+        <br />
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              Name
+              <span *ngIf="isEditable" style="color:#a94442" role="alert"
+                >*</span
+              >
+            </th>
+            <td>
+              <app-input
+                [editing]="isEditable"
+                [valueType]="'TEXT'"
+                [valueAttribute]="'name'"
+                [objectRefference]="organisationUnitObject"
+              ></app-input>
+              <div
+                *ngIf="
+                  isSavingActionTriggered && organisationUnitObject.name == ''
+                "
+                class="alert alert-danger"
+                role="alert"
+              >
+                Please enter the name.
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              Code
+              <span *ngIf="isEditable" style="color:#a94442" role="alert"
+                >*</span
+              >
+            </th>
+            <td>
+              <div style="display: block">
+                <div style="margin-bottom: 5px">
+                  {{ organisationUnitObject.code }}
+                  <span
+                    style="display: flex;justify-content: flex-end"
+                    *ngIf="
+                      (organisationUnitObject &&
+                        organisationUnitObject.code == '') ||
+                      isCreationOfDistributtionFailed
+                    "
+                  >
+                    <button
+                      *ngIf="isCodeGenerationActive"
+                      disabled
+                      class="btn btn-primary"
+                    >
+                      Generating ...
+                    </button>
+                    <button
+                      *ngIf="!isCodeGenerationActive"
+                      (click)="generateCodeForDistributionpoint()"
+                      class="btn btn-primary"
+                    >
+                      Generate
+                    </button>
+                  </span>
+                </div>
+                <div
+                  *ngIf="isUniqueCodeMissing"
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  Missing unique codes
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Coordinate</th>
+            <td>
+              <app-coordinate
+                [editing]="isEditable"
+                [(objectRefference)]="organisationUnitObject"
+                (onCoordinateChange)="onCoordinateChange($event)"
+              ></app-coordinate>
+            </td>
+          </tr>
+          <tr
+            *ngFor="
+              let attributeValue of (organisationUnitObject.attributeValues
+                | orderBy: 'attribute.name')
+            "
+          >
+            <th scope="row">
+              {{ attributeValue.attribute.name }}
+              <span
+                *ngIf="attributeValue.attribute.mandatory && isEditable"
+                style="color:#a94442"
+                role="alert"
+                >*</span
+              >
+            </th>
+            <td>
+              <app-input
+                [editing]="isEditable"
+                [attributeValue]="attributeValue"
+                [(objectRefference)]="organisationUnitObject"
+                (valueUpdate)="onValueUpdate($event)"
+              ></app-input>
+              <div
+                *ngIf="
+                  isSavingActionTriggered &&
+                  attributeValue.value == '' &&
+                  attributeValue.attribute.mandatory
+                "
+                class="alert alert-danger"
+                role="alert"
+              >
+                Please
+                <span *ngIf="attributeValue.attribute.optionSet">select</span>
+                <span *ngIf="!attributeValue.attribute.optionSet">enter</span>
+                {{ attributeValue.attribute.name }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="isEditable" class="btn-group pull-right" role="group">
+        <button *ngIf="isSaving" disabled class="btn btn-success">
+          Saving ...
+        </button>
+        <button
+          *ngIf="!isSaving"
+          (click)="save()"
+          type="submit"
+          [ngClass]="
+            organisationUnitObject && organisationUnitObject.code == ''
+              ? 'btn-custom'
+              : 'btn btn-success'
+          "
+        >
+          <i class="fa fa-save" aria-hidden="true"></i> Save
+        </button>
+        <button (click)="cancel()" [disabled]="isSaving" class="btn btn-danger">
+          <i class="fa fa-cancel" aria-hidden="true"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

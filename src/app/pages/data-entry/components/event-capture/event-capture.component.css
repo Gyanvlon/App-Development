@@ -1,0 +1,17 @@
+.error {
+  color: red;
+}
+
+.bottom-p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img.balls-loader {
+  height: 40px !important;
+}
+
+.eventForm {
+  border: 1px solid #dee2e6;
+}
