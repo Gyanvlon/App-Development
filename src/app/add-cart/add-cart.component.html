@@ -1,0 +1,27 @@
+<div class="content">
+ <marquee scrollamount="30"> <h1 class="header">Here is cart Item</h1></marquee>
+  <br>
+  <div class="footer">
+      <label>
+        Total no of Item: {{counts}}
+      </label>
+      <br>
+      <label>
+        Tolal Price:  ₹{{totalprice}}
+      </label>
+    </div>
+    <div *ngFor="let product of products; let i = index" class="container">
+    <p> {{product.name}} </p>
+    <p>Total prices: {{product.element}} X ₹{{product.price}} = ₹{{product.prices}}</p>
+    <button class="btn btn-primary" (click)="Plus(product.price, i)">+</button>
+    Total no of item: {{count}} X {{product.element}} = {{product.element}}
+    <button class="btn btn-primary" [disabled] ="buttons[i]" (click)="Minus(product.price, i)">-</button>
+    <br>
+    <br>
+    <button class="btn btn-primary" id="del" (click)="delete(i)">Delete</button>
+  </div> 
+  <div class="cartbtn">
+   <label> <button class="btn btn-primary" (click)="clear()">Clear Cart</button></label>
+    <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+    <Button routerLink='checkout' class="btn btn-primary">Checkout</Button>
+  </div>

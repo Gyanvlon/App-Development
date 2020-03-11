@@ -1,0 +1,23 @@
+  .content{
+    padding: 10px 10px;
+    font-size: 20px;
+    padding-right: 600px;
+    padding-left: 200px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: rgb(54, 221, 250);
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .header{
+    padding: 10px 10px;
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 3px;
+    display: inline-block;
+    background-color: rgb(250, 51, 190);
+    border-radius: 5px;
+    margin-left: 300px;
+   }

@@ -1,0 +1,27 @@
+.content{
+    padding: 30px 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: rgb(77, 206, 206);
+    border-radius: 20px;
+    margin-bottom: 30px;
+    margin-left: 200px;
+  }
+  .btn{
+    margin: 20px;
+    margin-left: 100px
+ }
+ .count{
+  padding: 20px 10px;
+  font-size: 20px;
+  text-decoration: none;
+  display: inline-block;
+  background-color: rgb(101, 240, 47);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  
+}

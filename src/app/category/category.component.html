@@ -1,0 +1,7 @@
+ <div >
+  <div *ngFor="let category of categories[0] | keyvalue" id="cat" class="catcss">
+    <a routerLink='{{category.key}}'>{{category.key}}</a>
+  </div>
+  <button routerLink='cart' class="btn btn-primary"> <b>Here is cart</b></button>
+</div> 
+

@@ -1,0 +1,22 @@
+
+  .btn {
+    padding: 25px;
+    color: #fdfdfd;
+    background-color: rgb(143, 32, 216);
+  } 
+   .catcss{
+    text-align: center;
+    padding: 40px 40px;
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 50px;
+    display: inline-block;
+    background-color: rgb(3, 56, 49);
+    border-radius: 10px;
+  }
+
+  .cat {
+    display: none;
+}

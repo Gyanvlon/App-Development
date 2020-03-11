@@ -1,0 +1,21 @@
+ h1{
+    padding: 40px 40px;
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 200px;
+    text-decoration: none;
+    margin-top: 50px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 40px;
+  }
+ 
+  h1:hover {
+    color: #0be503;
+    background-color: #CFD8DC;
+  }
+  h1.active {
+    color: #039be5;
+  }
+  
+  

@@ -1,0 +1,54 @@
+<form [formGroup]="Form" class="content">
+    <h1 class="header">Here is User Detail Form</h1>
+    <br>
+    <label>
+      Full Name:
+      <input type="text" formControlName="FullName" placeholder="Full name">
+    </label>
+    <div *ngIf="FullName.touched && FullName.invalid" class="alert alert-danger">
+      <div *ngIf="FullName.errors.CharacterOnly"> Please Enter the character only </div>
+      <div *ngIf="FullName.errors.UpperCaseCharacter">Name Character must be uppercase</div>
+      <div *ngIf="FullName.errors.required"> Full Name is Required</div>
+    </div>
+    <br>
+    <br>
+    <label>
+      Mobile No:
+      <input  formControlName="MobileNo" placeholder="Mobile No" required>
+    </label>
+    <div *ngIf="MobileNo.touched && MobileNo.invalid" class="alert alert-danger">
+     <div *ngIf="MobileNo.errors.NumberOnly"> Please Enter number only </div>
+    <div *ngIf="MobileNo.errors.required"> Mobile no is Required</div>
+    <div *ngIf="MobileNo.errors.NumberLength"> Mobile Number must be 10 digits</div>
+    </div>
+    <br>
+    <br>
+    <label>
+        Email:
+        <input formControlName="Email" placeholder="Email" required>
+      </label>
+      <div *ngIf="Email.touched && Email.invalid" class="alert alert-danger">
+          <div *ngIf="Email.errors.required"> Email  is Required</div>
+          <div *ngIf="Email.errors.cannotContainSpace"> Email can not space </div>
+          <div *ngIf="Email.errors.symbol">  Invalid expression (exrpression should be like xxxxxxxx12@xxxxx.xx)</div>
+      </div>
+      <br>
+    <br>
+    
+      <label>
+        Address:
+          <input type="text" formControlName="Address" placeholder="Address" required>
+        </label>
+        <br>
+    <br>
+        <div *ngIf="Address.touched && Address.invalid" class="alert alert-danger">
+          <div *ngIf="Address.errors.required"> Address  is Required</div>
+          <div *ngIf="Address.errors.firstCharacter">Address must include zip code (ex: xxxxxxxx, 012345)</div>
+          <div *ngIf="Address.errors.zipCode"> Zip code is mandatory </div>
+        </div>
+    <br>
+        <h1>Thank You!</h1>
+    <br>
+
+  </form>
+    

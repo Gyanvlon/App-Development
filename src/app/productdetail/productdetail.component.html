@@ -1,0 +1,17 @@
+
+<h1>Here is product with details</h1>
+<div class="count">
+  <label>Price: ₹{{cartService.price}}</label><br>
+  <label>Total No of Item:{{cartService.count}}</label>
+</div>
+<div *ngFor="let prodetail of productDetail"  class="content">
+  <p>{{prodetail.name}}</p>
+  <p>Price:  ₹{{prodetail.price}}</p>
+  <p>Title: {{prodetail.title}}</p>
+  <button class="btn btn-primary" (click)="plus()">+</button>
+  item:{{num}}
+  <button class="btn btn-primary" (click)="minus()" [disabled]="!showdata">-</button>
+  <button class="btn btn-primary" [disabled]="!showdata" (click)="addToCart(prodetail)" (click)="getPrice(prodetail.price)" >Add to cart</button>
+  <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+  <h1>====================================</h1>
+</div>

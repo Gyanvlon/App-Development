@@ -1,0 +1,8 @@
+   
+    <div>
+    <marquee scrollamount="30"><h2 class="header">{{para}} Category Here</h2></marquee></div>
+         <div *ngFor="let subcats of data" class="catcss">
+        <a routerLink='{{subcats.subcatname}}/{{subcats.subcatid}}'>{{subcats.subcatname}}</a><br>
+        <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+        <h2>=======</h2>
+      </div>   

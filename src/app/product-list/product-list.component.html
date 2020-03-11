@@ -1,0 +1,20 @@
+<marquee scrollamount="30">  <h1 class="header">Here is product with details</h1> </marquee>
+<div class="count">
+  <label>Price: ₹{{totPrice}}</label><br>
+  <label>Total No of Item:{{totCount}}</label>
+</div>
+<div class="search">
+  <input [(ngModel)]="queryString" placeholder="Please Enter item name">
+  <Button class="btn btn-primary">Search</Button>
+</div>
+  <div *ngFor="let products of productData | search: queryString let i = index" class="item">
+  <p>{{products.name}}</p>
+  <p>Price:  ₹{{products.price}}</p>
+  <p>Title: {{products.title}}</p>
+  <button class="btn btn-primary" (click)="plus(i, products.price)">+</button>
+  item:{{input[i]}}
+  <button class="btn btn-primary" (click)="minus(i)" [disabled]="buttons[i]">-</button>
+  <button class="btn btn-primary" (click)="addToCart(products, i, products.id, products.price)" (click)="getPrice(products.price)" [disabled]="buttons[i]" >Add to Cart</button>
+  <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+  <h1>====================================</h1>
+</div>
