@@ -1,0 +1,17 @@
+<div class="alert alert-{{type}}" role="alert" *ngIf="isError">
+  <div *ngIf="messageSet.heading">
+    <h4 class="alert-heading">{{messageSet.heading}}</h4>
+    {{messageSet.message}}
+    <div style="display: flex;justify-content: flex-end">
+      <button class="btn btn-outline-primary" (click)="reload()">Reload</button>
+    </div>
+  </div>
+  <div *ngIf="!messageSet.heading">
+    <h4 class="alert-heading"></h4>
+    {{messageObject | json}}
+  </div>
+</div>
+
+<div class="alert alert-{{type}} alert-dismissible fade show" role="alert" *ngIf="!isError">
+  {{messageSet.message}}
+</div>

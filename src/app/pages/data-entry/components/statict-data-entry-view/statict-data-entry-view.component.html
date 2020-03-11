@@ -1,0 +1,62 @@
+<div *ngIf="isLoading">
+  <app-loader [loadingMessage]="'Preparing distribution point data for rendering....'"></app-loader>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="isEditable && isEditAllowed">
+    <app-statict-data-entry-edit [attributes]="attributes" (addOrUpdateDitributionPoint)="onAddOrUpdateDitributionPoint($event)"
+      (cancelEditForm)="cancelEditDistributionPoint($event)" [organisationUnit]="organisationUnitObject"></app-statict-data-entry-edit>
+  </div>
+  <div *ngIf="!isEditable">
+    <div>
+      <button [disabled]="isDeletingActive || isDeleteNotAllowed" *ngIf="isEditAllowed" (click)="onDeleteDistributionPoint()" class="btn btn-danger pull-right">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        {{ (isDeletingActive)? 'Deleting' : 'Delete'}}
+      </button>
+      &nbsp;&nbsp;
+      <button [disabled]="isDeletingActive" *ngIf="isEditAllowed" (click)="editDistributionPoint()" class="btn btn-primary pull-right">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        Edit
+      </button>
+      &nbsp;&nbsp;
+    </div>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Name
+          </th>
+          <td>
+            {{ organisationUnitObject.name }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Code</th>
+          <td>{{organisationUnitObject.code}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Coordinate</th>
+          <td>
+            <app-coordinate [(objectRefference)]="organisationUnitObject"></app-coordinate>
+          </td>
+        </tr>
+        <tr *ngFor="let attributeValue of organisationUnitObject.attributeValues | orderBy:'attribute.name'">
+          <th scope="row">
+            {{attributeValue.attribute.name}}
+          </th>
+          <td>
+            <span *ngIf="attributeValue.attribute.valueType != 'DATE'">{{attributeValue.value}}</span>
+            <span *ngIf="attributeValue.attribute.valueType == 'DATE'">
+              <span *ngIf="attributeValue.value != ''">{{attributeValue.value | date: 'dd-MM-yyyy'}}</span>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-rc.10",
+  "name": "Distribution point",
+  "description": "Distribution point system",
+  "launch_path": "index.html",
+  "icons": {
+    "16": "assets/icons/logo.png",
+    "48": "assets/icons/logo.png",
+    "128": "assets/icons/logo.png"
+  },
+  "developer": {
+    "name": "HISPTZ",
+    "url": "https://hisptanzania.org"
+  },
+  "default_locale": "en",
+  "activities": {
+    "dhis": {
+      "href": "../../../"
+    }
+  }
+}

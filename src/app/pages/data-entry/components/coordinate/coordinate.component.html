@@ -1,0 +1,55 @@
+<div class="">
+  <table class="table table-custom table-bordered table-hover">
+    <tr>
+      <td width="90%" align="left" valign="middle" style="text-align:left">
+        {{objectRefference.coordinate}}
+        <div *ngIf="!editing">
+          <div class="form-group col-sm-12">
+            <label>Latitude</label>
+            {{lat}}
+          </div>
+          <div class="form-group col-sm-12">
+            <label>Longitude</label>
+            {{lng}}
+          </div>
+        </div>
+        <div *ngIf="editing">
+          <div class="form-group col-sm-12">
+            <label>Latitude</label>
+            <input required type="text" class="form-control" placeholder="Latitude" [(ngModel)]="lat" (ngModelChange)="onChange()">
+          </div>
+          <div class="form-group col-sm-12">
+            <label>Longitude</label>
+            <input required type="text" class="form-control" placeholder="Latitude" [(ngModel)]="lng" (ngModelChange)="onChange()">
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" [ngStyle]="{'padding':isCollapsed?'5px':'0'}">
+        <div [ngClass]="{'is-collapseds':isCollapsed,'is-not-collapseds':!isCollapsed,'is-full-screen':isFullScreen}">
+          <div class="row">
+            <div class="col-sm-12">
+              <div [ngClass]="{'panel panel-primary':isFullScreen}">
+                <div [ngClass]="{'panel-heading':isFullScreen}">
+                  <span *ngIf="editing && isFullScreen">Drag Marker to select coordinate</span>
+                  <span *ngIf="!editing && isFullScreen">Distribution Point Position</span>
+                  <a (click)="changeFullScreen()" [ngClass]="{'expand-btn':isFullScreen}" class="btn btn-default pull-right">
+                    <i *ngIf="isFullScreen" class="fa fa-expand"></i>
+                    <i *ngIf="!isFullScreen" class="fa fa-expand" tooltip="Full screen"></i>
+                  </a>
+                </div>
+                <div [ngClass]="{'panel-body':isFullScreen}" style="background-color: white">
+                  <div class="mapDiv" id="coordinateMap"></div>
+                </div>
+                <div *ngIf="isFullScreen" class="panel-footer">
+                  Latitude:{{lat}} Longitude:{{lng}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

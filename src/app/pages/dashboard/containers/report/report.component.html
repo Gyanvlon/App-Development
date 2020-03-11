@@ -1,0 +1,117 @@
+<div class="container" style="width: 1080px; margin-top: 20px;" *ngIf="!loading">
+  <div class="row no-print">
+    <div class="col-12">
+      <button
+        *ngIf="!show_warning_message && !show_sending_message && !show_other_sending_message && !show_other_warning_message && user_email != ''"
+        class="btn btn-info float-right btn-sm" title="Manual send emails now" (click)="show_warning_message=true"><span
+        class="glyphicon glyphicon-envelope"> Email All</span></button>
+      <div class="float-right" *ngIf="show_warning_message">
+        This will send emails of Last month to all subscribed users, Send Now? <br>
+        <small>You will get an email after 15 minutes</small>
+        <button class="float-right" (click)="enableSendEmail()"><span class="glyphicon glyphicon-check"></span> Yes
+        </button>
+        <button class="float-right" (click)="show_warning_message = false"><span
+          class="glyphicon glyphicon-remove"></span> No
+        </button>
+      </div>
+
+      <div class="float-right" *ngIf="show_sending_message">
+        The email is being prepared and will be send to all subscribed users
+      </div>
+
+      <!--no email warning-->
+      <div class="float-right" *ngIf="user_email == ''">
+        You can not receive emails since you have not set your email address, please update your <a
+        href="/dhis-web-user-profile/#/profile">Profile</a>!
+      </div>
+
+      <button
+        *ngIf="!show_warning_message && !show_sending_message  && !show_other_warning_message && user_email != '' && !show_other_sending_message"
+        class="btn btn-info float-right btn-sm" title="Manual send emails now" (click)="show_other_warning_message=true">
+        <span class="glyphicon glyphicon-envelope"> Email Me </span></button>
+
+      <div class="float-right" *ngIf="show_other_warning_message">
+        This will send email of last month report to {{ user_email }}, Send Now? <br>
+        <small>You will get an email after 15 minutes</small>
+        <button class="float-right" (click)="enableSendUserEmail()"><span class="glyphicon glyphicon-check"></span> Yes
+        </button>
+        <button class="float-right" (click)="show_other_warning_message = false"><span
+          class="glyphicon glyphicon-remove"></span> No
+        </button>
+      </div>
+
+      <div class="float-right" *ngIf="show_other_sending_message">
+        The email is being prepared and will be send to {{ user_email }}
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container" style="width: 1080px" *ngIf="!loading">
+
+  <!--Functional status-->
+  <fieldset *ngIf="visualizationObjects.length > 2">
+    <legend style="font-size: 1.27em;;font-weight: bold">Functionality Status:</legend>
+    <table style="width: 100%;">
+      <tr style="display: flex;">
+        <td style="width: 50%"
+            *ngFor="let visualizationObject of visualizationObjects | pickVisualization:[0,1]; let i = index"
+        >
+          <div class="half-item">
+            <div style="min-width: 100%;  margin: 0 auto;">
+              <app-visualization-card
+                [visualizationObject]="visualizationObject"
+              ></app-visualization-card>
+            </div>
+          </div>
+        </td>
+
+      </tr>
+    </table>
+  </fieldset>
+
+  <!--Reason for non functional-->
+  <fieldset *ngIf="visualizationObjects.length > 3" style="page-break-after: always">
+    <legend style="font-size: 1.27em;;font-weight: bold">Reasons for Non Functional</legend>
+    <table style="width: 100%;">
+      <tr style="display: flex;">
+        <td style="width: 50%"
+            *ngFor="let visualizationObject of visualizationObjects | pickVisualization:[2,3]"
+        >
+          <div class="half-item">
+            <div style="min-width: 100%;  margin: 0 auto;">
+              <app-visualization-card
+                [visualizationObject]="visualizationObject"
+              ></app-visualization-card>
+            </div>
+          </div>
+        </td>
+
+      </tr>
+    </table>
+  </fieldset>
+
+  <!--Reason for non functional-->
+  <fieldset *ngIf="visualizationObjects.length > 4">
+    <legend style="font-size: 1.37em;;font-weight: bold">Technology Functional Status:</legend>
+    <table style="width: 100%;">
+      <tr style="display: flex;">
+        <td style="width: 100%;" *ngFor="let visualizationObject of visualizationObjects | pickVisualization:[4]">
+          <div class="half-item">
+            <div style="min-width: 100%;  margin: 0 auto;">
+              <app-visualization-card
+                [visualizationObject]="visualizationObject"
+              ></app-visualization-card>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+  <div class="row" *ngIf="showGenerationDate">
+    <div class="col-md-12">
+      <h5 class="float-right"><b>Generated on:</b> {{dateGenerated}}</h5>
+    </div>
+  </div>
+</div>

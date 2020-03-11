@@ -1,0 +1,33 @@
+<div *ngIf="(hasErrorOccurred$ | async)">
+  <app-message
+    [type]="(messageObject$ | async).type"
+    [messageObject]="(messageObject$ | async).message"
+  >
+  </app-message>
+</div>
+
+<div *ngIf="actionType == 'add' && isEditAllowed">
+  <app-statict-data-entry-edit
+    [attributes]="attributes"
+    (addOrUpdateDitributionPoint)="onAddOrUpdateDitributionPoint($event)"
+    (cancelEditForm)="cancelEditDistributionPoint($event)"
+    [organisationUnit]="defaultOrganisationUnit"
+  ></app-statict-data-entry-edit>
+</div>
+<div *ngIf="actionType == 'view'">
+  <div *ngIf="!(currentOrganisation$ | async) && (isLoading$ | async)">
+    <app-loader
+      [loadingMessage]="'Preparing distribution point data for rendering....'"
+    ></app-loader>
+  </div>
+  <div *ngIf="(currentOrganisation$ | async)">
+    <app-statict-data-entry-view
+      [authorities]="authorities"
+      (addOrUpdateDitributionPoint)="onAddOrUpdateDitributionPoint($event)"
+      (deleteDitributionPoint)="onDeleteDistributionPoint($event)"
+      (hasViewRendered)="onViewDistributionRendered($event)"
+      [organisationUnit]="currentOrganisation$ | async"
+      [attributes]="attributes"
+    ></app-statict-data-entry-view>
+  </div>
+</div>
