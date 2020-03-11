@@ -1,0 +1,533 @@
+<section class="breadcrumb">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <a [routerLink]="['/']">Home</a>
+                &nbsp;&nbsp;>&nbsp;&nbsp;<span>Your Bag</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main shoppingcartpage">
+    <div *ngIf="!isCartLoaded">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="text-center mar-top50">Loading Cart...</h2>
+                <div class="row mar-bot50 clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isCartLoaded">
+        <ng-template *ngIf="cartItems.length == 0;then noItemsInCart else YesItemsInCart"></ng-template>
+        <ng-template #noItemsInCart>
+            <section class=" emptycartpage text-center">
+                <div class="container">
+                    <div class="emptycart">
+                        <svg width="148" height="148" viewBox="0 0 148 148" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M88.6112 47C87.8431 47 87.2223 46.3473 87.2223 45.5398V34.3006C87.2223 32.9659 86.846 32.1541 86.6557 31.9204H60.3443C60.1554 32.1541 59.7777 32.9645 59.7777 34.3006V45.5398C59.7777 46.3473 59.1569 47 58.3888 47C57.6222 47 57 46.3473 57 45.5398V34.3006C57 31.2283 58.3416 29 60.1901 29H86.8112C88.6584 29 90 31.2283 90 34.3006V45.5398C90 46.3473 89.3792 47 88.6112 47Z"
+                                fill="#A72B2A" />
+                            <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="41" y="41" width="66"
+                                height="79">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M41 41.2148H106.624V119.743H41V41.2148Z" fill="white" />
+                            </mask>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M46.071 43.9301C44.7766 43.9301 43.7217 44.9809 43.7217 46.2734V114.686C43.7217 115.978 44.7766 117.028 46.071 117.028H101.556C102.85 117.028 103.902 115.978 103.902 114.686V46.2734C103.902 44.9809 102.85 43.9301 101.556 43.9301H46.071ZM101.556 119.744H46.071C43.2739 119.744 40.9995 117.475 40.9995 114.686V46.2734C40.9995 43.4835 43.2739 41.2148 46.071 41.2148H101.556C104.35 41.2148 106.624 43.4835 106.624 46.2734V114.686C106.624 117.475 104.35 119.744 101.556 119.744Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M74 146C113.765 146 146 113.765 146 74C146 34.2355 113.765 2 74 2C34.2355 2 2 34.2355 2 74C2 113.765 34.2355 146 74 146Z"
+                                stroke="#A72B2A" stroke-width="3" />
+                        </svg>
+                        <h3>Unfortunately, Your Bag Is Empty</h3>
+                        <h4>Please Add Something In Your Bag</h4>
+                        <a [routerLink]="['/productlisting']" class="btn btn-secondary">Continue Shopping</a>
+                    </div>
+                </div>
+            </section>
+        </ng-template>
+        <ng-template #YesItemsInCart>
+            <div class="container">
+                <div class="shoppingcart">
+                    <h4 class="brgrmed">YOUR BAG</h4>
+                    <flash-messages></flash-messages>
+                </div>
+                <div class="cart-process d-none d-md-block">
+                    <div class="row steps-row">
+                        <div class="col-sm-12">
+                            <ol class="cd-multi-steps text-bottom">
+                                <li class="current">
+                                    <a href="javascript:void(0)">Finalise Order</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Place Order</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Order Summary</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-xl-9">
+
+                        <div class="cart-detail activate">
+                            <div class="mobilecartheading d-md-none d-lg-none">
+                                <h5>1. Finalise Order</h5>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a [routerLink]="['/productlisting']" class="col-primary f-18"><svg class="mr-2"
+                                        width="26" height="22" style="vertical-align: sub;" viewBox="0 0 26 22"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.99927 21L2 10.9995L10 1" stroke="#A72B2A" stroke-width="2"
+                                            stroke-linecap="round" />
+                                        <path d="M25 11H3" stroke="#A72B2A" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    Continue Shopping</a>
+                            </div>                           
+                            <div class="carttable mt-0" *ngIf="establishment1!=''">
+                                <!-- Added by me for shipping offer -->
+                                <div class="tablehead" *ngIf="establishmentIds && establishmentIds.est1 && establishmentIds.est1.estCategory!=''">
+                                    <h3 class="prbold"
+                                        *ngIf="establishmentIds && establishmentIds.est1 && establishmentIds.est1.estCategory!=''">
+                                        {{establishmentIds.est1.estCategory == 'Other' ? 'Beer & Mixers' : establishmentIds.est1.estCategory}}</h3>
+                                    <span class="col-primary"
+                                        *ngIf="establishmentIds && establishmentIds.est1 && establishmentIds.est1.deliveryMsg!=''">{{establishmentIds.est1.deliveryMsg}}</span>
+                                    <span
+                                        *ngIf="establishmentIds && establishmentIds.est1 && establishmentIds.est1.deliveryDate!=''">Delivery
+                                        Date:
+                                        {{establishmentIds.est1.deliveryDate | date: 'shortDate'}}</span>
+                                </div>
+                                <!-- If not logged in -->
+                                <div class="tablehead row" *ngIf="notLoggedIn">
+                                <div class="col-md-3">
+                                    <h3 class="prbold" *ngIf="establishmentIds[0] && establishmentIds[0].offer && establishmentIds[0].offer.establishment && establishmentIds[0].offer.establishment.category!=''">
+                                        {{establishmentIds[0].offer.establishment.category == 'Other' ? 'Beer & Mixers' : establishmentIds[0].offer.establishment.category}}</h3>
+                                </div>
+                               <div class="col-md-9"> 
+                                <span class="col-primary">{{est1Message.deliveryMsg}}</span>
+                              </div>
+                            </div>
+                                <!-- Ends by me -->
+                                <div class="tableminimumorder bg-primary"
+                                    *ngIf="deliveryMessage && deliveryMessage.est1 && deliveryMessage.est1.message!=''">
+                                    <span>{{deliveryMessage.est1.message}}</span>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Product</th>
+                                            <th>Item Price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Added by me, beer products -->
+                                    <tbody>
+                                        <tr *ngFor="let items of establishment1; let i = index;trackBy:trackByFn">
+                                            <td width="10%" class="productimg"><img
+                                                    src="{{ items.product | productImageUrl }}">
+                                            </td>
+                                            <td class="productname"> <a
+                                                    [routerLink]="['/productdetail', items.offer.id,'ALL']"
+                                                    title="{{items.product.name}}">{{items.product.name}}</a>
+                                            </td>
+                                            <td width="15%"><span class="d-block d-md-none d-lg-none">Item
+                                                    Price</span><span
+                                                    class="col-primary newprice">${{items.offer.salePrice}}</span>
+                                                <span *ngIf="items.offer.salePrice != items.offer.originalPrice"
+                                                    class="oldprice">${{items.offer.originalPrice}}</span>
+                                            </td>
+                                            <td align="center" width="5%">
+                                                <div *ngIf="isUserLoggedIn; then showLiveCart else showLocalCart">
+                                                </div>
+                                                <ng-template #showLiveCart>
+                                                    <span class="d-block d-md-none d-lg-none">Quantity</span>
+                                                    <div class="qty-input d-flex align-items-center">
+                                                        <button (click)="updateCartQuantity($event, items.id,'less')"
+                                                            class="less"><img src="/assets/images/minus.png"></button>
+                                                        <input type="number" [attr.id]="'quantityItems'+i"
+                                                            class="quantity-input"
+                                                            (ngModelChange)="quantityUpdated($event,items.id,'val',i)"
+                                                            [(ngModel)]="items.quantity" value="{{items.quantity}}" />
+                                                        <button class="more"
+                                                            (click)="updateCartQuantity($event, items.id,'more')"><img
+                                                                src="/assets/images/plus.png"></button>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                        (click)="removeFromCart(items.id)">Remove</a>
+                                                </ng-template>
+                                                <ng-template #showLocalCart>
+                                                    <span class="d-block d-md-none d-lg-none">Quantity</span>
+                                                    <div class="qty-input d-flex align-items-center">
+                                                        <button
+                                                            (click)="updateCartQuantity($event, items.offer.id,'less')"
+                                                            class="less"><img src="assets/images/minus.png"></button>
+                                                        <input type="number" class="quantity-input"
+                                                            [attr.id]="'quantityItems'+i" [attr.offerid]="'offer_'+items.offer.id"
+                                                            (ngModelChange)="quantityUpdated($event,items.offer.id,'val',i)"
+                                                            [(ngModel)]="items.quantity" value="{{items.quantity}}" />
+                                                        <button class="more"
+                                                            (click)="updateCartQuantity($event, items.offer.id,'more')"><img
+                                                                src="assets/images/plus.png"></button>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                        (click)="removeFromCart(items.offer.id)">Remove</a>
+                                                </ng-template>
+                                            </td>
+                                            <td width="15%" class="totalprice"><span
+                                                    class="d-block d-md-none d-lg-none">Total</span>${{ items.offer.salePrice | calculateCartPrice: items.quantity}}
+                                            </td>
+
+                                        </tr>
+                                        <tr class="itemnotify"
+                                            *ngIf="establishmentIds && establishmentIds.est1 && establishmentIds.est1.discountMsg!=''">
+                                            <td colspan="5" class="bg-secondary col-white" align="center">
+                                                {{establishmentIds.est1.discountMsg}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- ------------------------------------------------- -->
+                            <div class="carttable" *ngIf="establishment2!=''">
+                                <div class="tablehead"  *ngIf="establishmentIds && establishmentIds.est2 && establishmentIds.est2.estCategory!=''">
+                                    <h3 class="prbold"
+                                        *ngIf="establishmentIds && establishmentIds.est2 && establishmentIds.est2.estCategory!=''">
+                                        {{establishmentIds.est2.estCategory == 'Other' ? 'Beer & Mixers' : establishmentIds.est2.estCategory}}</h3>
+                                    <span class="col-primary"
+                                        *ngIf="establishmentIds && establishmentIds.est2 && establishmentIds.est2.deliveryMsg!=''">{{establishmentIds.est2.deliveryMsg}}</span>
+                                    <span
+                                        *ngIf="establishmentIds && establishmentIds.est2 && establishmentIds.est2.deliveryDate!=''">Delivery
+                                        Date:
+                                        {{establishmentIds.est2.deliveryDate | date: 'shortDate'}}</span>
+                                </div>
+                                <div class="tablehead" *ngIf="notLoggedIn">
+                                 <div class="col-md-3">
+                                    <h3 class="prbold" *ngIf="establishmentIds[1] && establishmentIds[1].offer && establishmentIds[1].offer.establishment && establishmentIds[1].offer.establishment.category!=''">
+                                        {{establishmentIds[1].offer.establishment.category == 'Other' ? 'Beer & Mixers' : establishmentIds[1].offer.establishment.category}}</h3>
+                                 </div>
+                                        <div class="col-md-9"> 
+                                                <span class="col-primary">{{est2Message.deliveryMsg}}</span>
+                                         </div>                                        
+                                    </div>
+                                <div class="tableminimumorder bg-primary"
+                                    *ngIf="deliveryMessage && deliveryMessage.est2 && deliveryMessage.est2.message!=''">
+                                    <span>{{deliveryMessage.est2.message}}</span>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Product</th>
+                                            <th>Item Price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Added by me, beer products -->
+                                    <tbody>
+                                        <tr *ngFor="let items of establishment2; let i = index;trackBy:trackByFn">
+                                            <td width="10%" class="productimg"><img
+                                                    src="{{ items.product | productImageUrl }}">
+                                            </td>
+                                            <td class="productname"> <a
+                                                    [routerLink]="['/productdetail', items.offer.id,'ALL']"
+                                                    title="{{items.product.name}}">{{items.product.name}}</a>
+                                            </td>
+                                            <td width="15%"><span class="d-block d-md-none d-lg-none">Item
+                                                    Price</span><span
+                                                    class="col-primary newprice">${{items.offer.salePrice}}</span>
+                                                <span *ngIf="items.offer.salePrice != items.offer.originalPrice"
+                                                    class="oldprice">${{items.offer.originalPrice}}</span>
+                                            </td>
+                                            <td align="center" width="5%">
+                                                <div *ngIf="isUserLoggedIn; then showLiveCart else showLocalCart">
+                                                </div>
+                                                <ng-template #showLiveCart>
+                                                    <span class="d-block d-md-none d-lg-none">Quantity</span>
+                                                    <div class="qty-input d-flex align-items-center">
+                                                        <button (click)="updateCartQuantity($event, items.id,'less')"
+                                                            class="less"><img src="/assets/images/minus.png"></button>
+                                                        <input type="number" [attr.id]="'quantityItems'+i"
+                                                            class="quantity-input"
+                                                            (ngModelChange)="quantityUpdated($event,items.id,'val',i)"
+                                                            [(ngModel)]="items.quantity" value="{{items.quantity}}" />
+                                                        <button class="more"
+                                                            (click)="updateCartQuantity($event, items.id,'more')"><img
+                                                                src="/assets/images/plus.png"></button>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                        (click)="removeFromCart(items.id)">Remove</a>
+                                                </ng-template>
+                                                <ng-template #showLocalCart>
+                                                    <span class="d-block d-md-none d-lg-none">Quantity</span>
+                                                    <div class="qty-input d-flex align-items-center">
+                                                        <button
+                                                            (click)="updateCartQuantity($event, items.offer.id,'less')"
+                                                            class="less"><img src="assets/images/minus.png"></button>
+                                                        <input type="text" class="quantity-input"
+                                                            [attr.id]="'quantityItems'+i" [attr.offerId]="'offer_'+items.offer.id"
+                                                            (ngModelChange)="quantityUpdated($event,items.offer.id,'val',i)"
+                                                            [(ngModel)]="items.quantity" value="{{items.quantity}}" />
+                                                        <button class="more"
+                                                            (click)="updateCartQuantity($event, items.offer.id,'more')"><img
+                                                                src="assets/images/plus.png"></button>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                        (click)="removeFromCart(items.offer.id)">Remove</a>
+                                                </ng-template>
+                                            </td>
+                                            <td width="15%" class="totalprice"><span
+                                                    class="d-block d-md-none d-lg-none">Total</span>${{ items.offer.salePrice | calculateCartPrice: items.quantity}}
+                                            </td>
+                                        </tr>
+                                        <tr class="itemnotify"
+                                            *ngIf="establishmentIds && establishmentIds.est2 && establishmentIds.est2.discountMsg!=''">
+                                            <td colspan="5" class="bg-secondary col-white" align="center">
+                                                {{establishmentIds.est2.discountMsg}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="carttable d-block d-md-none d-lg-none d-xl-none mt-0 one">
+                                <table class="table">
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="mb-0 form-group position-relative promoerror">
+                                                    <input type="text" name="promocode" id="promocode"
+                                                        [disabled]="!isUserLoggedIn" placeholder="Promo Code">
+                                                    <button type="submit" (click)="clearPromocode($event)"
+                                                        style="position: absolute;font-size: 15px;top: 12px;right: 10px;color: #A72B2A"><span
+                                                            class="fas fa-times"></span></button>
+                                                    <label class="validate-error help-block with-errors"
+                                                        id="promocodeError"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" [disabled]="!isUserLoggedIn"
+                                                    (click)="applyPromocode($event)"
+                                                    class="btn btn-secondary d-block static">Apply</button>
+
+                                                <!-- need input from html team -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><input type="number" name="tipAmount" id="tipAmount" min="0"
+                                                    placeholder="Enter tip amount" [ngModel]="tipAmount"
+                                                    (ngModelChange)="tipAmount=$event;updateTipAmount($event)">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="right"><span class="tabletotal">Subtotal:</span></td>
+                                            <td align="left"><span
+                                                    class="tabletotal">${{ cartItems | calculateSubtotal }}</span>
+                                            </td>
+                                        </tr>                                      
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="right"><span class="tabletotal">Tip:</span></td>
+                                            <td align="left"><span class="tabletotal">${{ tipAmountToDisplay}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="right"><span class="tabletotal">Promotions/Discounts:</span>
+                                            </td>
+                                            <td align="left" *ngIf="isUserLoggedIn"><span
+                                                    class="tabletotal">-${{ cartItems | calculateSavedPrice}}</span>
+                                            </td>
+                                            <td align="left" *ngIf="!isUserLoggedIn"><span class="tabletotal"
+                                                    style="font-size: 13px;color: #A72B2A;">Login for Bevvi
+                                                    Discounts</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="right"><span class="tabletotal">Tax:</span></td>
+                                            <td align="left"><span
+                                                    class="tabletotal">${{ cartItems | calculateTax }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="right"><span class="carttotal prbold">Total:</span></td>
+                                            <td align="left"><span
+                                                    class="carttotal prbold">${{ cartItems | calculateTotalPrice}}</span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <!-- ended by  me -->
+                            <div class="d-none d-xl-block d-lg-block">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a [routerLink]="['/productlisting']" class="col-primary f-18"><svg
+                                            class="mr-2 leftarrowcart" width="26" height="22"
+                                            style="vertical-align: sub;" viewBox="0 0 26 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.99927 21L2 10.9995L10 1" stroke="#A72B2A" stroke-width="2"
+                                                stroke-linecap="round" />
+                                            <path d="M25 11H3" stroke="#A72B2A" stroke-width="2"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                        Continue Shopping</a>
+                                </div>
+                            </div>
+
+                            <div class="d-block d-xl-none d-md-none d-lg-none">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a [routerLink]="['/productlisting']" class="col-primary f-18"><svg
+                                            class="mr-2 leftarrowcart" width="26" height="22"
+                                            style="vertical-align: sub;" viewBox="0 0 26 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.99927 21L2 10.9995L10 1" stroke="#A72B2A" stroke-width="2"
+                                                stroke-linecap="round" />
+                                            <path d="M25 11H3" stroke="#A72B2A" stroke-width="2"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                        Continue Shopping</a>
+                                    <button (click)="goToCartDelivery()" [disabled]="isCheckoutDisabled" type="button"
+                                        class="btn btn-primary">Check Out</button>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="cart-detail deactivate d-md-none d-lg-none">
+                            <div class="mobilecartheading">
+                                <h5>2. Place Order</h5>
+                                <!-- <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.01711 8.4633C4.76475 8.21258 4.35466 8.21258 4.1023 8.4633C3.84993 8.71402 3.84993 9.12143 4.1023 9.37214L7.08332 12.3337C7.2095 12.4591 7.36723 12.5218 7.54073 12.5218C7.5565 12.5218 7.5565 12.5218 7.57227 12.5218C7.74577 12.5061 7.91927 12.4277 8.04545 12.2867L15.5059 3.40199C15.7267 3.1356 15.6952 2.72819 15.427 2.49314C15.1589 2.27377 14.7488 2.30511 14.5122 2.57149L7.49341 10.9234L5.01711 8.4633Z" fill="#17AB13"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.752 1.37496C10.184 -0.856171 5.60782 -0.329376 2.62939 2.64547C-0.876464 6.14711 -0.876464 11.8644 2.62939 15.366C4.38232 17.1168 6.69371 18 8.98958 18C11.2854 18 13.5968 17.1168 15.3498 15.366C18.3437 12.3757 18.8556 7.78947 16.6063 4.22585C16.4201 3.93147 16.0323 3.8385 15.7376 4.02443C15.4428 4.21036 15.3498 4.59771 15.5359 4.8921C17.475 7.9599 17.0251 11.8954 14.45 14.4674C11.4406 17.4732 6.52307 17.4732 3.51361 14.4674C0.504161 11.4615 0.504161 6.54995 3.51361 3.54412C6.08871 0.987612 10.0134 0.538287 13.0849 2.44405C13.3797 2.62997 13.7675 2.53701 13.9536 2.24262C14.1398 1.94824 14.0467 1.56089 13.752 1.37496Z" fill="#4A4A4A"/> </svg> -->
+                            </div>
+                        </div>
+                        <div class="cart-detail deactivate d-md-none d-lg-none">
+                            <div class="mobilecartheading">
+                                <h5>3. Order Summery</h5>
+                                <!-- <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.01711 8.4633C4.76475 8.21258 4.35466 8.21258 4.1023 8.4633C3.84993 8.71402 3.84993 9.12143 4.1023 9.37214L7.08332 12.3337C7.2095 12.4591 7.36723 12.5218 7.54073 12.5218C7.5565 12.5218 7.5565 12.5218 7.57227 12.5218C7.74577 12.5061 7.91927 12.4277 8.04545 12.2867L15.5059 3.40199C15.7267 3.1356 15.6952 2.72819 15.427 2.49314C15.1589 2.27377 14.7488 2.30511 14.5122 2.57149L7.49341 10.9234L5.01711 8.4633Z" fill="#17AB13"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.752 1.37496C10.184 -0.856171 5.60782 -0.329376 2.62939 2.64547C-0.876464 6.14711 -0.876464 11.8644 2.62939 15.366C4.38232 17.1168 6.69371 18 8.98958 18C11.2854 18 13.5968 17.1168 15.3498 15.366C18.3437 12.3757 18.8556 7.78947 16.6063 4.22585C16.4201 3.93147 16.0323 3.8385 15.7376 4.02443C15.4428 4.21036 15.3498 4.59771 15.5359 4.8921C17.475 7.9599 17.0251 11.8954 14.45 14.4674C11.4406 17.4732 6.52307 17.4732 3.51361 14.4674C0.504161 11.4615 0.504161 6.54995 3.51361 3.54412C6.08871 0.987612 10.0134 0.538287 13.0849 2.44405C13.3797 2.62997 13.7675 2.53701 13.9536 2.24262C14.1398 1.94824 14.0467 1.56089 13.752 1.37496Z" fill="#4A4A4A"/> </svg> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-xl-3 d-none d-md-block d-lg-block d-xl-block">
+
+                        <div class="carttable carttableside">  
+                                <!-- <div>
+                                        <td>
+                                            <div class="mb-0">
+                                                <input type="text" name="promocode" id="promocode"
+                                                    [disabled]="!isUserLoggedIn" placeholder="Your Code">
+                                                   <label class="validate-error help-block with-errors show"
+                                                    id="promocodeError"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" [disabled]="!isUserLoggedIn"
+                                                (click)="applyPromocode($event)"
+                                                class="btn btn-secondary d-block">Apply</button>
+                                        </td>
+                                    </div>
+                                    <div>
+                                        <td>
+                                            <div class="mb-0">
+                                                <input type="number" name="tipAmount" id="tipAmount" min="0"
+                                                    placeholder="Enter tip amount" [ngModel]="tipAmount"
+                                                    (ngModelChange)="tipAmount=$event;updateTipAmount($event)">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </div>   -->
+                                    
+   
+                            <table class="table">
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <div class="mb-0">
+                                                <input type="text" name="promocode" id="promocode"
+                                                    [disabled]="!isUserLoggedIn" placeholder="Your Code">
+                                                   <label class="validate-error help-block with-errors show"
+                                                    id="promocodeError"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" [disabled]="!isUserLoggedIn"
+                                                (click)="applyPromocode($event)"
+                                                class="btn btn-secondary d-block static">Apply</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="mb-0">
+                                                <input type="number" name="tipAmount" id="tipAmount" min="0"
+                                                    placeholder="Enter tip amount" [ngModel]="tipAmount"
+                                                    (ngModelChange)="tipAmount=$event;updateTipAmount($event)">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><span class="tabletotal">Subtotal:</span></td>
+                                        <td align="left"><span
+                                                class="tabletotal">${{ cartItems | calculateSubtotal }}</span>
+                                        </td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td align="right"><span class="tabletotal">Tip:</span></td>
+                                        <td align="left"><span class="tabletotal">${{ tipAmountToDisplay}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><span class="tabletotal">Promotions/Discounts:</span>
+                                        </td>
+                                        <td align="left" *ngIf="isUserLoggedIn"><span
+                                                class="tabletotal">-${{ cartItems | calculateSavedPrice}}</span>
+                                        </td>
+                                        <td align="left" *ngIf="!isUserLoggedIn"><span class="tabletotal"
+                                                style="font-size: 13px;color: #A72B2A;">Login for Bevvi
+                                                Discounts</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><span class="tabletotal">Tax:</span></td>
+                                        <td align="left"><span class="tabletotal">${{ cartItems | calculateTax }}</span>
+                                        </td>
+                                    </tr>    
+                                    <tr>
+                                        <td align="right"><span class="carttotal prbold">Total:</span></td>
+                                        <td align="left"><span
+                                                class="carttotal prbold">${{ cartItems | calculateTotalPrice}}</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <button (click)="goToCartDelivery()" [disabled]="isCheckoutDisabled" type="button"
+                                class="btn btn-primary">Check Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</section>

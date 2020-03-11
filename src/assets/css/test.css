@@ -1,0 +1,11 @@
+.profilepage .container {
+    max-width: 970px;
+}
+
+.receipt-titles {
+    margin-right: -35px;
+}
+
+.receipt-table.table>tbody>tr>td {
+    vertical-align: middle;
+}

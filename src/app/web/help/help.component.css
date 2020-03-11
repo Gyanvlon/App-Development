@@ -1,0 +1,29 @@
+.register {
+	padding: 2px 22px !important;
+	border: 2px solid #9D2480;
+	color: #9D2480 !important;
+	border-radius: 40px;
+	margin-left: 30px;
+	margin-top: 11px;
+	max-width: 130px;
+  }
+  .faq-page .section-title h1{
+  	font-family: "Helvetica-Bold";
+  	font-size: 40px;
+  	color: #F9811E;
+  	line-height: 48px;
+  	text-align: center;
+  }
+
+  .register:hover {
+	background-color: #9D2480 !important;
+  }
+  .faq-que{
+  	color: #9D2480;
+  	line-height: 22px;
+  }
+@media screen and (max-width:767px) {
+  .faq-page{
+    padding-top: 50px;
+  }
+}

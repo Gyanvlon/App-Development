@@ -1,0 +1,223 @@
+<section class="main registerpage">
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-12">
+            <flash-messages></flash-messages>
+         </div>
+      </div>
+      <div class="row position-relative">
+         <div class="col-sm-6">
+            <div class="signin text-center">
+
+               <h2 class="section-title">
+                  Sign In
+               </h2>
+               <a (click)="signInWithFB()" class="btn btn-facebook"><span class="fab fa-facebook-square"></span>
+                  Continue with
+                  Facebook</a>
+               <form [formGroup]="loginForm" class="loginform" id="loginform" (ngSubmit)="onLogin()">
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="email" formControlName="email" name="email" required=""
+                        autocomplete="user email">
+                     <label for="input" class="control-label">Email Address*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="email.invalid && email.errors.required && loginFormSubmitted">
+                        Please enter a valid email address
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="email.invalid && !email.errors.required && email.errors.email && loginFormSubmitted">
+                        Please enter a valid email address
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="password" formControlName="password" name="password" required=""
+                        autocomplete="current-password">
+                     <label for="input" class="control-label">Password*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="password.invalid && password.errors.required && loginFormSubmitted">
+                        Password is required
+                     </label>
+                     <label class="validate-error help-block with-errors "
+                        *ngIf="password.invalid && password.errors.minlength && loginFormSubmitted">
+                        Password should be atleast {{password.errors.minlength.requiredLength}} characters long
+                     </label>
+                  </div>
+                  <a [routerLink]="['/forgotpassword']" class="forgotlink d-block">FORGOT PASSWORD?</a>
+                  <button type="submit" class="btn btn-primary btn-block">Login</button>
+               </form>
+            </div>
+         </div>
+         <div class="divider"><span class="hr">&nbsp;</span><span class="or">OR</span></div>
+         <div class="col-sm-6">
+            <div class="signup text-center">
+               <h2 class="section-title">
+                  Create Account
+               </h2>
+               <form class="loginform" [formGroup]="signupForm" id="signupForm" (ngSubmit)="onSignup()">
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="text" formControlName="username" name="username" required=""
+                        autocomplete="user email">
+                     <label for="input" class="control-label">Your First Name*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="username.errors && username.errors.required && signupFormSubmitted">
+                        Please enter Your First Name
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="text" formControlName="lastname" name="lastname" required=""
+                        autocomplete="user email">
+                     <label for="input" class="control-label">Your Last Name*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="lastname.errors && lastname.errors.required && signupFormSubmitted">
+                        Please enter Your Last Name
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="email" formControlName="s_email" name="s_email" required=""
+                        autocomplete="user email">
+                     <label for="input" class="control-label">Email Address*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="s_email.invalid && s_email.errors.required && signupFormSubmitted">
+                        Please enter a valid email address
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="s_email.invalid && !s_email.errors.required && s_email.errors.email && signupFormSubmitted">
+                        Please enter a valid email address
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="password" name="s_password" autocomplete="new-password"
+                        formControlName="s_password">
+                     <label for="input" class="control-label">Password*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="s_password.errors && s_password.errors.required && signupFormSubmitted">
+                        Password is required
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="s_password.errors && s_password.errors.minlength && signupFormSubmitted">
+                        Password should be minimum {{s_password.errors.minlength.requiredLength}} characters
+                        long
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="password" formControlName="confirm_password" name="re-password"
+                        autocomplete="new-password">
+                     <label for="input" class="control-label">Confirm Password*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="confirm_password.errors && confirm_password.errors.required && signupFormSubmitted">
+                        Confirm Password is required
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="confirm_password.errors && !confirm_password.errors.required && confirm_password.errors.notEquivalent && signupFormSubmitted">
+                        Password and Confirm Password do not match
+                     </label>
+                  </div>
+                  <label>Birthday Date</label>
+
+                  <div class="row">
+                     <div class="col">
+
+                        <div class="form-group">
+                           <input type="number" min="1" max="12" formControlName="month"
+                              autocomplete="doNotAutoComplete" name="month" class="form-control" required="">
+                           <label for="input" class="control-label">MM*</label>
+                           <label class="validate-errorn help-block with-errors"
+                              *ngIf="month.errors && month.errors.required && signupFormSubmitted">
+                              Please enter Your Birth Month
+                           </label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="(month.errors && !month.errors.required) && month.errors.max && signupFormSubmitted">
+                              Birth Month should be maximum {{month.errors.max.max}}
+                           </label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="(month.errors && !month.errors.required) && month.errors.min && signupFormSubmitted">
+                              Birth Month should be minimum {{month.errors.min.min}}
+                           </label>
+                        </div>
+                     </div>
+                     <div class="col pr-0 pl-0">
+                        <div class="form-group">
+                           <input type="number" min="1" max="31" formControlName="date" name="date" class="form-control"
+                              required="">
+                           <label for="input" class="control-label">DD*</label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="date.errors && date.errors.required && signupFormSubmitted">
+                              Please enter Your Birth Date
+                           </label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="(date.errors && !date.errors.required) && date.errors.max && signupFormSubmitted">
+                              Birth Date should be maximum {{date.errors.max.max}}
+                           </label>
+                           <label class="validate-error help-block with-errors "
+                              *ngIf="(date.errors && !date.errors.required) && date.errors.min && signupFormSubmitted">
+                              Birth Date should be minimum {{date.errors.min.min}}
+                           </label>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="form-group">
+                           <input type="number" min="{{ currentYear - 100 }}" max="{{ currentYear - 21 }}"
+                              formControlName="year" name="year" class="form-control" required="">
+                           <label for="input" class="control-label">YYYY*</label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="year.errors && year.errors.required && signupFormSubmitted">
+                              Please enter Your Birth Year
+                           </label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="(year.errors && !year.errors.required) && year.errors.max && signupFormSubmitted">
+                              Birth Year should be maximum {{year.errors.max.max}}
+                           </label>
+                           <label class="validate-error help-block with-errors"
+                              *ngIf="(year.errors && !year.errors.required) && year.errors.min && signupFormSubmitted">
+                              Birth Year should be minimum {{year.errors.min.min}}
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+
+                  <p class="mar-top20">You must be at least 21 years of age to shop with Bevvi. Any person accepting
+                     delivery of alcoholic
+                     beverages must also be 21 years of age.</p>
+                  <label class="custom-checkbox">I'm ordering for a business
+                     <input type="checkbox" (change)="businessRadioClicked($event)">
+                     <span class="checkmark"></span>
+                  </label>
+                  <div class="form-group position-relative" [ngClass]="{'disabled': !isBusiness }">
+                     <input class="form-control" [attr.disabled]="!isBusiness ? '' : null" type="text"
+                        formControlName="companyname" name="companyname">
+                     <label for="input" class="control-label">Company Name*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="companyname.errors && companyname.errors.required && signupFormSubmitted">
+                        Please enter Company Name
+                     </label>
+                  </div>
+                  <div class="form-group position-relative" [ngClass]="{'disabled': !isBusiness }">
+                     <input class="form-control" [attr.disabled]="!isBusiness ? '' : null" type="text"
+                        formControlName="companyaddress" name="companyaddress">
+                     <label for="input" class="control-label">Company Address*</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="companyaddress.errors && companyaddress.errors.required && signupFormSubmitted">
+                        Please enter Company Address
+                     </label>
+                  </div>
+                  <div class="form-group position-relative">
+                     <input class="form-control" type="text" formControlName="code" name="code">
+                     <label for="input" class="control-label">Referral Code</label>
+                  </div>
+                  <label class="custom-checkbox text-left agreebox">By Creating an Account, I agree to Bevvi’s<br>
+                     <a target="_blank" [routerLink]="['/termsOfUse']"> Terms and Condition</a> and <a target="_blank"
+                        [routerLink]="['/privacyPolicy']">Privacy Policy</a>.
+                     <input type="checkbox" [(ngModel)]="isAcceptPolicies" formControlName="acceptPolicies">
+                     <span class="checkmark"></span>
+                  </label>
+                  <label class="validate-error help-block with-errors"
+                     *ngIf="(acceptPolicies.invalid && acceptPolicies.errors.required && signupFormSubmitted) || (signupFormSubmitted && isAcceptPolicies == false)">
+                     Please agree to the Privacy Policy & Terms and Conditions
+                  </label>
+                  <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

@@ -1,0 +1,11 @@
+.color-error{color: #D3832B;}
+.color-errors{color: #D3832B;}
+.bg-color{background-color: #f5f5f5}
+.main{margin-top: 0px;padding-top: 60px;}
+.box.text-center.bartenderbox .validate-error{
+    color: #D3832B;
+    font-size: 11px;
+    left: 0;
+    right: 0;
+    font-family: 'BrandonGrotesque-Regular';
+}

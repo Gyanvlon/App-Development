@@ -1,0 +1,129 @@
+<section class="breadcrumb">
+   <div class="container">
+      <div class="row align-items-center">
+         <div class="col">
+            <a [routerLink]="['/']">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>My Account</span>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="main myaacount">
+   <div class="container">
+      <h3 class="section-title text-center">Account Details</h3>
+      <flash-messages></flash-messages>
+      <div class="box text-center">
+         <form [formGroup]="accountform" id="accountform" (ngSubmit)="onSaveProfile()">
+            <div class="row">
+               <div class="col-sm-6">
+                  <div class="form-group position-relative ">
+
+                     <input class="form-control " [ngClass]="{'filled': firstNameModel }" type="text"
+                        formControlName="firstname" name="firstname" [ngModel]="firstNameModel"
+                        value="{{firstNameModel}}" placeholder="">
+                     <label for="input" class="control-label">First Name</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="firstname.errors && firstname.errors.required  && formSubmitted">Please enter Your
+                        Name</label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="form-group position-relative">
+                     <input type="text" [ngClass]="{'filled': lastNameModel }" class="form-control"
+                        formControlName="lastname" name="lastname" [ngModel]="lastNameModel" value="{{lastNameModel}}"
+                        placeholder="">
+                     <label for="input" class="control-label">Last Name</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="lastname.errors && lastname.errors.required  && formSubmitted">
+                        Please enter Your Last Name
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="form-group position-relative ">
+                     <input class="form-control " [ngClass]="{'filled': loggedInUserData['email'] }"
+                        formControlName="email" type="email" name="email" placeholder=""
+                        value="{{loggedInUserData['email']}}" [ngModel]="loggedInUserData['email']" required="">
+                     <label for="input" class="control-label">Email</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="email.errors && email.errors.required && formSubmitted">Please enter a valid email
+                        address</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="email.invalid && email.errors.required && formSubmitted">
+                        Please enter a valid email address
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="email.invalid && !email.errors.required && email.errors.email && formSubmitted">
+                        Please enter a valid email address
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="form-group position-relative ">
+                     <input class="form-control" [ngClass]="{'filled': loggedInUserData['phoneNumber'] }"
+                        mask='(000) 000-0000' type="text" formControlName="phoneNumber" name="phoneNumber"
+                        [ngModel]="phoneNumberModel" required="">
+                     <label for="input" class="control-label">Mobile No.</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="phoneNumber.errors && phoneNumber.errors.required && formSubmitted">
+                        Please enter Phone Number
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="(phoneNumber.errors && !phoneNumber.errors.required) && phoneNumber.errors && phoneNumber.errors.minlength && formSubmitted">
+                        Phone Number should be minimum {{phoneNumber.errors.minlength.requiredLength}} digits long
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="form-group position-relative ">
+                     <input type="tel" autocomplete="off" id="cc-exp" [ngClass]="{'filled': birthday }" name="birthdayy"
+                        class="form-control" formControlName="birthdayy" value="{{birthday}}" [ngModel]="birthday"
+                        mask='99/99/9999'>
+                     <label for="input" class="control-label">Birthday (MM/DD/YYYY)</label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="birthdayy.errors && birthdayy.errors.required && formSubmitted">
+                        Please enter birthdate
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="birthdayy.hasError('invalidDate') && birthdayy.errors && formSubmitted ">
+                        Please enter valid birthdate
+                     </label>
+                     <label class="validate-error help-block with-errors"
+                        *ngIf="birthdayy.hasError('maxDate') && birthdayy.errors && formSubmitted ">
+                        Birth Year should be maximum {{birthdayy.errors.maxDate}}
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-primary">SAVE</button>
+         </form>
+      </div>
+      <h3 class="section-title text-center mt-2">PAYMENT METHODS</h3>
+      <div class="box text-center">
+         <div class="modal-cards mb-3">
+            <ng-template *ngIf="userSavedCards.length == 0;then noCardsList else yesCardsList"></ng-template>
+            <ng-template #noCardsList>
+               <h5 class="text-center">You have no Saved Cards</h5>
+            </ng-template>
+            <ng-template #yesCardsList>
+               <div id="cardsDetails" class="cards-box" *ngFor="let cards of userSavedCards; let i = index"
+                  (click)="setdefaultCard(cards.id)">
+                  <input type="radio" name="cardpayment" id="{{'Id'+i}}">
+                  <label for="{{'Id'+i}}" class="labelItems" [ngClass]="{'selected': i==0 }">
+                     <div class="d-flex align-items-end justify-content-between">
+                        <span class="text-left">**** **** **** {{cards.card.last4}}</span>
+                        <button type="button" (click)="deleteCard($event)" attr.data-card-id="{{cards.id}}"
+                           class="close">&times;</button>
+                     </div>
+                     <div class="d-flex align-items-end justify-content-between">
+                        <p>exp <span> {{cards.card.exp_month}}/{{cards.card.exp_year.toString()
+                                       | slice:-2}}</span></p>
+                        <img src="{{cards.card.brand | cardImage }}">
+                     </div>
+                  </label>
+               </div>
+            </ng-template>
+         </div>
+         <a [routerLink]="['/add-payment']" class="btn btn-primary">ADD CARD</a>
+      </div>
+   </div>
+</section>

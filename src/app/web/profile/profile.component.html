@@ -1,0 +1,77 @@
+<section class="profilepage">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2 class="padd-top50">{{ loggedInUserData['companyName']}} @{{ loggedInUserData['address']}}</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row profile-cards mar-top150 mar-bot150">
+            <div class="pro-card">
+                <h3 class="card-head">ACCOUNT INFO</h3>
+                <p class="card-body">{{ loggedInUserData['firstName']}} {{ loggedInUserData['lastName']}}
+                    <br> {{loggedInUserData['email']}}
+                </p>
+                <a [routerLink]="['/accountinfo']" class="card-edit">Edit</a>
+            </div>
+            <div class="pro-card">
+                <h3 class="card-head">MY ORDERS</h3>
+                <div *ngIf="userOrders.length == 0;then noOrders else yesOrders"></div>
+                <ng-template #noOrders>
+                    <p class="card-body">No Current Orders</p>
+                </ng-template>
+                <ng-template #yesOrders>
+                    <table class="card-body">
+                        <tr *ngFor="let orders of (userOrdersToShow | callback: filterOrders)">
+                            <td class="card-body">{{orders.pickupTime | date:'MMM, dd. EEE'}}</td>
+                            <td class="card-body">{{orders.establishment.name}}</td>
+                        </tr>
+                    </table>
+                </ng-template>
+                <a [routerLink]="['/myorders']" class="card-edit">More</a>
+            </div>
+            <div class="pro-card flex-row">
+                <h3 class="card-head">PRIMARY DELIVERY </h3>
+                <a [routerLink]="['/primarydelivery']" class="card-edit">Edit</a>
+            </div>
+            <div class="pro-card flex-row">
+                <h3 class="card-head">PAYMENT OPTIONS</h3>
+                <a href="#paymentoptions" data-toggle="modal" class="card-edit">Edit</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="paymentoptions" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md" style="max-width: 444px;margin: 0 auto;">
+
+        <!-- Modal content-->
+        <div class="modal-content text-center">
+            <button type="button" class="close" data-dismiss="modal">
+                <img src="assets/images/modal-close.png" alt="Close">
+            </button>
+            <div class="modal-body" style="padding: 20px 25px 35px;">
+                <div class="account-info-box-title">
+                    <h2>Payment Options</h2>
+                </div>
+                <ng-template *ngIf="userSavedCards.length == 0;then noCardsList else yesCardsList"></ng-template>
+                <ng-template #noCardsList>
+                    <h5 style="text-align: center;">You have no Saved Cards</h5>
+                </ng-template>
+                <ng-template #yesCardsList>
+                    <div *ngFor="let cards of userSavedCards; let i = index" class="exictingcard">
+                        <img src="{{cards.card.brand | cardImage }}" alt="" class="card-img">
+                        <span>{{cards.card.brand }} ****{{cards.card.last4}}, exp {{cards.card.exp_month}}/{{cards.card.exp_year.toString()
+                            | slice:-2}}</span>
+                        <input *ngIf="i == 0" checked class="star_payment defaultcard" (click)="setdefaultCard($event)" type="radio" name="star"
+                            id="star{{i}}" attr.data-card-id="{{cards.id}}" />
+                        <input *ngIf="i != 0" class="star_payment defaultcard" (click)="setdefaultCard($event)" type="radio" name="star" id="star{{i}}"
+                            attr.data-card-id="{{cards.id}}" />
+                        <label class="star_payment" for="star{{i}}" title="Default Card"></label>
+                        <button class="deletcard" (click)="deleteCard($event)" attr.data-card-id="{{cards.id}}">x</button>
+                    </div>
+                </ng-template>
+                <a [routerLink]="['/add-payment']" data-dismiss="modal" class="btn">Add another card</a>
+            </div>
+        </div>
+    </div>
+</div>

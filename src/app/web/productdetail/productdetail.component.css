@@ -1,0 +1,4 @@
+.navbar{position: fixed !important; min-height: 80px;}
+.invisible {
+    visibility: hidden;
+  }

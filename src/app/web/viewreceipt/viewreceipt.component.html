@@ -1,0 +1,136 @@
+<section class="breadcrumb">
+   <div class="container">
+      <a [routerLink]="['/']">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>My Order</span>
+   </div>
+</section>
+
+<section class="main receiptpage">
+   <div class="container">
+      <div class="box">
+         <a href="javascript:;" (click)="goBackButton()" class="col-primary backbtn"><svg width="26" height="22"
+               style="vertical-align: sub;" class="mr-2 leftarrowcart" viewBox="0 0 26 22" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+               <path d="M9.99927 21L2 10.9995L10 1" stroke="#A72B2A" stroke-width="2" stroke-linecap="round" />
+               <path d="M25 11H3" stroke="#A72B2A" stroke-width="2" stroke-linecap="round" /> </svg> Back</a>
+         <h2 class="brgrmed col-primary text-center">Receipt</h2>
+
+         <div class="receiptbox" *ngIf="isReceiptDataLoaded" id="print-section">
+            <h5 class="text-center">#{{ orderData['orderNumber'] }}</h5>
+            <div class="receiptoverview ">
+               <div>
+                  <span>Ordered date</span>
+                  <p>{{ orderData['createdAt'] | amTz: userTimezone | amDateFormat: 'dddd,' }}<br>{{ orderData['createdAt'] | amTz: userTimezone | amDateFormat: 'MMMM D, Y' }}
+                  </p>
+               </div>
+               <div>
+                  <span>Ordered at</span>
+                  <p>{{ orderData['createdAt'] | amTz: userTimezone | amDateFormat: 'hh:mm a' }}</p>
+               </div>
+               <div *ngIf="orderData['status'] == 0 || orderData['status'] == 1;then pendingAcceptanceAndPickup"></div>
+               <ng-template #pendingAcceptanceAndPickup>
+                  <div>
+                     <span>Delivery date</span>
+                     <p>{{orderData['deliveryTime'] | amDateFormat: 'YYYY, MMM D'}}
+                        <br> {{orderData['deliveryTime'] | amDateFormat: 'hh:mm a'}}</p>
+                  </div>
+               </ng-template>
+
+               <div *ngIf="orderData['status'] == 2;then pickedupOrder"></div>
+
+               <ng-template #pickedupOrder>
+                  <div>
+                     <span>Delivery date</span>
+                     <p>{{orderData['pickedUpDate'] | amDateFormat: 'YYYY, MMM D'}}
+                        <br> {{orderData['pickedUpDate'] | amDateFormat: 'hh:mm a'}}</p>
+                  </div>
+               </ng-template>
+
+
+               <div *ngIf="orderData['status'] == 3;then rejectedOrder"></div>
+
+               <ng-template #rejectedOrder>
+                  <div>
+                     <span>Rejected date</span>
+                     <p>{{orderData['updatedAt'] | amDateFormat: 'YYYY, MMM D'}}
+                        <br> {{orderData['updatedAt'] | amDateFormat: 'hh:mm a'}}</p>
+                  </div>
+               </ng-template>
+
+               <div *ngIf="orderData['status'] == 4 || orderData['status'] == 5;then cancelledOrder"></div>
+
+               <ng-template #cancelledOrder>
+                  <div>
+                     <span>Cancelled date</span>
+                     <p>{{orderData['updatedAt'] | amDateFormat: 'YYYY, MMM D'}}
+                        <br> {{orderData['updatedAt'] | amDateFormat: 'hh:mm a'}}</p>
+                  </div>
+               </ng-template>
+
+               <div>
+                  <span><a href="javascript:;" (click)="print()">PRINT RECEIPT</a></span>
+                  <p>ORDER #{{ orderData['orderNumber'] }}</p>
+               </div>
+            </div>
+            <div class="receipttable">
+               <h4 class="col-primary text-center">Ordered Items</h4>
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th>Product</th>
+                        <th></th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let items of orderDetails; let i = index">
+                        <td width="1%" class="productimg"><img src="{{ items.offer.product | productImageUrl }}"></td>
+                        <td class="productname">{{ items.offer.product.name }}</td>
+                        <td width="24%">{{ items.quantity }}</td>
+                        <td width="15%" class="totalprice">${{ items.price | calculateCartPrice:items.quantity }}</td>
+                     </tr>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right"><span class="tabletotal">Subtotal:</span></td>
+                        <td align="left"><span class="tabletotal">${{ orderDetails | calculateSubtotal }}</span></td>
+                     </tr>
+                     
+                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right"><span class="tabletotal">Tip:</span></td>
+                        <td align="left"><span class="tabletotal">${{ orderData['tipAmt'] }}</span></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right"><span class="tabletotal">Promotions/Discounts:</span></td>
+                        <td align="left"><span
+                              class="tabletotal">-${{ orderData['discountApplied'].discountAmount }}</span></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right"><span class="tabletotal">Tax:</span></td>
+                        <td align="left"><span class="tabletotal">${{ orderData['tax'] | number : '1.2-2'}}</span></td>
+                     </tr>   
+                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right"><span class="carttotal prbold">Total:</span></td>
+                        <td align="left"><span class="carttotal prbold">${{ orderData['totalAmount'] }}</span></td>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+            <div class="receiptbtmline">
+               <p>PAYMENT METHODS: Paid by {{paymentData.brand}}, ending in {{paymentData.last4}}</p>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</section>

@@ -1,0 +1,58 @@
+.pts-warapper .pts-range {
+	padding-right: 9px;
+	max-width: 300px;
+	width: 100%;
+	color: #9D2480;
+}
+
+.profile-cards .pro-card {
+	margin: 7.5px;
+	min-height: 220px;
+}
+
+#paymentoptions .btn{
+	min-width: 147px;
+	font-family: "Helvetica-Bold";
+	padding-left: 0;
+	padding-right: 0px;
+}
+
+@media screen and (max-width:767px) {
+	.pro-card {
+		margin-bottom: 20px !important;
+	}
+	.mar-bot150.mar-top150 {
+		margin-top: 40px !important;
+		margin-bottom: 40px !important;
+	}
+}
+
+@media screen and (max-width:480px){
+	.pts-warapper .pts-range {
+		max-width: 250px;
+	}
+}
+
+#paymentoptions input.star_payment {
+	display: none;
+}
+
+#paymentoptions label.star_payment {
+	/*float: right;*/
+	padding: 3px;
+    font-size: 16.91px;
+	color: #9D2480 ;
+	transition: all .2s;
+	cursor: pointer;
+}
+
+#paymentoptions input.star_payment:checked~label.star_payment:before {
+	content: '\f005';
+	color: #9D2480;
+	transition: all .25s;
+}
+
+#paymentoptions label.star_payment:before {
+	content: '\f006';
+	font-family: FontAwesome;
+}

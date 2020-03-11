@@ -1,0 +1,70 @@
+.profilepage .container {
+	max-width: 970px;
+}
+.profilepage .cards-wrapper {
+	padding: 0px 30px;
+	max-width: 360px;
+	margin: 0px auto;
+}
+.profilepage .payment-options1 {
+	max-width: 298px;
+	margin: 0px auto;
+}
+.card-details2 a{
+	font-weight: 400;
+}
+.card-details3 a {
+	font-weight: 500;
+}
+.card-img {
+	max-width: 30px;
+	height: auto;
+	margin-right: 10px;
+  }
+ .payment-options1 .row{
+ 	margin-left: -5px;
+ 	margin-right: -5px;
+ }
+ .payment-options1 .row .col-sm-6{
+ 	padding-left: 5px;
+ 	padding-right: 5px;
+ }
+
+
+.profilepage .payment-options1 .form-control{
+	/*border-color: #9D2480;*/
+}
+.profilepage .payment-options1 .form-control::placeholder{
+	/*color: #9D2480 !important;*/
+}
+
+/******** 8-2-2018 piyush *******/
+
+@media screen and (max-width:1023px) {
+	.add-card { margin-bottom: 25px; }
+	.add-card .card-details1 { padding-bottom: 3px; }
+	.add-card .card-details2 { padding: 10px 20px; }
+	.add-card .card-details3 { padding-top: 3px; }
+	
+}
+
+@media screen and (max-width:479px) {
+	.add-card { font-size: 13px; }
+	.add-card .card-details1 { padding-left: 0; padding-right: 0;  }
+	.add-card .card-details2 { padding: 10px 0px; }
+	.add-card .card-details3 { padding-left: 0; padding-right: 0; }
+	.profilepage .cards-wrapper { padding: 0 5px; }	
+	.payment-options1 .no-padding .btn { padding-left: 5px; padding-right: 5px; font-size: 28px; }
+	
+}
+
+
+@media screen and (max-width:639px) {
+	.profilepage .mar-top90{
+		margin-top: 20px !important;
+	}
+	.profilepage .mar-bot90{
+		margin-bottom: 30px !important;
+	}
+}
+

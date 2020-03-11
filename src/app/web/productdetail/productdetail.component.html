@@ -1,0 +1,284 @@
+<section class="breadcrumb">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-5">
+                <a [routerLink]="['/']">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a
+                    [routerLink]="['/productlisting']">{{breadcumbProductCategory}}</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>{{productData.name}}</span>
+            </div>
+            <div class="col-sm-7">
+                <div class="deliveridetail-crumb">
+                    <!-- <img src="assets/images/truck.png"> -->
+                    <svg width="35" height="22" viewBox="0 0 35 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="35"
+                            height="23">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M0 0.00878906H34.9999V22.0002H0V0.00878906Z" fill="white" />
+                        </mask>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M33.904 13.944H33.2829C32.9404 13.944 32.6618 13.6673 32.6618 13.3271V12.7101H33.9039V13.944H33.904ZM29.1911 20.9116C27.8816 20.9116 26.8163 19.8535 26.8163 18.5528C26.8163 17.2521 27.8816 16.194 29.1911 16.194C30.5005 16.194 31.5658 17.2521 31.5658 18.5528C31.5658 19.8535 30.5005 20.9116 29.1911 20.9116ZM9.90083 20.9116C8.59141 20.9116 7.52609 19.8535 7.52609 18.5528C7.52609 17.2521 8.59141 16.194 9.90083 16.194C11.2103 16.194 12.2756 17.2521 12.2756 18.5528C12.2756 19.8535 11.2103 20.9116 9.90083 20.9116ZM25.6472 9.29897V5.74257H30.5168L31.4119 9.29897H25.6472ZM25.6472 3.42008H29.7756C30.4404 3.42008 30.9812 3.95731 30.9812 4.61765V4.65391H25.6472V3.42008ZM32.5499 9.3317L31.6436 5.73055C31.8914 5.67827 32.0772 5.4599 32.0772 5.19828V4.61765C32.0772 3.357 31.0447 2.33142 29.7756 2.33142H25.6472V1.13378C25.6472 0.513431 25.1392 0.00878906 24.5146 0.00878906H3.47074C2.84621 0.00878906 2.33816 0.513431 2.33816 1.13378V11.0046C2.33816 11.3052 2.58351 11.5489 2.8862 11.5489C3.18883 11.5489 3.43424 11.3052 3.43424 11.0046V1.13378C3.43424 1.11375 3.45058 1.09752 3.47074 1.09752H24.5146C24.5347 1.09752 24.5511 1.11375 24.5511 1.13378V11.0047C24.5511 11.3053 24.7965 11.5491 25.0991 11.5491C25.4017 11.5491 25.6471 11.3054 25.6471 11.0047V10.3876H32.1118C32.1124 10.3876 32.1128 10.3878 32.1133 10.3878C32.1139 10.3878 32.1143 10.3877 32.1148 10.3877C32.9103 10.3882 33.5857 10.9069 33.8177 11.6215H32.1137C31.811 11.6215 31.5656 11.8652 31.5656 12.1659V13.3271C31.5656 14.2676 32.336 15.0328 33.2827 15.0328H33.9039V17.4278H32.4709C32.0002 16.0778 30.7081 15.1053 29.1909 15.1053C27.6737 15.1053 26.3815 16.0778 25.9109 17.4278H25.647V13.3271C25.647 13.0265 25.4017 12.7826 25.099 12.7826C24.7964 12.7826 24.5509 13.0264 24.5509 13.3271V17.4277H13.1809C12.7101 16.0776 11.4181 15.1051 9.90083 15.1051C8.38359 15.1051 7.09146 16.0776 6.62081 17.4277H3.47074C3.45058 17.4277 3.43424 17.4114 3.43424 17.3914V16.1939H5.80897C6.1116 16.1939 6.35701 15.9502 6.35701 15.6495C6.35701 15.3488 6.11167 15.1051 5.80897 15.1051H0.548037C0.24541 15.1051 0 15.3488 0 15.6495C0 15.9502 0.245342 16.1939 0.548037 16.1939H2.33823V17.3914C2.33823 18.0118 2.84628 18.5164 3.47081 18.5164H6.43105C6.43091 18.5285 6.43009 18.5405 6.43009 18.5527C6.43009 20.4536 7.98711 22.0002 9.90083 22.0002C11.8146 22.0002 13.3716 20.4536 13.3716 18.5527C13.3716 18.5405 13.3708 18.5285 13.3706 18.5164H25.7211C25.721 18.5285 25.7201 18.5405 25.7201 18.5527C25.7201 20.4536 27.2772 22.0002 29.191 22.0002C31.1046 22.0002 32.6616 20.4536 32.6616 18.5527C32.6616 18.5405 32.6608 18.5285 32.6607 18.5164H34.452C34.7545 18.5164 34.9999 18.2727 34.9999 17.9721V12.1658C35 10.7322 33.9352 9.54117 32.5499 9.3317Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M10 18C9.44858 18 9 18.4486 9 19C9 19.5514 9.44858 20 10 20C10.5514 20 11 19.5514 11 19C11 18.4486 10.5514 18 10 18Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M29 18C28.4485 18 28 18.4486 28 19C28 19.5514 28.4485 20 29 20C29.5515 20 30 19.5514 30 19C30 18.4486 29.5515 18 29 18Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M22.4685 15H14.5315C14.238 15 14 15.2239 14 15.5001C14 15.7762 14.2379 16 14.5315 16H22.4685C22.762 16 23 15.7762 23 15.5001C23 15.2239 22.7621 15 22.4685 15Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8.45944 13H1.54056C1.24206 13 1 13.2239 1 13.5001C1 13.7762 1.24199 14 1.54056 14H8.45944C8.75794 14 9 13.7762 9 13.5001C9 13.2239 8.75794 13 8.45944 13Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.8444 5.15145C18.6368 4.9495 18.3003 4.9495 18.0927 5.15152L13.3662 9.75127L10.9074 7.35839C10.6997 7.15637 10.3633 7.15637 10.1557 7.35839C9.9481 7.5604 9.9481 7.88784 10.1557 8.08986L12.9904 10.8485C13.0942 10.9495 13.2301 11 13.3662 11C13.5021 11 13.6383 10.9495 13.742 10.8485L18.8442 5.88299C19.0519 5.68091 19.0519 5.35347 18.8444 5.15145Z"
+                            fill="black" />
+                    </svg>
+                    <p>Delivery to <span>{{userDeliveryAddress[0].address}}</span> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="main productdetailpage">
+    <div class="container">
+        <div *ngIf="isProductDataLoaded" class="row">
+            <div class="col-md-6">
+                <div class="productimg text-center">
+                    <img src="{{ productData | productImageUrl}}" (load)="productData.loaded = true"
+                        [hidden]="!productData.loaded" />
+                    <img src="assets/images/logo3x.png" [hidden]="productData.loaded">
+                    <!-- <picture>
+                        <source srcset="{{ productData | productImageUrl}}" type="image/webp">
+                        <source srcset="{{ productData | productImageUrl}}" type="image/jpg">
+                        <img src="{{ productData | productImageUrl}}" alt="test">
+                    </picture> -->
+                    <div class="offertag text-left" *ngIf="productData.isVolumeDiscountEligible">
+                        <p *ngIf="establishmentData.minQty == 1 && productData.category == 'Wine'"><span
+                                class="offerper prbold">{{establishmentData.percentDiscount}}%</span> <span
+                                class="offeroff prbold">Off</span> Over {{establishmentData.minQty}} Bottle</p>
+                        <p *ngIf="establishmentData.minQty > 1 && productData.category == 'Wine'"><span
+                                class="offerper prbold">{{establishmentData.percentDiscount}}%</span> <span
+                                class="offeroff prbold">Off</span> Over {{establishmentData.minQty}} Bottles</p>
+                        <p *ngIf="establishmentData.minQty == 1 && productData.category == 'Liquor'"><span
+                                class="offerper prbold">{{establishmentData.percentLiquorDiscount}}%</span> <span
+                                class="offeroff prbold">Off</span> Over {{establishmentData.minLiquorQty}} Bottle</p>
+                        <p *ngIf="establishmentData.minQty > 1 && productData.category == 'Liquor'"><span
+                                class="offerper prbold">{{establishmentData.percentLiquorDiscount}}%</span> <span
+                                class="offeroff prbold">Off</span> Over {{establishmentData.minLiquorQty}} Bottles</p>
+                    </div>
+                    <div *ngIf="offerData['isSponsored']" class="bedge">
+                        <span class="col-white">Trending</span>
+                    </div>
+                    <!-- <div *ngIf="offerData['isSponsored']" class="sponsortag">
+                        <span class="col-white">Sponsored</span>
+                     </div> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="productdetail_r">
+                    <div class="productname">
+                        <!-- <span>{{productData.name}}</span> -->
+                        <h2 class="prbold">{{productData.name}}</h2>
+                    </div>
+                    <div class="productprice_rating">
+                        <div class="pricediv">
+                            <span class="old_price brgrreg"
+                                *ngIf="offerData['originalPrice'] != offerData['salePrice']">${{offerData['originalPrice']}}</span>
+                            <span class="new_price brgrmed">${{offerData['salePrice']}}</span>
+                        </div>
+                        <div class="ratingsdiv">
+                            <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [direction]="'ltr'" [step]="0.1"
+                                [showHalfStars]="true" [readOnly]="true" [rating]="productData.rating">
+                            </star-rating-comp>
+                            <span *ngIf="productData['ratingCount'] > 0">({{productData['ratingCount']}} Ratings)</span>
+                        </div>
+                    </div>
+                    <div class="product_quantity">
+                        <!-- <div class="product_size">
+                            <span class="labelsize">Size:</span><span>{{productData.size}}{{productData.units}}</span>
+                        </div> -->
+                        <div class="product_quant mt-0">
+                            <span class="labelsize">Quantity:</span>
+                            <div class="qty-cartbtn">
+                                <div class="qty-input d-flex align-items-center">
+                                    <input type="number" (ngModelChange)="updateQuantity($event)" name="quantity"
+                                        value="{{productData.tmpCount}}" [(ngModel)]="quantityItem" />
+                                    <div class="d-flex flex-column ml-2">
+                                        <button type="button" class="more" (click)="changeQuantity($event)"><img
+                                                src="assets/images/caret-up.png" /></button>
+                                        <button type="button" class="less" (click)="changeQuantity($event)"><img
+                                                src="assets/images/caret-down.png" /></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addtocartbtn">
+                            <button (click)="addToShoppingCart($event)" [disabled]="!quantityItem" type="button"
+                                class="btn btn-primary" id="addToCart">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="product-descr">
+                        <!-- <img  src="assets/images/productpage-logo.png"> -->
+                        <svg class="mb-3" width="79" height="25" viewBox="0 0 120 38" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M11.5116 19.5711C8.03451 19.1285 5.31853 21.9662 5.00171 25.0961C5.00171 25.0961 7.34815 20.8326 11.5569 21.6813C12.1108 21.793 13.0189 21.7216 13.2884 21.1386C13.6774 20.2995 12.1087 19.6471 11.5116 19.5711Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M14.6486 28.4231C14.2832 28.1196 13.6018 27.9892 13.1189 27.9996C12.5683 28.0121 12.0223 28.1536 11.5174 28.3596C10.3821 28.823 9.39514 29.8129 8.84497 30.858C9.44331 30.486 10.0786 30.1604 10.7417 29.9063C11.4642 29.6289 12.2523 29.3445 13.035 29.5534C13.6529 29.7182 14.5535 30.5117 15.1082 29.7971C15.4599 29.3441 15.0148 28.7275 14.6486 28.4231Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M118.673 0.851211C118.075 0.286505 117.328 0.000415225 116.452 0H116.45C115.612 0 114.884 0.285259 114.286 0.849135C113.677 1.42173 113.368 2.14131 113.368 2.98837C113.368 3.80055 113.676 4.5027 114.284 5.07654C114.881 5.64166 115.61 5.92775 116.45 5.92817H116.454C117.327 5.92817 118.072 5.64249 118.672 5.07903C119.28 4.50561 119.589 3.80346 119.589 2.99128C119.59 2.14505 119.282 1.42505 118.673 0.851211Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M35.4766 21.3398C35.6946 20.4292 36.0214 19.5747 36.4479 18.7999C36.9777 17.8328 37.6445 16.9849 38.4293 16.2791C39.2124 15.574 40.1097 15.0139 41.0967 14.6132C42.0766 14.2158 43.1405 14.014 44.2595 14.014H44.2641C45.3474 14.0148 46.4033 14.2175 47.4023 14.6173C48.4084 15.0201 49.3244 15.5819 50.1241 16.2878C50.9259 16.9966 51.609 17.8536 52.1546 18.8352C52.591 19.6195 52.8999 20.4645 53.0739 21.3469L35.4766 21.3398ZM53.5614 13.8882L53.5526 13.8799C52.3813 12.689 50.9949 11.734 49.4311 11.0406C47.8574 10.3426 46.1562 9.98799 44.3733 9.98633H44.3691C42.5176 9.98633 40.7529 10.348 39.124 11.0601C37.4971 11.7735 36.0596 12.7663 34.8513 14.0111C33.6418 15.2564 32.6755 16.725 31.9784 18.3747C31.2779 20.0314 30.922 21.8265 30.9216 23.7103C30.9208 25.5606 31.275 27.339 31.9738 28.9962C32.6706 30.6492 33.6459 32.1191 34.8729 33.3652C36.1003 34.6133 37.5652 35.607 39.227 36.3182C40.8895 37.0316 42.6904 37.3937 44.5784 37.3953H44.5829C46.5399 37.3953 48.3752 37.0374 50.0394 36.3315C51.6833 35.6335 53.2022 34.7018 54.5537 33.5599C55.1135 33.0778 55.3913 32.7045 55.4544 32.3503C55.5216 31.9642 55.3713 31.5606 55.0209 31.1861L54.3005 30.2381C53.6701 29.6481 52.7811 29.6937 52.0877 30.3485C51.1601 31.2541 50.0357 31.992 48.7447 32.5422C47.4629 33.0899 46.0832 33.3672 44.6432 33.3672H44.6353H44.5406C43.3082 33.3353 42.1294 33.0911 41.0365 32.6418C39.9428 32.1942 38.9637 31.5772 38.1262 30.8074C37.2945 30.0438 36.6127 29.1294 36.1007 28.0897C35.6818 27.2393 35.409 26.3229 35.289 25.3671L54.7269 25.375H54.7315C55.4365 25.375 56.0373 25.25 56.5178 25.0038C56.9334 24.7899 57.4292 24.3141 57.4296 23.2598C57.4304 21.442 57.0762 19.7047 56.3753 18.0965C55.6786 16.4983 54.7319 15.082 53.5614 13.8882Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M81.1572 10.382L79.412 10.3812C78.8307 10.3812 78.3976 10.6154 78.1223 11.0821L69.8057 29.8781L61.5025 11.0692C61.3837 10.8093 61.0661 10.3729 60.2705 10.3725L58.5253 10.3721C58.0275 10.3721 57.6675 10.4987 57.4233 10.7603C57.0363 11.1739 57.2074 11.8063 57.4001 12.3112L67.7533 35.5966C68.0614 36.2784 68.6539 36.6537 69.4204 36.6541H70.2388H70.2405C70.9709 36.6541 71.5443 36.2784 71.8561 35.5949L82.2247 12.3253C82.3605 12.0267 82.7213 11.2332 82.2052 10.7441C81.9502 10.5037 81.5977 10.382 81.1572 10.382Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M109.044 10.3933L107.298 10.3929H107.296C106.717 10.3929 106.284 10.6275 106.008 11.0938L97.6918 29.8898L89.3885 11.081C89.2706 10.821 88.9534 10.3846 88.157 10.3842L86.4122 10.3838H86.4089C85.9122 10.3838 85.5527 10.5104 85.3102 10.7716C84.9232 11.1848 85.0934 11.8167 85.2857 12.3225L95.6393 35.6091C95.9486 36.2905 96.5412 36.6654 97.3073 36.6654L98.1257 36.6663H98.1269C98.8573 36.6663 99.4307 36.2897 99.7421 35.6062L110.111 12.3374C110.247 12.0389 110.609 11.2458 110.091 10.7558C109.836 10.5158 109.484 10.3938 109.044 10.3933Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M117.047 10.3877H115.958H115.956C114.948 10.3877 114.347 10.9482 114.346 11.8867L114.336 35.165C114.336 35.6429 114.487 36.0204 114.786 36.2873C115.066 36.5377 115.456 36.6648 115.946 36.6656H117.036H117.039C117.531 36.6656 117.939 36.5286 118.219 36.2687C118.5 36.0083 118.648 35.6271 118.648 35.1667L118.658 11.8887C118.659 10.9499 118.057 10.3889 117.047 10.3877Z"
+                                fill="#A72B2A" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M13.7106 33.4181C11.8604 33.4181 9.24487 32.9506 7.89249 31.5425C5.70176 29.2621 8.86162 26.8061 10.9602 26.1226C12.3678 25.6638 13.4117 27.3027 14.8114 26.794C15.5318 26.532 16.0334 25.9964 16.1555 25.4072C16.253 24.938 16.1094 24.4343 15.6447 24.0074C12.4429 21.0685 6.24861 23.7434 4.73802 27.514C4.22564 26.3277 3.93913 25.021 3.93913 23.647C3.93913 18.2503 8.31394 13.8759 13.7106 13.8759C19.1073 13.8759 23.4821 18.2503 23.4821 23.647C23.4821 29.0433 19.1073 33.4181 13.7106 33.4181ZM21.5455 12.4214C19.8925 11.2501 17.9704 10.4383 15.8889 10.102C15.8088 10.0887 15.7282 10.0771 15.6476 10.0654C15.5077 10.0455 15.3674 10.0272 15.2266 10.0119C14.7288 9.95622 14.223 9.9255 13.7106 9.9255C10.104 9.9255 6.82744 11.3377 4.38924 13.6393L4.44031 1.55249C4.44488 0.604944 3.83906 0.0365015 2.82093 0.0323493L1.72183 0.0273666C0.704114 0.0232143 0.0941484 0.586259 0.0899962 1.53339L-0.000107646 22.7335C-0.00384467 23.6931 0.0692349 24.6253 0.209166 25.5272C0.387297 26.8339 0.748128 28.0812 1.26467 29.2438C1.30702 29.3381 1.34813 29.4332 1.39214 29.5266C1.40958 29.564 1.42702 29.6018 1.44488 29.6387C3.50024 33.8935 7.67616 36.9151 12.5891 37.3187C12.8665 37.3411 13.1459 37.3557 13.4274 37.3615C13.5055 37.3627 13.5827 37.3669 13.6612 37.3673C13.6778 37.3673 13.694 37.3685 13.7106 37.3685C13.7563 37.3685 13.8011 37.3656 13.8464 37.3652C13.9323 37.3644 14.0179 37.3611 14.103 37.3586C14.5182 37.3465 14.9285 37.3171 15.3333 37.2685C15.391 37.2614 15.4483 37.2539 15.5056 37.2465C15.8424 37.2016 16.1762 37.1476 16.5047 37.0787C16.7015 37.0376 16.8966 36.9923 17.0901 36.9429C17.1196 36.9355 17.1483 36.9272 17.1777 36.9193C23.027 35.3755 27.3425 30.0191 27.3425 23.647C27.3425 20.4149 26.2292 17.4456 24.3719 15.1009C23.5618 14.0782 22.6101 13.1755 21.5455 12.4214Z"
+                                fill="#A72B2A" /></svg>
+                        <p *ngIf="productData.description !== undefined && productData.description != '';">
+                            {{productData.description}}</p>
+                        <!-- <p>Pinot Grigio and Pinot Gris pair nicely with seafood, light pasta, and cheese crackers. It
+                            can also be a great salad wine.</p> -->
+                    </div>
+                    <div class="product_table">
+                        <div *ngIf="productData.category == 'Wine'; then showWineDetail"></div>
+                        <ng-template #showWineDetail>
+                            <div *ngIf="productData.size" class="table_td">
+                                <span class="labeltd">SIZE</span>
+                                <span>{{productData.size}}{{productData.units}}</span>
+                           </div>
+                            <div *ngIf="productData.category" class="table_td">
+                                <span class="labeltd">CATEGORY</span>
+                                <span>{{productData.category}}</span>
+                            </div>
+                            <div *ngIf="productData.alcContent" class="table_td">
+                                <span class="labeltd">ALC. CONTENT</span>
+                                <span>{{productData.alcContent}}</span>
+                            </div>
+                            <div *ngIf="productData.country" class="table_td">
+                                <span class="labeltd">COUNTRY </span>
+                                <span>{{productData.country}}</span>
+                            </div>
+                            <div *ngIf="productData.region" class="table_td">
+                                <span class="labeltd">REGION</span>
+                                <span>{{productData.region}}</span>
+                            </div>
+                            <div *ngIf="productData.year" class="table_td">
+                                <span class="labeltd">YEAR</span>
+                                <span>{{productData.year}}</span>
+                            </div>
+                          
+                            <div *ngIf="productData.varietal" class="table_td">
+                                <span class="labeltd">VARIETAL</span>
+                                <span>{{productData.varietal}}</span>
+                            </div>
+                            <div class="table_td" *ngIf="productData.color != ''">
+                                <span class="labeltd">COLOR:</span>
+                                <span>{{productData.color}}</span>
+                            </div>
+                            <div class="table_td" *ngIf="productData.aromaAndFlavor != ''">
+                                <span class="labeltd">AROMA and FLAVOR:</span>
+                                <span>{{productData.aromaAndFlavor}}</span>
+                            </div>
+                            <div class="table_td" *ngIf="productData.body != ''">
+                                <span class="labeltd">BODY:</span>
+                                <span>{{productData.body}}</span>
+                            </div>
+                            <div class="table_td" *ngIf="productData.pairings != ''">
+                                <span class="labeltd">FOOD PAIRINGS:</span>
+                                <span>{{productData.pairings}}</span>
+                            </div>
+                        </ng-template>
+                        <div *ngIf="productData.category == 'Liquor'; then showLiquorDetail"></div>
+                        <ng-template #showLiquorDetail>
+                            <div *ngIf="productData.size" class="table_td">
+                                 <span class="labeltd">SIZE</span>
+                                 <span>{{productData.size}}{{productData.units}}</span>
+                            </div>
+                            <div *ngIf="productData.category" class="table_td">
+                                <span class="labeltd">CATEGORY</span>
+                                <span>{{productData.category}}</span>
+                            </div>
+                            <div *ngIf="productData.alcContent" class="table_td">
+                                <span class="labeltd">ALC. CONTENT</span>
+                                <span>{{productData.alcContent}}</span>
+                            </div>
+                            <div *ngIf="productData.country" class="table_td">
+                                <span class="labeltd">COUNTRY </span>
+                                <span>{{productData.country}}</span>
+                            </div>
+                        </ng-template>
+                        <div *ngIf="productData.category == 'Beer'; then showBeerDetail"></div>
+                        <ng-template #showBeerDetail>
+                         <div *ngIf="productData.size" class="table_td">
+                                <span class="labeltd">SIZE</span>
+                                <span>{{productData.size}}{{productData.units}}</span>
+                          </div>                        
+                            <div *ngIf="productData.category" class="table_td">
+                                <span class="labeltd">CATEGORY</span>
+                                <span>{{productData.category}}</span>
+                            </div>
+                            <div *ngIf="productData.alcContent" class="table_td">
+                                <span class="labeltd">ALC. CONTENT</span>
+                                <span>{{productData.alcContent}}</span>
+                            </div>
+                            <div *ngIf="productData.country" class="table_td">
+                                <span class="labeltd">COUNTRY </span>
+                                <span>{{productData.country}}</span>
+                            </div>
+                        </ng-template>
+                        <div *ngIf="productData.category == 'Mixer'; then showMixerDetail"></div>
+                        <ng-template #showMixerDetail>
+                            <div *ngIf="productData.size" class="table_td">
+                                <span class="labeltd">SIZE </span>
+                                <span>{{productData.size}}{{productData.units}}</span>
+                            </div>
+                        </ng-template>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!isProductDataLoaded" class="row mar-top30 mar-bot20">
+            <h3 class="text-center">Loading Product</h3>
+        </div>
+    </div>
+</section>
+<a href="#sepratedelivary" data-toggle="modal" id="vendorPopup" class="btn btn-secondary invisible" data-dismiss="modal"></a>
+<div class="modal fade" id="sepratedelivary">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h4 class="modal-title col-primary prbold">Add and create separate deliveries?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body text-center">
+                <p>You currently have items in your cart from multiple stores. Adding items from different stores will
+                    result in separate deliveries. You can schedule your deliveries at checkout.</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer justify-content-center flex-wrap">
+                <button id='popupAdd' type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="modalAddToCart($event)">ADD</button>
+                <button type="button" class="btn btn-blkline btn-block" data-dismiss="modal">DON’T ADD</button>
+            </div>
+
+        </div>
+    </div>
+</div>

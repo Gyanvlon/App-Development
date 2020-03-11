@@ -1,0 +1,58 @@
+<section class="breadcrumb">
+   <div class="container">
+      <div class="row">
+         <div class="col">
+            <a [routerLink]="['/']">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a [routerLink]="['/accountinfo']">My
+               Account</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>Add Card</span>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="main addcard">
+   <div class="container">
+      <h3 class="section-title text-center">Account Details</h3>
+      <div class="box text-center">
+         <flash-messages></flash-messages>
+         <form (ngSubmit)="saveCardDetailsToStripe()">
+            <div class="row">
+               <div class="col-sm-12">
+                  <p class="brgrreg">Please type your credit card expiry date in MM/YYYY format.</p>
+                  <div class="form-group position-relative">
+                     <input type="text" name="name" autocomplete='cc-name' class="form-control filled" required="">
+                     <label for="input" class="control-label">Card Holder Name</label>
+                  </div>
+               </div>
+               <div class="col-sm-12">
+                  <div class="form-group position-relative">
+                     <input type="text" type="tel" autocomplete="cc-number" id="cc-number" ccNum name="number"
+                        class="form-control filled" required="">
+                     <label for="input" class="control-label">Card Number</label>
+                  </div>
+               </div>
+               <div class="col-sm-7">
+                  <div class="form-group position-relative">
+                     <input type="tel" autocomplete="cc-exp" id="cc-exp" ccExp name="month" class="form-control filled"
+                        required="" pattern="([0-9]{2}[/]?){2}">
+                     <label for="input" class="control-label">Exp Date</label>
+                  </div>
+               </div>
+               <div class="col-sm-5">
+                  <div class="form-group position-relative">
+                     <input type="tel" autocomplete="cc-csc" id="cc-cvc" ccCvc name="cvv" class="form-control filled"
+                        maxlength="4" required="">
+                     <label for="input" class="control-label">CVV</label>
+                  </div>
+               </div>
+               <div class="col-sm-12">
+                  <div class="form-group position-relative">
+                     <input type="text" type="text" name="zip" autocomplete="zip" class="form-control filled"
+                        required="">
+                     <label for="input" class="control-label">Zip Code</label>
+                  </div>
+               </div>
+            </div>
+            <button type="submit" [disabled]="submitIsDisabled" class="btn btn-primary btn-block">SAVE CARD</button>
+         </form>
+      </div>
+   </div>
+</section>

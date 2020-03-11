@@ -1,0 +1,10 @@
+.bannertext .alert p{
+    color: black !important;
+}
+.addreserror{
+    flex: 1 100%;
+}
+.addreserror span {
+    color: #f18030;
+    font-size: 12px;
+}

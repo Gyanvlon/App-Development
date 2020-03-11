@@ -1,0 +1,14 @@
+.newsletterform {
+    position: relative;
+    overflow: visible;
+}
+
+.newsletterform label.validate-error {
+    position: absolute;
+    bottom: -25px;
+    color: #ffffff !important;
+}
+
+.newsletterform .btn:disabled {
+    opacity: 0.85;
+}

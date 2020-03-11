@@ -1,0 +1,40 @@
+<section class="profilepage">
+    <div class="container">
+        <div class="row mar-bot40 mar-top40">
+            <div class="col-sm-12">
+                <div class="account-info-box rateorder">
+                    <a [routerLink]="['/myorders']" class="backbtn">
+                        <img src="assets/images/pink-arrow.png">
+                    </a>
+                    <div class="account-info-box-title">
+                        <h2>Thanks for ordering with Bevvi!</h2>
+                    </div>
+                    <p class="review-p-text">Please take a second to review your purchase.</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <owl-carousel [options]="carouselOptions" [items]="orderDetails"
+                                [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                                <div class="item" *ngFor="let items of orderDetails">
+                                    <div class="review-01">
+                                        <img src="{{ items.offer.product | productImageUrl }}" alt="">
+                                        <h5>{{items.offer.product.name}}</h5>
+                                        <p>Please rate your purchase.</p>
+                                        <div class="stars" attr.data-productId="{{items.offer.product.id}}">
+                                            <star-rating-comp (onClick)="onRatingClick($event,items.offer.product.id)"
+                                                [starType]="'svg'" [staticColor]="'negative'" [direction]="'ltr'"
+                                                [step]="0.1" [showHalfStars]="true"></star-rating-comp>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </owl-carousel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button [routerLink]="['/myorders']" type="button" class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

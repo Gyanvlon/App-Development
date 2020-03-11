@@ -1,0 +1,58 @@
+label.validate-error {
+    font-size: 11px !important;
+    color: #f18030 !important;
+}
+
+.alert.alert-custom {
+    color: #f18030 !important;
+    text-align: center !important;
+}
+
+.irs-bar {
+    height: 4px;
+    top: 25px;
+}
+
+#flashMessages {
+    text-align: center;
+    background: green;
+}
+
+.menu-cart .dropdown-toggle, .mobileloginmenu .dropdown-toggle {
+    max-width: 130px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#flashMessages .flash-message {
+    display: none;
+}
+
+#flashMessages .flash-message:last-child {
+    display: block;
+}
+
+.ng-invalid.ng-touched {
+    border-color: #f18030;
+}
+
+.owl-carousel .owl-item img {
+    width: auto;
+    margin: 0 auto;
+    height: 200px;
+}
+
+.owl-stage-outer {
+    padding-left: 15px;
+}
+
+.rating {
+    margin-right: 0px;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover {
+    /* font-weight: 600; */
+    /* color: #9D2480; */
+}

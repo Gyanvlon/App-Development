@@ -1,0 +1,8 @@
+
+@font-face {
+  font-family: 'BrandonGrotesque-Medium';
+  src: url('BrandonGrotesque-Medium.eot?#iefix') format('embedded-opentype'),  url('BrandonGrotesque-Medium.otf')  format('opentype'),
+	     url('BrandonGrotesque-Medium.woff') format('woff'), url('BrandonGrotesque-Medium.ttf')  format('truetype'), url('BrandonGrotesque-Medium.svg#BrandonGrotesque-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,0 +1,210 @@
+<section class="listingbanner bartenderbanner">
+  <div class="container">
+     <h1 class="brgrblk col-white">BOOK A BARTENDER</h1>
+     <h4 class="col-white">CHEERS!</h4>
+  </div>
+</section>
+<section class="breadcrumb">
+  <div class="container">
+     <div class="row align-items-center">
+        <div class="col">
+           <a routerLink="/">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>Book a Bartender</span>
+        </div>
+     </div>
+  </div>
+</section>
+<section class="main">
+  <div class="container">     
+    <div class="box text-center bartenderbox">
+      <form  [formGroup]="barTenderForm" (ngSubmit)="onSubmit()" autocomplete="off">
+          <div class="formsection">
+              <h5>Where is this event?</h5>
+              <div class="form-group position-relative">
+                  <input type="text" autocomplete="off" #search placeholder="" [ngModel]="enteredAddress"  formControlName="address" name="address" class="form-control" required=""
+                      data-error-msg="Please enter valid location" >
+                  <label for="input"  class="control-label">Location*</label>
+                  <div class="validate-error help-block with-errors"
+                  *ngIf="address.errors && address.errors.required  && formSubmitAttempt">
+                  Please Enter Location
+              </div>
+              </div>
+          </div>
+          <div class="formsection">
+              <h5>When is it? <span>(MIN OF 3 HOURS)</span>
+                  <p>Your bartender will arrive 30 mins before your event to setup<br> *Bookings must be
+                      placed 48 hours in advance</p>
+              </h5>
+              <div class="dropdown">
+                  <div class="form-group position-relative">
+                      <input type="text"  id="datevalue" autocomplete="off" class="form-control whenIsItDatepicker" name="eventDate" required="" data-toggle="dropdown" readonly>
+                      <label for="input" class="control-label">Date*</label>
+                      <div class="validate-error help-block with-errors eventDateError hideAllError" style="display: none;">
+                          Please choose Event Start Date
+                      </div>
+
+                      <div class="deliverydatepicker dropdown-menu dropdown-menu-center">
+                          <div class="calendar datepicker"></div>
+                          <div class="dateshowbtn">
+                              <a>Today</a>
+                              <span>{{Today}}</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group position-relative timepicker">
+                          <input type="text" id="timepicker" autocomplete="off" name="eventStartTime" class="form-control"  required="" readonly>
+                          <label class="control-label">From*</label>
+                          <div class="validate-error help-block with-errors eventStartTimeError hideAllError" style="display: none;">
+                              Please choose Event Start Time
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">                      
+                      <div class="form-group position-relative timepicker">
+                          <input type="text" id="timepicker1" autocomplete="off" name="eventEndTime" class="form-control" required="" readonly>
+                          <label class="control-label">To*</label>
+                          <div class="validate-error help-block with-errors eventEndTimeError hideAllError" style="display: none;">
+                              Please choose Event End Time
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="formsection">
+              <h5 style="margin-top: 20px;">How many guests?</h5>
+              <div class="boxborder boxborder1">
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfGuests" name="numOfGuests" value="< 30">
+                      <span>
+                          < 30</span> </label> <label class="checkbox-styled">
+                              <input type="radio" formControlName="numOfGuests" name="numOfGuests" value="30-50">
+                              <span>30-50</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfGuests" name="numOfGuests" value="50-80">
+                      <span>50-80</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfGuests" name="numOfGuests" value="80-100">
+                      <span>80-100</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfGuests" name="numOfGuests" value="150+">
+                      <span>150+</span>
+                  </label>
+              </div>
+              <div class="validate-error help-block with-errors color-errors"
+                  *ngIf="numOfGuests.errors && numOfGuests.errors.required  && formSubmitAttempt">
+                  Please Select, How many guests?
+               </div>
+
+              <h5 style="margin-top: 20px;">How many Bartenders?</h5>
+              <div class="boxborder boxborder2">
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfBartenders" value="1">
+                      <span>1</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfBartenders" value="2">
+                      <span>2</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfBartenders" value="3">
+                      <span>3</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfBartenders" value="4">
+                      <span>4</span>
+                  </label>
+                  <label class="checkbox-styled">
+                      <input type="radio" formControlName="numOfBartenders" value="5">
+                      <span>5</span>
+                  </label>
+              </div>
+              <div class="validate-error help-block with-errors color-error"
+              *ngIf="numOfBartenders.errors && numOfBartenders.errors.required  && formSubmitAttempt">
+              Please Select, How many Bartenders?
+              </div>
+
+              <h5 style="margin-top: 20px;">Do you require service materials for your event (ice, cups, garnish, mixers)?</h5>
+              <div class="materials mb-3">
+                  <label class="radiobutton">Yes
+                      <input type="radio" formsControlName="requireSvcMaterials" checked="checked" name="requireSvcMaterials" value="Yes">
+                      <span class="radiocheck"></span>
+                  </label>
+                  <label class="radiobutton">No
+                      <input type="radio" formControlName="requireSvcMaterials" name="requireSvcMaterials" value="No">
+                      <span class="radiocheck"></span>
+                  </label>
+              </div>
+          </div>
+
+          <div class="formsection" >
+              <h5>Booking information</h5>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group position-relative">
+                          <input type="text" formControlName="firstName" [ngModel]="firstNameModel" name="firstName" class="form-control" required=""
+                              data-error-msg="Please enter your name">
+                          <label for="input" class="control-label">First Name*</label>
+                          <div class="validate-error help-block with-errors"
+                          *ngIf="formSubmitAttempt && firstName.invalid">
+                           Please Enter First Name
+                       </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group position-relative">
+                          <input type="text" formControlName="lastName" [ngModel]="lastNameModel"  name="lastName" class="form-control" required=""
+                              data-error-msg="Please enter your name">
+                          <label for="input" class="control-label">Last Name*</label>
+                          <div class="validate-error help-block with-errors"
+                          *ngIf="formSubmitAttempt && lastName.invalid">
+                          Please Enter Last Name
+                       </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group position-relative">
+                          <input type="text" formControlName="phoneNum" [ngModel]="phoneNumberModel" name="phoneNum" class="form-control" required=""
+                              data-error-msg="Please enter your Phone Number"  mask='(000) 000-0000'>
+                          <label for="input" class="control-label">Phone*</label>
+                          <div class="validate-error help-block with-errors"
+                          *ngIf="formSubmitAttempt && phoneNum.invalid">
+                          Please Enter Phone Number
+                       </div> 
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group position-relative">
+                          <input type="email"  formControlName="emailId" [ngModel]="emailModel" name="emailId" class="form-control" required=""
+                              data-error-msg="Please enter valid email">
+                          <label for="input" class="control-label">Email*</label>
+                          <div class="validate-error help-block with-errors"
+                       *ngIf="formSubmitAttempt && emailId.invalid">
+                       Please Enter Email Id
+                    </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Request a Quote</button>
+      </form>
+  </div>
+  </div>
+</section>
+<a href="#msg" data-toggle="modal" id="request" class="btn btn-secondary invisible" data-dismiss="modal"></a>
+<div class="modal fade" id="msg">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center" data-dismiss="modal">
+                <p>Request has been submitted.</p>
+            </div>
+            <div class="modal-footer justify-content-center flex-wrap">
+                    <button  type="button" class="btn btn-primary btn-block" data-dismiss="modal">OK</button>
+                </div>
+        </div>
+    </div>
+</div>

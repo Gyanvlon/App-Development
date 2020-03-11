@@ -1,0 +1,30 @@
+.accountform label {
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+.account-info-box {
+    margin: 0px auto;
+}
+.accountform {
+    width: 254px;
+    margin: 0px auto;
+}
+.accountform .btn {
+    font-family: "Helvetica-Bold";
+}
+@media screen and (max-width:450px) {
+    .accountform {
+        width: 100%;
+    }
+}
+@media screen and (max-width:639px) {
+    .profilepage .mar-top90 {
+        margin-top: 20px !important;
+    }
+    .profilepage .mar-bot90 {
+        margin-bottom: 30px !important;
+    }
+}

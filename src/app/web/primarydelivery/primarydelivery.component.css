@@ -1,0 +1,173 @@
+.profilepage .container {
+    max-width: 970px;
+}
+
+.profilepage .primary-pickup {
+    max-width: 350px;
+    margin: 0px auto;
+}
+
+.profilepage .primary-pickup .btn-location {
+    padding: 0px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    color: #F78130 !important;
+    font-size: 13px;
+    border: none;
+    background-color: transparent;
+}
+
+.profilepage .primary-pickup .btn-location img {
+    margin-right: 7px;
+}
+
+.profilepage .primary-pickup .range-group label, .profilepage .primary-pickup .range-p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.profilepage .primary-pickup .range-p {
+    font-weight: 300;
+}
+
+span.irs-bar {
+    height: 4px !important;
+    top: 25px;
+    background-color: #9D2480;
+}
+
+.btn {
+    font-family: "Helvetica-Bold";
+    min-width: 165px;
+}
+
+#unavailable .btn {
+    min-width: 206px;
+}
+
+.btn-radio1 {
+    border-right: 2px solid #E8E3D9;
+    border-top: 2px solid #E8E3D9;
+    border-bottom: 2px solid #E8E3D9;
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px;
+    width: 49%;
+    color: #BBB4A7;
+    position: relative;
+    text-align: center;
+    -webkit-transition: background 600ms ease, color 600ms ease;
+    transition: background 600ms ease, color 600ms ease;
+    font-weight: 500;
+}
+
+.btn-radio2 {
+    border: 2px solid #E8E3D9;
+    display: inline-block;
+    color: #BBB4A7;
+    font-size: 14px;
+    padding: 10px;
+    width: 49%;
+    position: relative;
+    text-align: center;
+    -webkit-transition: background 600ms ease, color 600ms ease;
+    transition: background 600ms ease, color 600ms ease;
+}
+
+input[type="radio"].toggle {
+    display: none;
+}
+
+input[type="radio"].toggle+label {
+    cursor: pointer;
+    min-width: 60px;
+    margin-bottom: 0px;
+}
+
+.radio-buttons {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input[type="radio"].toggle+label:hover {
+    background: none;
+    color: #1a1a1a;
+}
+
+input[type="radio"].toggle+label.btn-radio:after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    -webkit-transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+    transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+    width: 100%;
+    z-index: -1;
+}
+
+input[type="radio"].toggle.toggle-left+label {
+    border-right: 0;
+}
+
+input[type="radio"].toggle.toggle-left+label:after {
+    left: 100%;
+}
+
+input[type="radio"].toggle.toggle-right+label {
+    margin-left: -3px;
+}
+
+input[type="radio"].toggle.toggle-right+label:after {
+    left: -100%;
+}
+
+input[type="radio"].toggle:checked+label {
+    cursor: default;
+    -webkit-transition: color 200ms;
+    transition: color 200ms;
+    border: 2px solid #9D2480;
+    color: #fff;
+    background: #9D2480;
+}
+
+input[type="radio"].toggle:checked+label:after {
+    left: 0;
+}
+
+.radio-buttons img {
+    width: auto;
+    height: 22px;
+    margin-right: 23px;
+}
+
+/*** 13-2-2018 piyush ***/
+
+.primary-pickup input#selector-opener {
+    opacity: 0;
+}
+
+.primary-pickup .select-form ul li.select_items:before {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #dddddd;
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    box-shadow: none;
+    z-index: 1;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@media (max-width: 767px) {
+    .profilepage .mar-top90.mar-bot90 {
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+}

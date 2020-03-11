@@ -1,0 +1,368 @@
+<section class="breadcrumb">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-5">
+                <a [routerLink]="['/']">Home</a>
+                &nbsp;&nbsp;>&nbsp;&nbsp;<span>My Order</span>
+            </div>
+        </div>
+    </div>
+</section>
+<div *ngIf="!isOrderDateLoaded">
+    <section>
+        <div class="container">
+            <div class="row mar-top150 mar-bot150">
+                <div class="col-md-12">
+                    <div class="account-info-box">
+                        <h3 class="text-center">Loading Your Orders</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div *ngIf="isOrderDateLoaded">
+    <div *ngIf="userOrders.length == 0;then noOrders else yesOrders"></div>
+    <ng-template #noOrders>
+        <section class="main orderemptypage text-center">
+            <div class="container">
+                <div class="box">
+                    <h2 class="col-primary brgrmed mb-3">My orders</h2>
+                    <h5 class="mb-4">You haven’t placed any orders yet!</h5>
+                    <a [routerLink]="['/productlisting']" class="btn btn-primary">Continue Shopping</a>
+                </div>
+            </div>
+        </section>
+    </ng-template>
+    <ng-template #yesOrders>
+        <section class="main myorderpage text-center">
+            <div class="container">
+                <div class="box">
+                    <ul id="tabs" class="nav nav-tabs flex-column" role="tablist" aria-orientation="vertical">
+                        <li class="nav-item active">
+                            <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Pending Delivery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Pending Acceptance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab-C" href="#pane-C" class="nav-link" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Past Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab-D" href="#pane-D" class="nav-link" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Cancelled Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Rejected Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab-D" href="#pane-F" class="nav-link" data-toggle="tab" role="tab"
+                                (click)="changeTitleText($event)">Cancelled Orders (Invalid Id)</a>
+                        </li>
+                    </ul>
+                    <div id="content" class="tab-content" role="tablist">
+                        <div class="tabheading d-flex align-items-center justify-content-between">
+                            <h2 id="changeTitleText" class="col-primary brgrmed">Pending Delivery</h2>
+                            <div class="sorting">
+                                <form action="">
+                                    <div>
+                                        <label for="sort">sort by</label>
+                                        <select id="sort" (change)="sortOrders($event.target.value)">
+                                            <option value="Most Recent">Most Recent</option>
+                                            <option value="Old">Old</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="pane-A" class="card tab-pane fade "
+                            [ngClass]="{'show active': isSelectedPane == 'pane-A' }" role="tabpanel"
+                            aria-labelledby="tab-A">
+                            <div class="card-header" role="tab" id="heading-A">
+                                <h5 class="mb-0">
+                                    <a data-toggle="collapse" href="#collapse-A" aria-expanded="true"
+                                        aria-controls="collapse-A" (click)="activeClass('pane-A')">
+                                        Pending Delivery
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-A" class="collapse show" data-parent="#content" role="tabpanel"
+                                aria-labelledby="heading-A">
+                                <div
+                                    *ngIf="(userOrders | callback: filterpending_pickup).length == 0 ;then noPendingOrders else yesPendingOrders">
+                                </div>
+                                <ng-template #noPendingOrders>
+                                    <h2 class="no-orders">No Pending Orders Yet</h2>
+                                </ng-template>
+                                <ng-template #yesPendingOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filterpending_pickup) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.deliveryTime | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Pending Delivery')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Pending Delivery')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div id="pane-B" class="card tab-pane fade" role="tabpanel"
+                            [ngClass]="{'show active': isSelectedPane == 'pane-B' }" aria-labelledby="tab-B">
+                            <div class="card-header" role="tab" id="heading-B">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-B"
+                                        (click)="activeClass('pane-B')" aria-expanded="false"
+                                        aria-controls="collapse-B">
+                                        Pending Acceptance
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-B" class="collapse" data-parent="#content" role="tabpanel"
+                                aria-labelledby="heading-B">
+                                <div
+                                    *ngIf="(userOrders | callback: filterpending_acceptance).length == 0 ;then noPendingAcceptanceOrders else yesPendingAcceptanceOrders">
+                                </div>
+                                <ng-template #noPendingAcceptanceOrders>
+                                    <h2 class="no-orders">No Pending Accepted Orders</h2>
+                                </ng-template>
+                                <ng-template #yesPendingAcceptanceOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filterpending_acceptance ) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.createdAt | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Pending Acceptance')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Pending Acceptance')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+
+                        <div id="pane-C" class="card tab-pane fade" role="tabpanel"
+                            [ngClass]="{'show active': isSelectedPane == 'pane-C' }" aria-labelledby="tab-C">
+                            <div class="card-header" role="tab" id="heading-C">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-C"
+                                        (click)="activeClass('pane-C')" aria-expanded="false"
+                                        aria-controls="collapse-C">
+                                        Past Orders
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-C" class="collapse" role="tabpanel" data-parent="#content"
+                                aria-labelledby="heading-C">
+                                <div
+                                    *ngIf="(userOrders | callback: filterpast_orders).length == 0 ;then noPastOrders else yesPastOrders">
+                                </div>
+                                <ng-template #noPastOrders>
+                                    <h2 class="no-orders">No Past Orders</h2>
+                                </ng-template>
+                                <ng-template #yesPastOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filterpast_orders) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.deliveredDate | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">                                                  
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Past Orders')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5></h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Past Orders')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div id="pane-D" class="card tab-pane fade" role="tabpanel"
+                            [ngClass]="{'show active': isSelectedPane == 'pane-D' }" aria-labelledby="tab-D">
+                            <div class="card-header" role="tab" id="heading-D">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-D"
+                                        (click)="activeClass('pane-D')" aria-expanded="false"
+                                        aria-controls="collapse-D">
+                                        Cancelled Orders
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-D" class="collapse" role="tabpanel" data-parent="#content"
+                                aria-labelledby="heading-D">
+                                <div
+                                    *ngIf="(userOrders | callback: filtercancelled_orders).length == 0 ;then noCancelledOrders else yesCancelledOrders">
+                                </div>
+                                <ng-template #noCancelledOrders>
+                                    <h2 class="no-orders">No Cancelled Orders</h2>
+                                </ng-template>
+                                <ng-template #yesCancelledOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filtercancelled_orders) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.deliveryTime | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Cancelled Orders')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Cancelled Orders')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div id="pane-E" class="card tab-pane fade" role="tabpanel"
+                            [ngClass]="{'show active': isSelectedPane == 'pane-E' }" aria-labelledby="tab-E">
+                            <div class="card-header" role="tab" id="heading-E">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-E"
+                                        (click)="activeClass('pane-E')" aria-expanded="false"
+                                        aria-controls="collapse-E">
+                                        Cancelled Orders
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-E" class="collapse" role="tabpanel" data-parent="#content"
+                                aria-labelledby="heading-E">
+                                <div
+                                    *ngIf="(userOrders | callback: filterrejected_orders).length == 0 ;then noRejectedOrders else yesRejectedOrders">
+                                </div>
+                                <ng-template #noRejectedOrders>
+                                    <h2 class="no-orders">No Rejected Orders</h2>
+                                </ng-template>
+                                <ng-template #yesRejectedOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filterrejected_orders) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.deliveryTime | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Rejected Orders')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Rejected Orders')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div id="pane-F" class="card tab-pane fade" role="tabpanel"
+                            [ngClass]="{'show active': isSelectedPane == 'pane-F' }" aria-labelledby="tab-F">
+                            <div class="card-header" role="tab" id="heading-F">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-F"
+                                        (click)="activeClass('pane-F')" aria-expanded="false"
+                                        aria-controls="collapse-F">
+                                        Cancelled Orders (Invalid Id)
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-F" class="collapse" role="tabpanel" data-parent="#content"
+                                aria-labelledby="heading-F">
+                                <div
+                                    *ngIf="(userOrders | callback: filterrejectedId_orders).length == 0 ;then noRejectedIdOrders else yesRejectedIdOrders">
+                                </div>
+                                <ng-template #noRejectedIdOrders>
+                                    <h2 class="no-orders">No Rejected Orders</h2>
+                                </ng-template>
+                                <ng-template #yesRejectedIdOrders>
+                                    <div class="card-body">
+                                        <div class="orderlist">
+                                            <div class="single-order"
+                                                *ngFor="let orders of (userOrders | callback: filterrejectedId_orders) | orderBy: 'createdAt':sortReverse">
+                                                <div class="orderditemdate">
+                                                    <span
+                                                        class="col-primary">{{orders.deliveryTime | date:'MMM.dd' }}</span>
+                                                </div>
+                                                <div class="orderditem">
+                                                    <label class="ordernumberLabel" (click)="viewReceipt(orders.id, 'Cancelled Orders (Invalid Id)')">{{ orders.orderNumber }}</label>
+                                                </div>
+                                                <div class="orderditemrate">
+                                                    <h5>${{orders.totalAmount}}</h5>
+                                                </div>
+                                                <div class="receiptlink orders.id">
+                                                    <a href="javascript:;"
+                                                        (click)="viewReceipt(orders.id, 'Cancelled Orders (Invalid Id)')">View
+                                                        Receipt</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>
+</div>

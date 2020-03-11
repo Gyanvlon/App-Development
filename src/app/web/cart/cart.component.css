@@ -1,0 +1,12 @@
+.promoerror.form-group .help-block{right: -50px;left: -50px;bottom: -24px;}
+@media (max-width: 639px){
+    .shoppingcartpage svg.leftarrowcart{width: 16px; height: 14px;} 
+    .promoerror.form-group .help-block{right: -50px;left: 0px;bottom: -23px;}
+}
+@media (max-width: 396px){
+    .promoerror.form-group .help-block{right: -100px;left: -20px;bottom: -24px;}
+}
+label.show{
+    display: block;
+}
+.static {width: 250px;}

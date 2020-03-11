@@ -1,0 +1,37 @@
+<section class="breadcrumb">
+   <div class="container">
+      <div class="row">
+         <div class="col">
+            <a [routerLink]="['/']">Home</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>Edit Address</span>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="main addcard">
+   <div class="container">
+      <h3 class="section-title text-center">Delivery Address</h3>
+      <flash-messages></flash-messages>
+      <div class="box text-center">
+         <form (ngSubmit)="saveuserDeliveryLocation()">
+            <input type="hidden" name="latitude" value="{{latitude}}" />
+            <input type="hidden" name="longitude" value="{{longitude}}" />
+            <div class="row">
+               <div class="col-sm-12">
+                  <p>Enter the address that you are frequently at. We will show you the closest liquor store.</p>
+                  <div class="form-group position-relative">
+                     <input #search type="text" class="form-control filled" name="address"
+                        placeholder="Whats your address?"
+                        value="{{(userDeliveryLocation.length > 0) ? userDeliveryLocation[0].address : ''}}"
+                        required="">
+                     <label for="input" class="control-label">Address</label>
+                  </div>
+                  <button type="button" class="loactionbtn" (click)="getCurrentAddress()"><img
+                        src="assets/images/map-pin.png"> Use my current location</button>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">SAVE ADDRESS</button>
+         </form>
+      </div>
+   </div>
+</section>
