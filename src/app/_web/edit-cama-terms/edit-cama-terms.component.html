@@ -1,0 +1,482 @@
+<form [formGroup]="camatermForm" (ngSubmit)="onSubmit()">
+  <div class="wrapper wrapper-content" id="label-bold">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="breadcrumb-main">
+              <ol class="breadcrumb">
+                <li><a routerLink='/manage-project'>Manage Projects</a></li>
+                <li><a routerLink='/project-details'>Project Details</a></li>
+                <li><a routerLink='/edit-project'>Edit Projects</a></li>
+                <li><a routerLink='/edit-cama'>Edit CAMA</a></li>
+                <li class="active">Edit CAMA Terms</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="title-part clearfix">
+              <h2>Edit CAMA Terms</h2>
+            </div>
+            <!-- TERM NAME & PRIORITY -->
+            <div class="row or-section">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Term Name</label>
+                  <input class="form-control" type="text" formControlName="termName" value={{editData.termName}}>
+                  <div *ngIf='termName.invalid && (termName.dirty || termName.touched)' class="alert alert-danger">
+                    <div *ngIf="termName.errors.required">
+                      Field Can't be empty
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Priority
+                  </label>
+                  <select [(ngModel)]="Priority" class="form-control" formControlName="priority">
+                    <option [ngValue]="undefined" disabled selected hidden>{{editData.priority}}</option>
+                    <option *ngFor="let ProjectPhases of projectPhases">{{ProjectPhases}}</option>
+                  </select>
+                  <div *ngIf="priority.touched && priority.invalid" class="alert alert-danger">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- STAKEHOLDER & STAKEHOLDER ROLE -->
+            <div class="row or-section">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Stakeholder</label>
+                  <select class="form-control" [(ngModel)]="selectedStake" formControlName="stakeholder"
+                    (change)="getRole($event)">
+                    <option [ngValue]="undefined" disabled selected hidden>{{editData.stakeholderName}}</option>
+                    <option [ngValue]="Stakeholders" *ngFor="let Stakeholders of stakeholders">
+                      {{Stakeholders.stakeholderName}}</option>
+                  </select>
+                  <div *ngIf="stakeholder.touched && stakeholder.invalid" class="alert alert-danger">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Stakeholder Role</label>
+                  <select class="form-control" [(ngModel)]="rolesss" formControlName="role">
+                    <option [ngValue]="undefined" disabled selected hidden>Select</option>
+                    <option *ngFor="let Roles of roles" [ngValue]="Roles.option">{{Roles.option}}</option>
+                  </select>
+                  <div *ngIf="role.touched && role.invalid" class="alert alert-danger">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- COUNTRY & DATE -->
+            <div class="row or-section">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Country </label>
+                  <select class="form-control" formControlName="country">
+                    <option disabled selected hidden>{{editData.country}}</option>
+                    <option *ngFor="let country of countryList" [ngValue]="country">{{country}}</option>
+                  </select>
+                  <div *ngIf="country.touched && country.invalid" class="alert alert-danger">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Date </label>
+                  <div class="input-group date">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar">
+                      </i>
+                    </span>
+                    <input type="date" class="form-control" formControlName="date" value={{camaIssueDate}}>
+
+                  </div>
+                  <div *ngIf="date.touched && date.invalid" class="alert alert-danger">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- TYPE OF COLLECTION & MINIMUM COLLECTION -->
+            <div class="row or-section">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Types of collection</label>
+                  <div class="rd-form clearfix">
+                    <label class="radio-inline">
+                      <input type="radio" value="Foreign Sales" formControlName="typCollection" [ngModel]="editData.typeOfCollections"> Foreign Sales
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" value="Domestic Sales" formControlName="typCollection" [ngModel]="editData.typeOfCollections"> Domestic Sales
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Minimum Collection</label>
+                  <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" formControlName="minCollection"
+                        value={{editData.minimumCollections}}>
+                      <div *ngIf="minCollection.touched && minCollection.invalid" class="alert alert-danger">
+                        Field Can't be empty
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="checkbox m-xs">
+                        <label>
+                          <input type="checkbox" class="na" value="" (change)="valueChanged()">
+                          NA
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row or-section">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Type Of investment
+                  </label>
+                  <select class="form-control" [(ngModel)]="editData.investmentType" formControlName="TypeOfInvestments">
+                    <option [ngValue]="editData.investmentType" disabled selected hidden>{{editData.investmentType}}</option>
+                    <option *ngFor="let TypeOfInvestment of typeOfInvestment">{{TypeOfInvestment.option}} </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- for the loan -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Loan'">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="form-group">
+                    <label>Initial Investment</label>
+                    <input class="form-control" type="text" formControlName="investment">
+
+                    <div *ngIf="investment.touched && investment.invalid" class="alert alert-danger">
+                      Field Can't be empty
+                    </div>
+                  </div>
+
+                  <div class="repeat" *ngFor="let loan of Loan; let i=index">
+                    <div class="text-right">
+                      <a>
+                        <i class="fa fa-trash" aria-hidden="true" (click)="removeButtonClick(i)" *ngIf="i!>=0">
+                        </i>
+                      </a>
+                    </div>
+                    <div class="row or-section">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>Interest Rate</label>
+                          <input class="form-control" type="text" value={{loan.interest}}
+                            formControlName="loanInterestRate">
+                          <div *ngIf="loanInterestRate.touched && loanInterestRate.invalid" class="alert alert-danger">
+                            Field Can't be empty
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>For</label>
+                          <input class="form-control" type="text" placeholder="Duration" value={{loan.for}}
+                            formControlName="loanfor">
+                          <div *ngIf="loanfor.touched && loanfor.invalid" class="alert alert-danger">
+                            Field Can't be empty
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="repeat">
+                    <div class="text-right">
+                      <a (click)="addButtonClick()">
+                        <i class="fa fa-plus" aria-hidden="true">
+                        </i>
+                      </a>
+                    </div>
+                    <div class="row or-section">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>Interest Rate</label>
+                          <input class="form-control" type="text" formControlName="interest">
+                          <div *ngIf="interest.touched && interest.invalid" class="alert alert-danger">
+                            Field Can't be empty
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>For</label>
+                          <input class="form-control" type="text" formControlName="for" placeholder="Duration">
+                          <div *ngIf='for.invalid && (for.dirty || for.touched)' class="alert alert-danger">
+                            <div *ngIf="for.errors.required">
+                              Field Can't be empty
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Loan Issue Date</label>
+                        <div class="input-group date">
+                          <span class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                          </span>
+                          <input type="date" class="form-control" formControlName="loanIssueDate">
+                        </div>
+                        <div *ngIf="loanIssueDate.touched && loanIssueDate.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row or-section">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="form-group">
+                        <div class="checkbox m-xs">
+                          <label>
+                            <input type="checkbox" value="" name="cummulativeInterest" #interest (change)="0">
+                            Cummulative Interest
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Cummulative Interest -->
+                  <div class="ibox-b">
+                    <div class="row" *ngIf="interest.checked">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>Cummutative Interest Rate (annually in %)</label>
+                          <input class="form-control" type="text" formControlName="cummulativeInterest">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                          <label>Interest Calculation
+                          </label>
+                          <h4 class="pad-5">Daily : {{interestCalc}} % per day</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <button class="btn btn-primary" type="submit">Save
+                      </button> -->
+                  </div>
+                  <!-- //Cummulative Interest -->
+                </div>
+              </div>
+            </div>
+            <!-- //for the loan -->
+
+            <!-- for Deferment -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Deferment'">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Payment %</label>
+                        <input class="form-control" type="text" formControlName="defermentPayment">
+
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save
+                            </button></div> -->
+                      </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group or-box">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="payments">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //for Deferment -->
+
+            <!-- legal fees  -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Legal Fees'">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="legalFeesAmount">
+                        <div *ngIf="legalFeesAmount.touched && legalFeesAmount.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save
+                            </button></div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //legal fees  -->
+
+            <!-- Investment premium -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Investment Premium'">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Percentage</label>
+                        <input class="form-control" type="text" formControlName="investmentPremiumPercent">
+                        <div *ngIf="investmentPremiumPercent.touched && investmentPremiumPercent.invalid"
+                          class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save
+                            </button></div> -->
+                      </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group or-box-a">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="investmentPremiumAmount ">
+                        <div *ngIf="investmentPremiumAmount.touched && investmentPremiumAmount.invalid"
+                          class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //Investment premium -->
+
+            <!-- Turnaround Reimbursement -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Turnaround Reimbursement' ">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="turnaroundReimbursementAmount">
+                        <div *ngIf="turnaroundReimbursementAmount.touched && turnaroundReimbursementAmount.invalid"
+                          class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save
+                            </button></div> -->
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //Turnaround Reimbursement -->
+
+            <!--  Completion Guarantor Advacnes -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Completion Guarantor Advacnes' ">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>percentage</label>
+                        <input class="form-control" type="text" formControlName="guarantorPerecent">
+                        <div *ngIf="guarantorPerecent.touched && guarantorPerecent.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save
+                            </button></div> -->
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // Completion Guarantor Advacnes -->
+
+            <!--  Other -->
+            <div class="row bg-grey" *ngIf="editData.investmentType=='Other'">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox-a">
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>Percentage</label>
+                        <input class="form-control" type="text" formControlName="otherPercent">
+                        <div *ngIf="otherPercent.touched && otherPercent.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group or-box-a">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="otherAmount">
+                        <div *ngIf="otherAmount.touched && otherAmount.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row or-section">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group  or-box-b  m-t-md">
+                        <label>Amount</label>
+                        <input class="form-control" type="text" formControlName="otherFinalAmount">
+                        <div *ngIf="otherFinalAmount.touched && otherFinalAmount.invalid" class="alert alert-danger">
+                          Field Can't be empty
+                        </div>
+                        <!-- <div class="m-t-sm"><button class="btn btn-primary " type="submit" [disabled]="camatermForm.invalid">Save -->
+                        <!-- </button> -->
+                        <!-- </div> -->
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // Other -->
+            <div class="m-t-sm"><button class="btn btn-primary " type="submit">Save</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

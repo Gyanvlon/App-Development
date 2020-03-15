@@ -1,0 +1,107 @@
+
+<ng-flash-message></ng-flash-message>
+<form [formGroup]="addAccountForm" (ngSubmit)="onSubmit()">
+          <div class="wrapper wrapper-content">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="ibox">
+                       <div class="ibox-content">
+                             <div class="row page-heading">
+                                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+                         <h2>Bank Account Details</h2>
+                       </div>
+                                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+                                </div>
+                           </div>
+                             <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Account No.</strong></label>
+                                         <input  formControlName="accountNo" class="form-control">
+                                         <div *ngIf="accountNo.touched && accountNo.invalid" class="alert alert-danger">Bank Account Required</div>
+                                         <!-- <div *ngIf="accountNo.errors?.NumberOnly" class="alert alert-danger">Please Enter contact no only in number</div> -->
+
+                                         <!-- <div *ngIf="accountNo.errors?.NumberOnly" class="alert alert-danger">Please Enter Bank Account no only in number digits</div> -->
+                                         <div *ngIf="accountNo.errors?.maxlength" class="alert alert-danger">Bank Account no shoud be maximum 15 digits</div>
+
+
+                                         <!-- <div *ngIf="accountNo.invalid" class="alert alert-danger">
+                                               <div *ngIf="accountNo.errors.maxlength">Bank Account no shoud be maximum 15 digits</div>
+                                                <div *ngIf="accountNo.errors.NumberOnly"> Please Enter Account No only in number</div>
+                                           </div> -->
+                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Account Holder</strong></label>
+                                         <input type="text" formControlName="accountHolder"  class="form-control">
+                                         <div *ngIf="accountHolder.touched && accountHolder.invalid" class="alert alert-danger">Account Holder Name Required</div>
+                                 
+                                         <!-- <div *ngIf="accountHolder.invalid" class="alert alert-danger">Please Enter account Holder Name in character                              </div> -->
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Bank Name</strong></label>
+                                         <input formControlName="bankName" class="form-control">
+                                         <div *ngIf="bankName.touched && bankName.invalid" class="alert alert-danger">Bank Name Required</div>
+
+                                         <!-- <div *ngIf="bankName.invalid" class="alert alert-danger">
+                                           <div *ngIf="bankName.errors.textOnly"> Please Bank Name in character Only</div>
+                                       </div> -->
+                                     </div>
+                                </div> 
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Bank Address</strong></label>
+                                         <input type="text" formControlName="bankAddress"  class="form-control">
+                                         <div *ngIf="bankAddress.touched && bankAddress.invalid" class="alert alert-danger">Bank Address Required</div>
+                                     </div>
+                                </div>
+                             </div>
+                             <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>ABA No.</strong></label>
+                                         <input type="number" formControlName="abaNo"  class="form-control">
+                                         <div *ngIf="abaNo.touched && abaNo.invalid" class="alert alert-danger">ABA No. Required</div>
+                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Swift Code</strong></label>
+                                         <input type="text" formControlName="swiftCode" class="form-control">
+                                         <div *ngIf="swiftCode.touched && swiftCode.invalid" class="alert alert-danger">Swift Code Required</div>
+                                     </div>
+                                </div>
+                             </div>
+                             <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                          <label><strong>Routing No.</strong></label>
+                                          <input type="number" formControlName="routingNo" class="form-control">
+                                          <div *ngIf="routingNo.touched && routingNo.invalid" class="alert alert-danger">Routing No. Required</div>
+                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                         <label><strong>Country Code</strong></label>
+                                         <input formControlName="countryCode" class="form-control">
+                                         <div *ngIf="countryCode.touched && countryCode.invalid" class="alert alert-danger">Country Code Required</div>
+                                         <div *ngIf="countryCode.errors?.maxlength" class="alert alert-danger">Country code shoud be  maximum 4 digits</div>
+                                  </div>
+                                </div>
+                             </div>
+                             <div class="clearfix my-btn-grp">
+                                <button type="submit" class="btn btn-primary" [disabled]="addAccountForm.invalid">Save</button>
+                                <a routerLink='/bank-account-details' class="btn btn-primary">Cancel</a>
+                             </div>
+                       </div>
+                  </div>
+              </div>
+            </div>
+         </div>
+        </form>
+  

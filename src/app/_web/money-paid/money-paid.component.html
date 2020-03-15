@@ -1,0 +1,191 @@
+<!-- <div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink='/manage-project'>Manage Projects</a></li>
+              <li><a routerLink='/project-details'>Projects Details</a></li>
+              <li><a routerLink='/project-insight'>Projects Insights</a></li>
+              <li class="active">Money Paid Out</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Money Paid Out</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+            </div>
+          </div>
+          <p class="text-right"><strong>Total Money Paid</strong>: $600000</p>
+          <div class="coman-table table-responsive">
+            <table class="table table-bordered">
+              <tr>
+                <th>Stakeholder</th>
+                <th>Role</th>
+                <th>Payment </th>
+                <th>Description of Payment</th>
+                <th>Priority</th>
+                <th>Percentage</th>
+              </tr>
+              <tr>
+                <td>Union Entertainment Group</td>
+                <td>Production Company, Investor</td>
+                <td></td>
+                <td>Net Profits</td>
+                <td>Phase Five</td>
+                <td>50%</td>
+              </tr>
+              <tr>
+                <td>Noah Haeussner</td>
+                <td>Producer</td>
+                <td></td>
+                <td>Net Profits</td>
+                <td>Phase Five</td>
+                <td>50%</td>
+              </tr>
+              <tr>
+                <td>Lionsgate</td>
+                <td>Production Company</td>
+                <td>$250000</td>
+                <td>Turnaround Reimbursement</td>
+                <td>Phase Three</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lillian Ghodoushim</td>
+                <td>Investor</td>
+                <td>$500000</td>
+                <td>Recoupment of Investment</td>
+                <td>Phase Two</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Einar Thorsteinson</td>
+                <td>Investor</td>
+                <td>$500000</td>
+                <td>Recoupment of Investment</td>
+                <td>Phase Two</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Dev Patel</td>
+                <td>Talent</td>
+                <td>$450000</td>
+                <td>Deferments</td>
+                <td>Phase Four</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Union Editorial</td>
+                <td>Loan</td>
+                <td>$250000</td>
+                <td>Repayment of Loan</td>
+                <td>Phase One</td>
+                <td></td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div> -->
+
+
+ 
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="ibox">
+               <div class="ibox-content">
+                  <div class="breadcrumb-main">
+                      <ol class="breadcrumb">
+                        <li><a routerLink="/manage-project">Manage Projects</a></li>
+                        <li><a routerLink="/project-details">Projects Details</a></li>
+                        <li><a routerLink="/project-insights">Projects Insights</a></li>
+                        <li class="/active">Money Distribution</li>
+                      </ol>
+                  </div>
+               </div>
+         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="ibox">
+               <div class="ibox-content">
+                  <div class="row page-heading">
+                      <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+               <h2>Money Distribution</h2>
+             </div>
+                      <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+                          
+                      </div>
+                  </div>
+                  
+                  <div class="coman-table table-responsive" *ngIf="!isblank">
+                        <table class="table table-bordered">
+                              <tr>
+                                  <th>Stakeholder Name</th>
+                                  <th>Role</th>
+                                  <th>Phase No.</th>
+                                  <th>Payment</th>
+                                  <th>Last Payment</th>
+                                  <th>Percentage of Phase No.</th>
+                              </tr>
+                              <tr *ngFor=" let list of listOfTransaction | paginate: { itemsPerPage: 5, currentPage: p }">
+                                  <td>{{list.stakeholderName}}</td>
+                                  <td>{{list.role}}</td>
+                                  <td>{{list.phase}}</td>
+                                  <td>${{list.amount}}</td>
+                                  <td>{{list.dateOfTx}}</td>
+                                  <td>{{list.percentage}}</td>
+                              </tr>
+                              
+                      </table>
+						       <pagination-controls (pageChange)="p = $event" class="page"></pagination-controls>
+
+                  </div>
+                  
+               </div>
+         </div>
+    </div>
+ </div>
+</div>
+<div *ngIf="isblank">
+  <div class="wrapper wrapper-content" >
+      <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <div class="ibox">
+                     <div class="ibox-content">
+                        
+                        <div class="no-data-page text-center p-lg">
+                            <div class="icon m-t-lg">
+                                 <img src="/assets/img/no-data.svg" alt="">
+                            </div> 
+                            <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                        </div>
+                     </div>
+               </div>
+          </div>
+      </div>
+    </div> 
+ </div>
+ 

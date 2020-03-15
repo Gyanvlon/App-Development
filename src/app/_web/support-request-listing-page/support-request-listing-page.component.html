@@ -1,0 +1,125 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li class="active">Support Request</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-flash-message></ng-flash-message>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Support Request</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+            </div>
+          </div>
+
+          <div class="support-req-tab-section">
+            <div class="clearfix">
+              <div class="req-btn">
+                <a routerLink='/new-request' class="btn btn-primary">New Request</a>
+              </div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#tab-1" aria-controls="home" role="tab"
+                    data-toggle="tab">Open Issues</a></li>
+                <li role="presentation"><a href="#tab-2" aria-controls="profile" role="tab" data-toggle="tab">Resolved
+                    Issues</a></li>
+                <li role="presentation"><a href="#tab-3" aria-controls="profile" role="tab" data-toggle="tab">My
+                    Issues</a></li>
+              </ul>
+            </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="tab-1">
+                <div class="issues-list clearfix">
+                  <ul *ngFor="let ProjectDetail of projectDetail">
+                    <li>
+                      <div class="box clearfix">
+                        <div class="image" *ngIf="ProjectDetail.projectImage != null ">
+                          <img src="{{ProjectDetail.projectImage}}" alt="">
+                        </div>
+                        <div class="image" *ngIf="ProjectDetail.projectImage == null ">
+                          <img src='/assets/img/movie-placeholder.jpg' alt="">
+                        </div>
+                        <div class="text">
+                          <h3> <a
+                              routerLink='/support-request-detail-page/{{ProjectDetail._id}}/Pending'>{{ProjectDetail.projectName}}</a>
+                          </h3>
+                          <p>{{ProjectDetail.projectDescription | slice:0:100}}<strong>20 sec,
+                              ago</strong> </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab-2">
+                <div class="issues-list clearfix">
+                  <ul *ngFor="let ProjectDetail of projectDetail">
+                    <li>
+                      <div class="box clearfix" >
+                        <div class="image" *ngIf="ProjectDetail.projectImage != null ">
+                          <img src="{{ProjectDetail.projectImage}}" alt="">
+                        </div>
+                        <div class="image" *ngIf="ProjectDetail.projectImage == null ">
+                          <img src='/assets/img/movie-placeholder.jpg' alt="">
+                        </div>
+                        <div class="text">
+                          <h3> <a
+                              routerLink='/support-request-detail-page/{{ProjectDetail._id}}/Resolved'>{{ProjectDetail.projectName}}</a>
+                          </h3>
+                          <p>{{ProjectDetail.projectDescription | slice:0:100}}<strong>20 sec,
+                              ago</strong> </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab-3">
+                <div class="issues-list clearfix">
+                  <ul *ngFor="let ProjectDetail of projectDetail">
+                    <li>
+                      <div class="box clearfix">
+                        <div class="image" *ngIf="ProjectDetail.projectImage != null ">
+                          <img src="{{ProjectDetail.projectImage}}" alt="">
+                        </div>
+                        <div class="image" *ngIf="ProjectDetail.projectImage == null ">
+                          <img src='/assets/img/movie-placeholder.jpg' alt="">
+                        </div>
+                        <div class="text">
+                          <h3> <a
+                              routerLink='/support-request-detail-page/{{ProjectDetail._id}}/myIssues'>{{ProjectDetail.projectName}}</a>
+                          </h3>
+                          <p>{{ProjectDetail.projectDescription | slice:0:100}}<strong>20 sec,
+                              ago</strong> </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

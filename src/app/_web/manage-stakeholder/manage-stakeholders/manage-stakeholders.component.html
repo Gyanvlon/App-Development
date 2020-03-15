@@ -1,0 +1,117 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink='/manage-projects'>Manage Projects</a></li>
+              <li class="active">View Stakeholders</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-flash-message></ng-flash-message>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 top-title-bar">
+              <div class="row">
+                <div class="form-group col-md-5">
+
+                  <select class="form-control" [(ngModel)]="selectedValue" (change)="getData($event)">
+                    <option *ngFor="let AllProjectsData of allProjectsData" [ngValue]="AllProjectsData._id">
+                      {{AllProjectsData.projectName}}
+                  </select>
+
+
+                </div>
+                <!-- <div class="col-md-3">
+                  <div class="clear-fix">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+              <div class="add-btn">
+                <a routerLink='/add-stakeholders' class="btn btn-primary">Add Stakeholder</a>
+                <a routerLink='/stakeholders-account' class="btn btn-primary">Stakeholder Accounts</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="Stackholder-list table-responsive coman-table" *ngIf="blank!=true">
+            <table class="table table-bordered table-striped">
+              <tr>
+                <th>Stakeholder</th>
+                <th>Role</th>
+                <!-- <th>Movies</th> -->
+                <th>Pending Support Requests</th>
+                <th>Action</th>
+              </tr>
+              <tr *ngFor="let StakeHolderDetails of stakeholders | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td>
+                    <div class="table-user" *ngIf="StakeHolderDetails.stakeholderImage == null">
+                        <img src="/assets/img/prf-img.png">
+                      </div>
+                  <div class="table-user">
+                    <img src="{{StakeHolderDetails.stakeholderImage}}" alt="">
+                  </div>
+                  <h5><a
+                      routerLink='/stakeholders-details/{{StakeHolderDetails._id}}'>{{StakeHolderDetails.stakeholderName}}</a>
+                  </h5>
+                </td>
+                <td>
+                  <div class="bifercation" *ngFor="let StakeRole of StakeHolderDetails.projects">
+                    <span *ngFor="let Role of StakeRole.role" class="label label-info m-xxs">
+                      {{Role.role}}
+                    </span>
+                  </div>
+                </td>
+                <!-- <td *ngFor="let projectMovie of StakeHolderDetails.projects">
+                  {{projectMovie.projectId.projectName}}
+                </td> -->
+                <td><a href="#"><span
+                      class="badge label-warning">{{StakeHolderDetails.pendingSupportRequest}}</span></a></td>
+                <td>
+                  <div class="action-btn">
+                    <a routerLink='/edit-stakeholders/{{StakeHolderDetails._id}}'><i class="fa fa-pencil"
+                        aria-hidden="true"></i></a>
+                    <a routerLink='/stakeholders-details/{{StakeHolderDetails._id}}'><i class="fa fa-eye"
+                        aria-hidden="true"></i></a>
+                    <a data-toggle="modal" data-target="#modal-delete-stakeholder"
+                      (click)="getId(StakeHolderDetails._id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="blank!=true"></pagination-controls>
+          <div class="dashboard-blank" *ngIf="blank==true">
+            <!-- <p>Hello, <strong>XYZ.</strong> Welcome to the portal.</p> -->
+            <p>Hey! No Data Found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-delete-stakeholder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure you want to delete this stakeholder ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStakeholders()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

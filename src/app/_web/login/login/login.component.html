@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+	<body class="gray-bg">
+		<br>
+		<ng-flash-message></ng-flash-message>
+		<div class="login-part">
+			<div class="lg-logo">
+				<img src="/assets/img/logo.png" alt="">
+			</div>
+			<div class="login-form">
+				<div class="def-title text-center">
+					<h2>Login</h2>
+				</div>
+				<div class="form-group">
+					<label>Email ID <span>*</span></label>
+					<input formControlName="email" [(ngModel)]="user.email" class="form-control" type="email" required>
+					<div *ngIf="email.touched && email.invalid" class="alert alert-danger">Email Id required </div>
+				</div>
+				<div class="form-group">
+					<label>Password <span>*</span></label>
+					<input formControlName="password" [(ngModel)]="user.password" class="form-control" type="password">
+					<div *ngIf="password.touched && password.invalid" class="alert alert-danger">password required</div>
+				</div>
+				<div class="forgot-link">
+					<a routerLink='/forgot-password'>Forgot Password ?</a>
+				</div>
+				<div class="login-btn">
+					<input class="btn btn-primary" type="submit" [disabled]="loginForm.invalid" value="Login">
+				</div>
+			</div>
+		</div>
+	</body>
+</form>

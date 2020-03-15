@@ -1,0 +1,139 @@
+<form [formGroup]="demoSimulationForm">
+  <div class="wrapper wrapper-content">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="row page-heading">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 top-title-bar">
+                <h2>Demo Simulation</h2>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                <div class="add-btn">
+                  <a href="#" class="btn btn-primary">Run Simulation</a>
+                  <a href="view-status.html" class="btn btn-primary">View Status</a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="clearfix">
+                  <div class="prj-pay-img">
+                    <img src="img/dash-new1.png" alt="">
+                  </div>
+                  <div class="form-group">
+                    <label>Project Name</label>
+                    <select [(ngModel)]="projectName" class="form-control" formControlName="projects" (change)="projectSelected($event)">
+                      <option [ngValue]="undefined" disabled  selected hidden> Please select project </option>
+                        <option *ngFor="let AllProjectsData of allProjectsData" [ngValue]="AllProjectsData._id">{{AllProjectsData.projectName}}
+                        </option>
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Investment Type</label>
+                  <div class="clearfix">
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="">
+                      Domestic
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Foreign
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>&nbsp;</label>
+                  <select class="form-control" [(ngModel)]="selected" formControlName="userType">
+                    <option [ngValue]="undefined" disabled selected hidden>Select User Type</option>
+                    <option *ngFor="let UserType of userType">{{UserType.option}} </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Revenue ($)</label>
+                  <div class="revenue-range clearfix">
+                    <div class="range-slider">
+                      <input class="range-slider__range" type="range" value="100" min="100000" max="10000000">
+                      <span class="pull-right">10000000</span>
+                      <span class="range-slider__value pull-left">100000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>&nbsp;</label>
+                  <select [(ngModel)]="phasevalue" class="form-control" formControlName="phase">
+                    <option [ngValue]="undefined" disabled selected hidden>Select Phase</option>
+                    <option *ngFor="let ProjectPhases of projectPhases">{{ProjectPhases}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>&nbsp;</label>
+                  <select [(ngModel)]="userRoles" class="form-control" formControlName="role">
+                    <option [ngValue]="undefined" disabled selected hidden>Select Role</option>
+                    <option *ngFor="let StakeholderRole of stakeholderRole">{{StakeholderRole.role}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+
+            <div class="coman-table table-responsive">
+              <table class="table table-striped table-bordered">
+                <tr>
+                  <th>Stakeholder</th>
+                  <th>Role</th>
+                  <th>Phase</th>
+                  <th>Amount to be Paid ($)</th>
+                </tr>
+                <tr>
+                  <td>Noah Haeussner</td>
+                  <td>Producer</td>
+                  <td>First Phase</td>
+                  <td>5000000</td>
+                </tr>
+                <tr>
+                  <td>Lionsgate</td>
+                  <td>Production Company</td>
+                  <td>First Phase</td>
+                  <td>3000000</td>
+                </tr>
+                <tr>
+                  <td>Lillian Ghodoushim</td>
+                  <td>Investor</td>
+                  <td>Second Phase</td>
+                  <td>2000000</td>
+                </tr>
+              </table>
+            </div>
+            <div class="my-btn-grp clearfix">
+              <button type="submit" class="btn btn-primary">Share Results</button>
+              <button type="submit" class="btn btn-primary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</form>

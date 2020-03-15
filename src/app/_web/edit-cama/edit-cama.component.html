@@ -1,0 +1,73 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink='/manage-project'>Manage Projects</a></li>
+              <li><a routerLink='/project-details/{{projectId}}'>{{projectName}}</a></li>
+              <li><a routerLink='/edit-project/{{projectId}}'>Edit "{{projectName}}"</a></li>
+              <li class="active">Edit CAMA</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-flash-message></ng-flash-message>
+
+  <div class="row" *ngFor="let CamaDetails of camaDetails">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="project-details-section">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><strong>Project Name</strong> :</label>
+                  <p>{{CamaDetails.projectName}}</p>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                <div class="form-group" >
+                  <label><strong>Admin Name</strong> :</label>
+                  <p >{{CamaDetails.projectAdmin.stakeholderName}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><strong>Admin Mail</strong> :</label>
+                  <p>{{CamaDetails.projectAdmin.email}}</p>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><strong>CAMA Document</strong> :</label>
+                  <div class="upload-box">
+                    <input type="file" (change)="fileUpload($event)">
+                    <span>Upload CAMA Document</span>
+                    <p>{{CamaDetails.camaDocumentName}}</p>
+                  </div>
+                  <div class="uni-link">
+                    <a href={{CamaDetails.camaDocument}} target="_blank">View CAMA</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix my-btn-grp">
+              <a routerLink='/view-cama-terms/{{projectId}}' class="btn btn-primary m-t-sm">View CAMA Terms</a>
+              <button class="btn btn-primary m-t-sm" type="submit" (click)="updateCama()">Save</button>
+              <a href="#" class="btn btn-primary m-t-sm">Cancel</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

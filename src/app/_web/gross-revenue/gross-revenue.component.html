@@ -1,0 +1,82 @@
+<div class="wrapper wrapper-content" >
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink='/manage-project'>Manage Projects</a></li>
+              <li><a routerLink='/project-details'>Projects Details</a></li>
+              <li><a routerLink='/project-insight'>Projects Insights</a></li>
+              <li class="active">Gross Revenue</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Gross Revenue</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+            </div>
+          </div>
+          <p class="text-right"><strong>Gross Revenue :</strong>${{netRevenue}}</p>
+          <div class="coman-table table-responsive" *ngIf="!isblank">
+
+            <table class="table table-bordered" >
+              <tr>
+                <th>Distributor</th>
+                <th>Country</th>
+                <th>Take</th>
+                <th>Collections</th>
+                <th>Date into Account</th>
+              </tr>
+              <tr *ngFor="let list of listOfTransaction | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td>{{list.distributorName}}</td>
+                <td>{{list.country}}</td>
+                <td>${{list.take}}</td>
+                <td>${{list.weekendCollection}}</td>
+                <td>{{list.date}}</td>
+              </tr>
+            </table>
+						<pagination-controls (pageChange)="p = $event" class="page"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgb(50, 65, 59)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: rgb(245, 248, 247)">Loading...</p>
+</ngx-spinner>
+<div *ngIf="isblank">
+   <div class="wrapper wrapper-content" >
+       <div class="row">
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox">
+                      <div class="ibox-content">
+                         
+                         <div class="no-data-page text-center p-lg">
+                             <div class="icon m-t-lg">
+                                  <img src="/assets/img/no-data.svg" alt="">
+                             </div> 
+                             <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                         </div>
+                      </div>
+                </div>
+           </div>
+       </div>
+     </div> 
+  </div>
+  

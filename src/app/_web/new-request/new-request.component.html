@@ -1,0 +1,98 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink="/notification-setting">Notification</a></li>
+              <li class="active">Support Request</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-flash-message></ng-flash-message>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="row page-heading">
+              <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+                <h2>Support Request</h2>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+              </div>
+            </div>
+
+            <div class="support-req-details">
+              <div class="ibox chat-view">
+
+                <div class="user-heading clearfix">
+                  <div class="image">
+                    <img src="/assets/img/prf-img.png" alt="">
+                  </div>
+                  <div class="text">
+                    <h3>Super Admin</h3>
+                    <p>Request ID : {{requestId}}</p>
+                  </div>
+                </div>
+
+                <div class="ibox-content new-request-section">
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4">
+                      <div class="form-group chat-search-box">
+                        <input type="text" formControlName="subject" class="form-control" placeholder="Subject">
+                        <div class="alert alert-danger" *ngIf="subject.touched && subject.invalid">
+                          <div *ngIf="subject.errors.required">Field can't be empty</div>
+                        </div>
+                      </div>
+                      <div  class="form-group m-t-sm">
+                        <select [(ngModel)]="projectName" class="form-control" formControlName="projects" (change)="($event)">
+                        <option [ngValue]="undefined" disabled  selected hidden> Please select project </option>
+                          <option *ngFor="let AllProjectsData of allProjectsData" [ngValue]="AllProjectsData._id">{{AllProjectsData.projectName}}
+                          </option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="projects.touched && projects.invalid">
+                          <div *ngIf="projects.errors.required">Field can't be empty</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8">
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="chat-message-form">
+                        <div class="form-group">
+                          <textarea  formControlName="message" class="form-control message-input" name="message"
+                            placeholder="Enter message text"></textarea>
+                          <div class="alert alert-danger" *ngIf="message.touched && message.invalid">
+                            <div *ngIf="message.errors.required">Field can't be empty</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clearfix">
+                    <button class="btn btn-primary m-t" type="submit" [disabled]="!form.valid" (click)=newRequest(subject.value,projectName,message.value)>Send</button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

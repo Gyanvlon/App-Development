@@ -1,0 +1,78 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content clearfix">
+          <div class="breadcrumb-main  pad-3  pull-left">
+            <ol class="breadcrumb">
+              <li><a routerLink="/manage-stakeholders">Manage Stakeholders</a></li>
+              <li class="active">Stakeholder Accounts</li>
+            </ol>
+          </div>
+          <div class="pull-right width-200">
+            <select class="form-control" [(ngModel)]="selectedValue" (change)="getProjectId($event)">
+              <option [ngValue]="undefined" selected hidden disabled> {{firstProject}} </option>
+              <!-- <option [ngValue]="undefined" selected disabled hidden>Select Project</option> -->
+              <option *ngFor="let project of projects" [ngValue]="project._id">{{project.projectName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!blank">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Stakeholder Accounts</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+            </div>
+          </div>
+          <div class="table-responsive coman-table">
+            <table class="table table-bordered">
+              <tr>
+                <th>Name</th>
+                <th>Bank Name</th>
+                <th>Account No.</th>
+                <th>ABA No.</th>
+                <th>Routing No.</th>
+                <th>Swift Code</th>
+              </tr>
+              <tr *ngFor="let detail of accountDetail | paginate: { itemsPerPage: 5, currentPage: p} ">
+                <td>{{detail.stackHolderName}}</td>
+                <td>{{detail.bankName}}</td>
+                <td>{{detail.accountNo}}</td>
+                <td>{{detail.abaNo}}</td>
+                <td>{{detail.routingNo}}</td>
+                <td>{{detail.swiftCode}}</td>
+              </tr>
+            </table>
+						<pagination-controls (pageChange)="p = $event" class="page"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="blank">
+    <div class="wrapper wrapper-content" >
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                 <div class="ibox">
+                       <div class="ibox-content">
+                          
+                          <div class="no-data-page text-center p-lg">
+                              <div class="icon m-t-lg">
+                                   <img src="/assets/img/no-data.svg" alt="">
+                              </div> 
+                              <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                          </div>
+                       </div>
+                 </div>
+            </div>
+        </div>
+  </div> 
+ </div>

@@ -1,0 +1,161 @@
+<!-- {{editProjectDetails.projectDescription}} -->
+<ng-flash-message></ng-flash-message>
+<div *ngFor="let EditProjectData of editProjectDetails">
+  <div class="wrapper wrapper-content">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="breadcrumb-main">
+              <ol class="breadcrumb">
+                <li><a routerLink='/manage-projects'>Manage Projects</a></li>
+                <li><a routerLink='/project-details/{{projectId}}'>{{projectName}}</a></li>
+                <li class="active">Edit "{{projectName}}"</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="project-details-section">
+              <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                  <!-- <div class="image brs-part" *ngIf="imageSrc == 'null'">
+                    <img src="/assets/img/movie-placeholder.jpg" alt="">
+                    <div class="brs-btn">
+                      <input type="file" (change)="imgUpload($event)">
+                      <span class="btn btn-primary">Browse</span>
+                    </div>
+                  </div> -->
+                  <div class="image brs-part">
+                    <img src="{{imageSrc}}" alt="">
+                    <div class="brs-btn">
+                      <input type="file" id="file" (change)="imgUpload($event)">
+                      <span class="btn btn-primary">Browse</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
+                  <div class="text">
+                    <h2>{{EditProjectData.projectName}}</h2>
+                    <div class="form-group ">
+                      <textarea class="form-control" [(ngModel)]="EditProjectData.projectDescription" required
+                        #projectDescription="ngModel"></textarea>
+                      <div
+                        *ngIf='projectDescription.invalid && (projectDescription.dirty || projectDescription.touched)'
+                        class="alert alert-danger">
+                        <div *ngIf="projectDescription.errors.required">
+                          Field Can't be empty
+                        </div>
+                      </div>
+                    </div>
+                    <p><strong>Admin:</strong> {{EditProjectData.projectAdmin.stakeholderName}}</p>
+                    <div class="uni-link">
+                      <a routerLink='/universal-message/{{EditProjectData._id}}'>Universal Message</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="project-details-section">
+              <div class="pull-right m-b">
+                <a routerLink='/edit-cama/{{EditProjectData._id}}' class="btn btn-primary">Edit CAMA</a>
+              </div>
+              <div class="form-group dt-form">
+                <label>Start Date : </label>
+                <div class="input-group date">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  <input type="text" placeholder="YYYY/MM/DD" name="startDt" id="startDt" class="form-control"
+                    [(ngModel)]="projectStartDate" #startDt="ngModel" required>
+                </div>
+                <div *ngIf="startDt.invalid && (startDt.dirty || startDt.touched)" class="alert alert-danger">
+                  <div *ngIf="startDt.errors.required">
+                    Field Can't be empty
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group"> -->
+              <!-- <label>Current Status :</label> -->
+              <!-- <div class="current-status-part clearfix">
+                  <div class="box">
+                    <input type="radio" name="status">
+                    <span>In Progress</span>
+                  </div>
+                  <div class="box">
+                    <input type="radio" name="status">
+                    <span>On Hold</span>
+                  </div>
+                  <div class="box">
+                    <input type="radio" name="status">
+                    <span>Completed</span>
+                  </div>
+                  <a href="#" class="btn btn-primary btn-circle"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div> -->
+              <!-- </div> -->
+              <div class="form-group">
+                <label>Press and Articles :</label>
+                <div class="press-form">
+                  <div *ngFor="let pressArticles of PressArticles; let i=index">
+                    <div class="row">
+                      <div class="box col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <input type="text" placeholder="Name" class="form-control" [(ngModel)]="pressArticles.name"
+                          #pressName="ngModel" required />
+                        <div *ngIf='pressName.invalid && (pressName.dirty || pressName.touched)'
+                          class="alert alert-danger">
+                          <div *ngIf="pressName.errors.required">
+                            Field Can't be empty
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <input name="PressLink" type="text" placeholder="Link" pattern="^((ht|f)tp(s?))\://([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(/\S*)?$" class="form-control"
+                          [(ngModel)]="pressArticles.link" required #PressLink="ngModel" />
+                        <div *ngIf='PressLink.invalid && (PressLink.dirty || PressLink.touched)'
+                          class="alert alert-danger">
+                          <div *ngIf="PressLink.errors.required">
+                            Field Can't be empty
+                          </div>
+                          <div>
+                           please enter correct url.
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="i<PressArticles.length-1" class="box col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <a href="javascript:void(0)" (click)="removeButtonClick(i)"
+                          class="btn btn-primary btn-circle"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      </div>
+                      <div *ngIf="i >=PressArticles.length-1" class="box col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <a href="javascript:void(0)" (click)="addButtonClick()" class="btn btn-primary btn-circle"><i
+                            class="fa fa-plus" aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <!-- <input type="submit" value="Save Changes" class="btn btn-primary"> -->
+                <button type="submit" class="btn btn-primary"
+                  (click)=updateProject(EditProjectData.projectDescription,projectStartDate)
+                  [disabled]="submitButtonValidity">Save
+                  Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

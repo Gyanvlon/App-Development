@@ -1,0 +1,67 @@
+<form [formGroup]="popUpForm" (ngSubmit)="onSubmit()" *ngIf="show">
+<div class="security-ques-section-out {{className}}">
+  <div class="security-ques-section">
+         <div class="def-title">
+        <h2>Security Question</h2>
+      </div>
+      <div class="form-group">
+        <label>Select Your Security Question</label>
+        <select [(ngModel)]="Question" class="form-control" formControlName="questionField"
+          (change)="($event.target.value)">
+          <option *ngFor="let Question of question" [ngValue]="Question">{{Question.question}}</option>
+        </select>
+        <input type="text" formControlName="answer" class="form-control m-t-md m-b-md">
+        <div *ngIf="answer.touched && answer.invalid" class="alert alert-danger">Please Enter Answer </div>
+        <button class="btn btn-primary" type="submit" [disabled]="popUpForm.invalid">Save</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Dashboard</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+              <div *ngIf="isSuperAdmin=='true'">
+                <a routerLink='/manage-projects' class="btn btn-primary">Add New Project</a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+            </div>
+          </div>
+          <div class="dashboard-list" *ngIf="blank!=true">
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" *ngFor="let project of projects">
+                <div class="box">
+                  <div class="image">
+                    <img src="{{project.projectImage}}" alt="">
+                  </div>
+                  <div class="image" *ngIf="project.projectImage == null">
+                    <img src="/assets/img/movie-placeholder.jpg" alt="">
+                  </div>
+                  <div class="text clearfix">
+                    <div class="vi-btn">
+                      <a class="btn btn-primary" (click)="setProjectId(project._id)">Insights</a>
+                    </div>
+                    <h3><a routerLink='/project-details/{{project._id}}'>{{project.projectName}}</a></h3>
+                    <h4>{{project.rating}} | {{project.language}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-blank" *ngIf="blank==true">
+            <!-- <p>Hello, <strong>XYZ.</strong> Welcome to the portal.</p> -->
+            <p>Hey! Looks like you haven't been added to any project yet. Check again later!</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

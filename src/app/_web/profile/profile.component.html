@@ -1,0 +1,159 @@
+<div class="wrapper wrapper-content" *ngIf="stakeholderDetail">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row page-heading">
+						<div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+							<h2>Profile</h2>
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+							<div class="clearfix">
+								<a routerLink='/edit-profile' class="btn btn-primary">Edit Profile</a>
+							</div>
+						</div>
+					</div>
+					<div class="profile-pic-part clearfix">
+						<div class="profile-pic">
+							<img src="{{image}}" alt="">
+						</div>
+						<div class="profile-pic-text">
+							<h3>{{stakeholderDetail.stakeholderName}}</h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label><strong>Address</strong></label>
+								<p>{{stakeholderDetail.address}}</p>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label><strong>Email</strong></label>
+								<p>{{stakeholderDetail.email}}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label><strong>Contact No.</strong></label>
+								<p>{{stakeholderDetail.contactNo}}</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="project-view-tab">
+						<div class="project-view-menu">
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a href="#pv-tab1" aria-controls="home"
+										role="tab" data-toggle="tab">Live Projects</a></li>
+								<li role="presentation"><a href="#pv-tab2" aria-controls="profile" role="tab"
+										data-toggle="tab">Past Projects</a></li>
+							</ul>
+						</div>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="pv-tab1">
+								<div>
+								<div class="coman-table table-responsive" *ngIf="!isLive">
+									<table class="table table-bordered table-striped">
+										<tr>
+											<th>Project Name</th>
+											<th>Role</th>
+											<th>Payment Received</th>
+										</tr>
+										<tr *ngFor="let data of liveProject | paginate: { itemsPerPage: 5, currentPage: p }">
+											<td>{{data.projectId.projectName}}</td>
+											<td>
+											<span *ngFor="let Role of data.role" class="label label-info m-xxs">
+												{{Role.role}}
+											</span>
+											</td>
+											<td>{{data.projectId.paymentReceived}}</td>
+										</tr>
+										
+									</table>
+									<pagination-controls (pageChange)="p = $event" *ngIf="blank!=true" class="page"></pagination-controls>
+
+								</div>
+							
+							</div>
+							<div *ngIf="isLive">
+									<div class="wrapper wrapper-content" >
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												 <div class="ibox">
+													   <div class="ibox-content">
+														  
+														  <div class="no-data-page text-center p-lg">
+															  <div class="icon m-t-lg">
+																   <img src="/assets/img/no-data.svg" alt="">
+															  </div> 
+															  <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+														  </div>
+													   </div>
+												 </div>
+											</div>
+										</div>
+									  </div> 
+								   </div>
+
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="pv-tab2">
+							  <div>
+								<div class="coman-table table-responsive" *ngIf="!isPast">
+									<table class="table table-bordered table-striped" >
+										<tr>
+											<th>Project Name</th>
+											<th>Role</th>
+											<th>Payment Received</th>
+										</tr>
+										<tr *ngFor="let data of pastProject | paginate: { itemsPerPage: 5, currentPage: p }">
+											<td >{{data.projectId.projectName}}</td>
+											<td>
+												<span *ngFor="let Role of data.role" class="label label-info m-xxs">
+													{{Role.role}}
+												</span>
+											</td>
+											<td>{{data.projectId.paymentReceived}}</td>
+										</tr>
+										
+									</table>
+									<pagination-controls (pageChange)="p = $event" *ngIf="blank!=true" class="page"></pagination-controls>
+									
+								</div>
+								<div *ngIf="isPast">
+										<div class="wrapper wrapper-content" >
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													 <div class="ibox">
+														   <div class="ibox-content">
+															  
+															  <div class="no-data-page text-center p-lg">
+																  <div class="icon m-t-lg">
+																	   <img src="/assets/img/no-data.svg" alt="">
+																  </div> 
+																  <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+															  </div>
+														   </div>
+													 </div>
+												</div>
+											</div>
+										  </div> 
+									   </div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	  

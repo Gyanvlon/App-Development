@@ -1,0 +1,108 @@
+<!-- <app-navbar></app-navbar> -->
+<!-- <div id="wrapper"> -->
+<div id="wrapper">
+  <nav class="navbar-default navbar-static-side left-main-menu" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav metismenu" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <div class="logo text-center">
+              <a routerLink="/dashboard"><img src="/assets/img/logo.png" alt=""></a>
+            </div>
+          </div>
+          <div class="logo-element">
+            <img src="/assets/img/logo-element.png" alt="">
+          </div>
+        </li>
+        <li class="active">
+          <a routerLink='/dashboard'><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
+        </li>
+        <li>
+          <a routerLink='manage-commission'><i class="fa fa-money"></i> <span class="nav-label">Manage
+              Commission</span></a>
+        </li>
+        <li>
+          <a routerLink='manage-project'><i class="fa fa-desktop"></i> <span class="nav-label">Manage
+              Projects</span></a>
+        </li>
+        <li>
+          <a routerLink='manage-stakeholders'><i class="fa fa-cog"></i> <span class="nav-label">Manage
+              Stakeholders</span></a>
+        </li>
+        <li>
+          <a routerLink='payment-cnb-account'><i class="fa fa-money"></i> <span class="nav-label">Payments</span></a>
+        </li>
+        <li>
+          <a routerLink='bank-account-details'><i class="fa fa-university"></i> <span class="nav-label">Bank Account
+              Details</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Demo Simulation</span></a>
+        </li>
+        <li>
+          <a routerLink='support-request-listing-page'><i class="fa fa-question-circle"></i> <span
+              class="nav-label">Support Requests</span></a>
+        </li>
+        <li>
+          <a routerLink="cama-contracts"><i class="fa fa-compress"></i> <span class="nav-label">CAMA
+              Contracts</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row border-bottom">
+      <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+          <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i></a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="dropdown message-header">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+              <i class="fa fa-comments"></i> <span class="label label-danger">8</span>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+              <li>
+                <a routerLink='/message-box'>Messages</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown notification-header">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+              <i class="fa fa-bell"></i> <span class="label label-danger">8</span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+              <li>
+                <a href="#">
+                  Notification
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown adm-menu">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+              <span class="profile-img"><img src="/assets/img/user-img-pr.png" alt=""></span> <span
+                class="hidden-xs">Admin <i class="fa fa-angle-down"></i></span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+              <li>
+                <a routerLink='profile'>Profile</a>
+              </li>
+              <li>
+                <a routerLink='notification-setting'>Notification Settings</a>
+              </li>
+              <li>
+                <a routerLink='/change-password'>Change Password</a>
+              </li>
+              <li>
+                <a routerLink='login'>Log out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- <router-outlet></router-outlet> -->
+  </div>
+</div>

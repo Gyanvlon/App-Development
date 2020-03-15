@@ -1,0 +1,116 @@
+<ng-flash-message></ng-flash-message>
+<form [formGroup]="editCommissionForm" (ngSubmit)="onSubmit()">
+            <div class="wrapper wrapper-content" *ngIf="detail">
+                        <div class="row">
+                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="ibox">
+                                                  <div class="ibox-content">
+                                                         <div class="breadcrumb-main">
+                                                                 <ol class="breadcrumb">
+                                                                         <li><a routerLink="/manage-commission">Manage Commission</a></li>
+                                                                  <li class="active">Edit Commission</li>
+                                                            </ol>
+                                                         </div>
+                                                  </div>
+                                        </div>
+                               </div>
+                       </div>
+                       
+                      <div class="row"> 
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="ibox">
+                                <div class="ibox-content">
+                                     <div class="row page-heading">
+                                          <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+                                                <h2>Edit Commission</h2>
+                                          </div>
+                                          <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+                                              
+                                          </div>
+                                     </div>
+                                     
+                                     <div class="row">
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                             <div class="form-group">
+                                                  <label>Project Name</label>
+                                                    <input class="form-control" [ngModel]="detail.projectName" formControlName="project"readOnly />
+                                               </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                             <div class="form-group">
+                                                    <label>Sales Agent</label>
+                                                    <input class="form-control" [ngModel]="detail.agentName" formControlName="salesAgentId" readOnly />
+                                               </div>
+                                              
+                                          </div>
+                                     </div>
+                                     
+                                     <div class="row">
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                             <div class="form-group">
+                                                    <label>Country</label>
+                                                    <select class="form-control" [(ngModel)]="detail.country" formControlName="countryName" [ngModel]="detail.country" (change)="($event.target.value)">
+                                                            <option [ngValue]="detail.country" hidden selected disabled>{{detail.country}}</option>
+                                                            <option *ngFor="let country of countryList" [ngValue]="country">{{country}}</option>
+                                                    </select>
+
+                                               </div>
+                                              
+                                          </div>
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                             <div class="form-group">
+                                                    <label>Payment (%)</label>
+                                                    <input placeholder="" class="form-control" [ngModel]="detail.paymentPercentage" formControlName="payment">
+                                                    <div *ngIf="payment.invalid" class="alert alert-danger">Please Enter Payment Percentage only in number and maximum length 2 digits
+                                                  </div>
+                                               </div>
+                                              
+                                          </div>
+                                     </div>
+                                     
+                                     <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            
+                                               <div class="form-group">
+                                                    <label>Collection Range ($)</label>
+                                                    <div class="row cr-from">
+                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                              <input  class="form-control" [ngModel]="detail.collectionRangeFrom" placeholder="From" formControlName="collectionFrom">
+                                                              <div *ngIf="collectionFrom.invalid" class="alert alert-danger">Please Enter Collection From</div>
+                                                         </div>
+                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                              <input class="form-control" placeholder="To" [ngModel]="detail.collectionRangeTo" formControlName="collectionTo">
+                                                              <div *ngIf="collectionTo.invalid" class="alert alert-danger">Please Enter collection range greater than To collection Range
+                                                               <div *ngIf="collectionTo.errors.MustGreater" class="alert alert-danger">Please Enter collection range greater than To collection Range</div>
+
+                                                              </div>
+                                                            </div>
+                                                    </div>
+                                               </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                               <div class="form-group">
+                                                  <label>Type of Collection</label>
+                                                    <div class="clearfix">
+                                                         <label class="radio-inline">
+                                                          <input type="radio" name="collectionType" id="inlineRadio1" value="Foreign Sales" formControlName="collectionType"> Foreign Sales
+                                                         </label>
+                                                         <label class="radio-inline">
+                                                          <input type="radio" name="collectionType" id="inlineRadio2" value="Domestic Sales" formControlName="collectionType"> Domestic Sales
+                                                         </label>
+                                                    </div>
+                                               </div>
+                                          </div>
+                                     </div>
+                                     
+                                     <div class="clearfix my-btn-grp">
+                                          <button type="submit" class="btn btn-primary" [disabled]="editCommissionForm.invalid">Save</button>
+                                          <button routerLink="/manage-commission" class="btn btn-primary">Cancel</button>
+                                     </div>
+                                     
+                                </div>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+</form>

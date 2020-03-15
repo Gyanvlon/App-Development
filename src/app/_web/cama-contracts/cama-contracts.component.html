@@ -1,0 +1,87 @@
+<div *ngIf="blank">
+ <div class="wrapper wrapper-content" >
+     <div class="row">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="ibox">
+                    <div class="ibox-content">
+                       
+                       <div class="no-data-page text-center p-lg">
+                           <div class="icon m-t-lg">
+                                <img src="/assets/img/no-data.svg" alt="">
+                           </div> 
+                           <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                       </div>
+                    </div>
+              </div>
+         </div>
+     </div>
+   </div> 
+   </div>
+<div class="wrapper wrapper-content" *ngIf="!blank">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2> CAMA Contracts </h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+            </div>
+          </div>
+
+          <div class="coman-table table-responsive">
+            <table class="table table-bordered table-striped">
+              <tr>
+                <th>Project</th>
+                <th>Role</th>
+                <th>CAMA Contract</th>
+              </tr>
+              <tr *ngFor="let project of detail | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td>{{project.projectId.projectName}}</td>
+                <td>
+                  <div class="bifercation">
+                    <span *ngFor="let Role of project.role" class="label label-info m-xxs">
+                      {{Role.role}}
+                    </span>
+                  </div>
+                </td>
+                <td><a href="{{project.projectId.camaDocument}}" target="_blank">Click to View</a>
+                  <!-- <div><a *ngIf="project.projectId.camaDocument == null" target="_blank">Click to View</a></div> -->
+                </td>
+
+              </tr>
+            </table>
+            <pagination-controls (pageChange)="p = $event" *ngIf="blank!=true" class="page"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div >
+    <div class="clearfix text-right m-t-sm" >
+     <a routerLink='/add-bank-account' class="btn btn-primary">Add Account Detail</a>
+   </div> 
+   <div class="wrapper wrapper-content" >
+       <div class="row">
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox">
+                      <div class="ibox-content">
+                         
+                         <div class="no-data-page text-center p-lg">
+                             <div class="icon m-t-lg">
+                                  <img src="/assets/img/no-data.svg" alt="">
+                             </div> 
+                             <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                         </div>
+                      </div>
+                </div>
+           </div>
+       </div>
+     </div> 
+  </div> -->
+  
+     
+
+

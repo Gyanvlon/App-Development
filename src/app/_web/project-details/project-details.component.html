@@ -1,0 +1,147 @@
+<div class="wrapper wrapper-content" *ngFor="let ProjectDetails of projectDetails">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a routerLink='/manage-projects' class="active">Manage Projects</a></li>
+              <li class="active">{{ProjectDetails.projectName}}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="project-details-section">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <div class="image" *ngIf="ProjectDetails.projectImage != null">
+                  <img src="{{ProjectDetails.projectImage}}" alt="">
+                </div>
+                <div class="image" *ngIf="ProjectDetails.projectImage == null">
+                  <img src="/assets/img/movie-placeholder.jpg" alt="">
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
+                <div class="text">
+                  <h2>{{ProjectDetails.projectName}}</h2>
+                  <p>{{ProjectDetails.projectDescription}}</p>
+                  <p><strong>Admin:</strong>{{ProjectDetails.projectAdmin.stakeholderName}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngFor="let ProjectDetails of projectDetails">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="project-details-section">
+            <div class="pull-right m-b">
+              <a routerLink='/view-cama-terms/{{projectId}}' class="btn btn-primary">View CAMA Terms</a>
+            </div>
+            <div class="form-group">
+              <label><strong>Start Date</strong> :</label>
+              <p>{{projectStartDate}}</p>
+            </div>
+            <div class="form-group">
+              <label><strong>Current Status</strong> :</label>
+              <p>{{ProjectDetails.currentStatus}}</p>
+            </div>
+            <div class="form-group">
+              <label><strong>Univeral Message</strong> :</label>
+              <p *ngFor="let UniversalMessage of ProjectDetails.universalMessage">{{UniversalMessage.message}}</p>
+            </div>
+            <div class="form-group">
+              <label><strong>Press and Articles</strong> :</label>
+              <p >
+                  <a class="m-r" *ngFor="let PressAndArticles of ProjectDetails.pressAndArticles" href="{{PressAndArticles.link}}" target="_blank">{{PressAndArticles.name}}</a>
+              </p>
+            </div>
+            <div class="clearfix my-btn-grp">
+              <!-- <a routerLink='/edit-project/{{ProjectDetails._id}}' class="btn btn-primary m-t-sm">Edit Project</a> -->
+              <a  (click)="setProject()" class="btn btn-primary m-t-sm">View Insights</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <h3>Stakeholder</h3>
+          <div class="Stackholder-list table-responsive coman-table" *ngIf="blank!=true">
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr>
+                  <th>Stakeholder</th>
+                  <th>Role</th>
+                  <!-- <th>Movies</th> -->
+                  <th>Pending Support Requests</th>
+                  <th>Action</th>
+                </tr>
+                <tr *ngFor="let Stakeholders of stakeholders">
+                  <td>
+                      <div class="table-user" *ngIf="Stakeholders.stakeholderImage != null">
+                          <img src="{{Stakeholders.stakeholderImage}}">
+                        </div>
+                        <div class="table-user" *ngIf="Stakeholders.stakeholderImage == null">
+                          <img src="/assets/img/prf-img.png">
+                        </div>
+                    <h5><a routerLink='/stakeholders-details'>{{Stakeholders.stakeholderName}}</a></h5>
+                  </td>
+                  <td>
+                    <div *ngFor='let Projects of Stakeholders.projects'>
+                      <span class="label label-info m-xxs" *ngFor='let Role of Projects.role'>{{Role.role}}</span>
+                      <!-- <span class="label label-info m-xxs">Investor</span> -->
+                    </div>
+                  </td>
+                  <!-- <td>The Escape</td> -->
+                  <td><a href="#"><span class="badge label-warning">{{Stakeholders.pendingSupportRequest}}</span></a>
+                  </td>
+                  <td>
+                    <div class="action-btn">
+                      <!-- <a routerLink='/edit-stakeholders/{{Stakeholders._id}}'><i class="fa fa-pencil"
+                          aria-hidden="true"></i></a> -->
+                      <a routerLink='/stakeholders-details/{{Stakeholders._id}}'><i class="fa fa-eye"
+                          aria-hidden="true"></i></a>
+                      <!-- <a href="#" data-toggle="modal" data-target="#modal-delete-stakeholder"
+                        (click)="getId(Stakeholders._id)"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dashboard-blank" *ngIf="blank==true">
+            <!-- <p>Hello, <strong>XYZ.</strong> Welcome to the portal.</p> -->
+            <p>Hey! No Data Found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-delete-stakeholder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure you want to delete this stakeholder ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStakeholder()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

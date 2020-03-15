@@ -1,0 +1,104 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="breadcrumb-main">
+            <ol class="breadcrumb">
+              <li><a href="manage-project.html">Manage Projects</a></li>
+              <li><a href="project-details.html">Project Details</a></li>
+              <li><a href="edit-project.html">Edit Projects</a></li>
+              <li><a href="edit-cama.html">Edit CAMA</a></li>
+              <li class="active">CAMA Terms</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>View CAMA Terms</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+              <div class="add-btn">
+                <a routerLink="/add-cama-terms/{{projectId}}" class="btn btn-primary">Add New Term</a>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive coman-table" *ngIf="blank==false">
+            <table class="table table-bordered">
+              <tr>
+                <th>Term Name</th>
+                <th>Priority</th>
+                <th>Stakeholder</th>
+                <th>Stakeholder Role</th>
+                <th>Investment Type</th>
+                <th>Initial Investment ($)</th>
+                <!-- <th>Interest Rate</th> -->
+                <th>Minimum Collections</th>
+                <th>Type of Collections</th>
+                <th>Country</th>
+                <th>Payment (%)</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+              <tr *ngFor="let CamaTerm of camaTerm | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{CamaTerm.Record.termName}}</td>
+                <td>{{CamaTerm.Record.priority}}</td>
+                <td> {{CamaTerm.Record.stakeholderName}}</td>
+                <td>{{CamaTerm.Record.role}}</td>
+
+                <td>{{CamaTerm.Record.investmentType}}</td>
+                <td>{{CamaTerm.Record.initialInvestment}}</td>
+                <!-- <td>{{CamaTerm.Record.interestRate}}</td> -->
+                <td>{{CamaTerm.Record.minimumCollections}}</td>
+                <td>{{CamaTerm.Record.typeOfCollections}}</td>
+                <td>{{CamaTerm.Record.country}}</td>
+                <td>{{CamaTerm.Record.percentage}}</td>
+                <td>{{CamaTerm.Record.amount}}</td>
+                <td>
+                  <div class="action-btn">
+                    <a href="stakeholders-details.html" class="btn btn-primary btn-lg"><i class="fa fa-eye"
+                        aria-hidden="true"></i></a>
+                    <a href="copy-cama-terms.html" class="btn btn-primary btn-lg"><i class="fa fa-files-o"
+                        aria-hidden="true"></i></a>
+                    <a routerLink="/edit-cama-terms/{{projectId}}/{{CamaTerm.Record.camaTermId}}"
+                      class="btn btn-primary btn-lg"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                      data-target="#modal-delete-term" (click)="getDeleteActiveId()"><i class="fa fa-trash"
+                        aria-hidden="true"></i></button>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <br>
+          <pagination-controls (pageChange)="p = $event" *ngIf="blank!=true"></pagination-controls>
+          <div class="dashboard-blank" *ngIf="blank==true">
+            <p>Hey! Looks like there are no Cama Terms added till now. Check again later!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-delete-term" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  style="display: none;">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure you want to delete this Term ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button (click)="deleteProject()" data-dismiss="modal" type="button" class="btn btn-primary">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

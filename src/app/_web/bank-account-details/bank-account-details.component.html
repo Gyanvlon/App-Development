@@ -1,0 +1,114 @@
+<!-- <ngx-spinner></ngx-spinner> -->
+<form>
+<div class="wrapper wrapper-content" *ngIf="noData" >
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="row page-heading">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 top-title-bar">
+              <h2>Bank Account Details</h2>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 text-right">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Account No.</strong></label>
+                <p>{{accountNos}}</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Account Holder</strong></label>
+                <p>{{accountHolders}}</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Bank Name</strong></label>
+                <p>{{bankNames}}</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Bank Address</strong></label>
+                <p>{{bankAddresss}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>ABA No.</strong></label>
+                <p>{{abaNos}}</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Swift Code</strong></label>
+                <p>{{swiftCodes}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Routing No.</strong></label>
+                <p>{{routingNos}}</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label><strong>Country Code</strong></label>
+                <p>{{countryCodes}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix">
+            <a routerLink='/edit-bank-account-details' class="btn btn-primary">Edit</a>
+            <!-- <button type="submit" class="btn btn-primary">Confirm Changes</button> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<ngx-spinner
+  bdColor="rgb(50, 65, 59)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: rgb(245, 248, 247)">Loading...</p>
+</ngx-spinner>
+<div *ngIf="!noData">
+  <div class="clearfix text-right m-t-sm" >
+   <a routerLink='/add-bank-account' class="btn btn-primary">Add Account Detail</a>
+ </div> 
+ <div class="wrapper wrapper-content" >
+     <div class="row">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="ibox">
+                    <div class="ibox-content">
+                       
+                       <div class="no-data-page text-center p-lg">
+                           <div class="icon m-t-lg">
+                                <img src="/assets/img/no-data.svg" alt="">
+                           </div> 
+                           <h2 class="p-md font-bold" style="color: #999c9e;">Sorry, No Data Found.</h2>
+                       </div>
+                    </div>
+              </div>
+         </div>
+     </div>
+   </div> 
+</div>
+
+   

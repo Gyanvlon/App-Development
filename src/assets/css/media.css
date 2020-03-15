@@ -1,0 +1,115 @@
+@media screen and (max-width:1300px)
+{
+	
+}
+
+@media screen and (max-width:1200px)
+{
+	.tl-box{ clear: left; float: left; margin-top: 7px; }
+	.tl-box + .tl-box { clear: none; }
+	.vi-btn{ float: none; padding: 0 0 7px 0; }
+}
+
+@media screen and (max-width:1023px)
+{	
+	.manage-project-list .box > div{ padding:10px;}
+	.status-btn a{width:120px; }
+	.manage-project-list .box > div:last-child{ width: auto; }
+	.manage-project-list .dropdown-menu{ left:auto; }
+	.image-view .image{ margin: 0 10px 0 0; }
+	.payment-tab-section .nav li a{ padding: 8px 10px; font-size: 15px; }
+	
+}
+
+@media screen and (max-width:992px)
+{
+	.chat-search-box{ margin: 5px 0; }
+}
+
+@media screen and (max-width:768px)
+{
+	nav.navbar-static-top .navbar-right{ margin-right:15px; }
+}
+
+
+@media screen and (max-width:767px)
+{
+	nav.navbar-static-top .navbar-right{ float: right; }
+	.profile-img{ margin: 0; }
+	.page-heading{ padding: 0 0 15px 0; }
+	.top-title-bar h2{ margin: 0; padding: 0 0 10px 0; font-size: 18px; }
+	.manage-project-list .box{ min-width: 700px; }
+	.manage-project-list{ overflow: auto; }
+	.pagination-main ul li a{ font-size: 13px; padding: 0 5px; }
+	.image-view h3{ font-size: 14px; }
+	.manage-project-list .box > div{ font-size: 14px; }
+	.title-part h3{ font-size: 14px; line-height: 20px; float: none; clear: left; }
+	.tl-box{ float: none; margin: 0; }
+	.tl-box label{ float: none; }
+	.tl-box .form-control{ width: 100%; }
+	.breadcrumb-main ol li{ font-size: 14px; }
+	.login-part{ margin: 20px 15px; max-width: inherit; padding: 15px; }
+	.dashboard-blank{ padding: 30px 15px; }
+	.project-details-section .text{ padding: 20px 0 0 0; }
+	.dt-form{ clear: both; width: auto; }
+	.current-status-part .box{ width: auto; float: none; margin: 0 0 5px 0; }
+	.current-status-part .box span{ display: block; }
+	.current-status-part .btn{ margin: 0; }
+	.current-status-part .box textarea{ width: 100%; }
+	.or-box{ padding-top: 30px !important; }
+	.or-box:before{ top:0; left:25px; }
+	.title-part h2{ padding: 0 0 10px 0; }
+	.theatrical-top-form .radio-inline{ display: block; margin: 0 0 10px 0; }
+	.support-req-tab-section .tab-content{ padding: 10px; }
+	.issues-list ul li .box .image{ height:50px; width: 50px; margin: 0 10px 0 0; }
+	.issues-list ul li .box .text h3{ font-size: 16px; padding: 0px 0 5px 0; }
+	.support-req-tab-section .nav li a{ font-size: 14px; padding: 7px 10px; }
+	.user-heading .image{ width: 50px; height: 50px; }
+	.user-heading .text h3{ font-size: 16px; padding: 0px 0 10px 0; }
+	.chat-user{ margin-right: 3px; }
+	.req-btn{ float: none; padding: 0 0 10px 0; }
+	.support-req-tab-section .nav li{ float: none; }
+	.support-req-tab-section .nav li a{ display: block; }
+	.payment-tab-section .nav li{ float: none; display: block; }
+	.payment-tab-section .nav li a{ display: block; }
+	.bank-box{ padding: 15px; }
+	.rev-box p{ font-size: 14px; }
+	.payment-tab-section .tab-content{ padding: 10px; }
+	.modal-sm{ width:auto; }
+	.cr-from .form-control{ margin-bottom: 5px; }
+	.add-btn a{  margin-left: 0; margin-bottom: 5px; }
+	.press-form .row{ margin-bottom: 15px; }
+	.country-box select{ margin-bottom:10px; }
+	
+}
+
+@media screen and (max-width:479px)
+{
+	.message-header ul.dropdown-menu{  left:auto; right:0; }
+	.profile-pic-text{ float: none; clear: left; }
+	.profile-pic-text h3{ font-size: 18px; }
+	.stackholder-prf-image-part h3{ font-size: 18px; }
+	.rd-form .radio-inline{ margin: 4px 0; display: block; }
+	.add-btn{ text-align: center; }
+	
+	.breadcrumb .pull-right .btn-primary{
+	margin-top: 15px; }
+   .breadcrumb .pull-right {
+	float: none !important; 
+      }
+
+	
+	
+}
+
+@media screen and (max-width:350px)
+{
+	.navbar-static-top .nav.navbar-top-links li.dropdown{ display: inline-block; }
+	
+	
+	
+}
+
+
+
+
