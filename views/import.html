@@ -1,0 +1,75 @@
+<div id="mainPage" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2>
+        <span  style="margin-Left:540px;text-align: center;"><b>Excel File Import App</b></span></h2>
+    <h2>
+        <h4>
+            <span class="center-block"><b> Please Upload .xlsx or .csv file</b></span></h4>
+        <input type="file" style="width:400px; background-color: yellow;" id="fileInput"><br>
+        <button class="btn btn-primary" ng-click="getSet()">Import</button>
+        <div ng-show="importSummary.outcome == 'error'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label>{{importSummary.errorMessage}}</label>
+        </div>
+        <div style="width:1300px; text-align: center;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2><b>Following Mappings were found :-</b></h2>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <table class="table">
+                <tr>
+                    <th>Domain</th>
+                    <th>Column</th>
+                    <th>Field</th>
+                    <th>Arguments</th>
+                </tr>
+                <tbody ng-repeat="iSummary in initialSummary">
+                    <tr>
+                        <td rowspan="{{iSummary.length+1}}">{{iSummary[0].domain}}</td>
+                    </tr>
+                    <tr ng-repeat="item in iSummary">
+                        <td>{{item.key}}</td>
+                        <td>{{item.field}}</td>
+                        <td>{{item.args}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+<br>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <span class="btn btn-info float-right">No of Requests made : {{requestStats.requestCount}}</span>
+    <span class="btn btn-success" style="width:230px;">No of Successful requests : {{requestStats.successCount}}</span>
+    <span class="btn btn-danger float-left">No of Failed requests : {{requestStats.errorCount}}</span>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Row</th>
+                    <th>Domain</th>
+                    <th>Status</th>
+                    <th>HTTP Response</th>
+                    <th>Conflict Details</th>
+                    <th>Reference</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="summaryItems in importSummary">
+                <tr>
+                    <td rowspan="{{summaryItems.length+1}}"> {{summaryItems[0].row+2}}</td>
+                </tr>
+                <tr ng-repeat="item in summaryItems">
+                    <td>{{item.domain}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.httpResponse.message}}</td>
+                    <td><i ng-repeat="conflict in item.conflicts">{{conflict.object}} {{conflict.value}}</i> </td>
+                    <td>{{item.reference}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="alert">
+    <table>
+        <tr ng-repeat="error in errorList">
+            <td>{{error.description}}</td>
+        </tr>
+    </table>
+</div>
+</div>

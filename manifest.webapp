@@ -1,0 +1,29 @@
+{
+    "activities": {
+        "dhis": {
+            "href": "*",
+            "namespace": null
+        }
+    },
+    "baseUrl": null,
+    "default_locale": "en",
+    "description": "Excel Importer",
+    "developer": {
+        "company": null,
+        "email": null,
+        "name": "HISP",
+        "url": "http://dhis2.org"
+    },
+    "folderName": null,
+    "icons": {
+        "128": "img/excel-icon.png",
+        "16": "img/excel-icon.png",
+        "48": "img/excel-icon.png"
+    },
+    "installs_allowed_from": null,
+    "key": null,
+    "launchUrl": null,
+    "launch_path": "index.html",
+    "name": "#Excel-Import",
+    "version": "229.1"
+}
