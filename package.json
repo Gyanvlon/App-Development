@@ -1,6 +1,13 @@
 {
   "name": "cama",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "developer": {
+    "name": "Gyan Bahadur Tamang"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gyanvlon/App-Development/tree/Cama-App"
+},
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
