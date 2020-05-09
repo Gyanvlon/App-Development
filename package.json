@@ -2,6 +2,14 @@
   "name": "distribution-point",
   "version": "1.0.0",
   "license": "MIT",
+  "developer": {
+    "name": "Gyan Bahadur Tamang",
+    "email": "gyan.vlon212@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gyanvlon/App-Development/tree/WPDM-App"
+},
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot",
