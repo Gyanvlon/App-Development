@@ -1,1 +1,0 @@
-export { getSqlView } from './getSqlView'
