@@ -1,0 +1,42 @@
+.btn{
+float: "right"
+}
+.loaderPosition{
+    text-align: center;
+    margin-top: 200px;
+  }
+  .sidebars {
+    height: 280px;
+    overflow: auto;
+    overflow-y: scroll;
+    /* width: 10%; */
+  }
+  .cartContent{
+    margin: 30px;
+  }
+  .contentManage{
+    margin: 0px;
+  }
+  .mainDiv {
+    width:70%;
+  }
+  .main {
+    width:70%;
+  }
+
+  /* .sidebars {
+    height: 430px;
+    width: 20%;
+    top: 0;
+    left: 0;
+    background-color: rgb(253, 251, 251);
+    overflow: auto;
+    overflow-y: scroll;
+    margin-top: 50px;
+  } */
+  
+  /* .main-div {
+    width:70%;
+    height: 40px;
+    align-content: center;
+  } */
