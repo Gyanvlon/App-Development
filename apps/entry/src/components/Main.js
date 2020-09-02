@@ -2,11 +2,9 @@ import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { EventOverview } from './EventOverview'
 import { EventForm } from './EventForm'
-// const paths = ['/orgUnit/:orgUnit/event', '/orgUnit/:orgUnit/event/:event', '/orgUnit/:orgUnit/trackedEntityInstances/:teiId']
-const paths = [
-    '/orgUnit/:orgUnit/event',
-    '/orgUnit/:orgUnit/trackedEntityInstances/:teiId',
-]
+
+const paths = ['/orgUnit/:orgUnit/event', '/orgUnit/:orgUnit/event/:event']
+
 export const Main = () => (
     <Switch>
         <Route

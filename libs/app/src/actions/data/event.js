@@ -6,7 +6,6 @@ import {
     EXISTING_DATA_RECEIVED,
     EXISTING_DATA_ERRORED,
     NEW_EVENT_ERRORED,
-    SET_PANEL,
     DISABLE_BUTTONS,
     RESET_PANEL_EVENT,
     SET_INCOMPLETED,
@@ -17,36 +16,33 @@ import {
     DUPLICACY,
     ENABLE_BUTTONS,
     EXIT,
-    PANEL_EDITABLE,
     SET_BUTTON_LOADING,
-    EXISTING_TEI_DATA_RECEIVED,
-    REMOVE_BUTTONS,
-    SET_PREVIOUS_EVENT,
-    SET_EVENT,
-    SET_PREVALUE
 } from '../types'
 import { deleteEvent } from '@hisp-amr/api'
-
 import {
     existingRecord,
     newRecord,
     setEventStatus,
     updateEventValue,
     isDuplicateRecord,
-    existingRecordTei
 } from 'api'
 import { entityRules, eventRules, getRules } from 'helpers'
 import { DUPLICATE_CHECKING } from 'constants/duplicacy'
 import { LOADING, SUCCESS } from 'constants/statuses'
-import { SAMPLE_ID_ELEMENT, ORGANISM_SET , ORGANISM_DETECTED} from 'constants/dhis2'
-import { showAlert } from '../alert'  
+import { SAMPLE_ID_ELEMENT, ORGANISM_SET } from 'constants/dhis2'
+import { showAlert } from '../alert'
+
 export const resetData = () => dispatch => dispatch(createAction(RESET_DATA))
-export const disableButtons = () => dispatch =>dispatch(createAction(DISABLE_BUTTONS))
-export const enableButtons = () => dispatch =>dispatch(createAction(ENABLE_BUTTONS))
-export const AddAndSubmit = val => dispatch =>dispatch(createAction(REMOVE_BUTTONS, val))
-export const setButtonLoading = payload => dispatch =>dispatch(createAction(SET_BUTTONS, payload))
-export const addExistingEvent = payload => dispatch =>dispatch(createAction(SET_EVENT, payload))
-export const PreValue = payload => dispatch=> dispatch(createAction(SET_PREVALUE, payload))
+
+export const disableButtons = () => dispatch =>
+    dispatch(createAction(DISABLE_BUTTONS))
+
+export const enableButtons = () => dispatch =>
+    dispatch(createAction(ENABLE_BUTTONS))
+
+export const setButtonLoading = payload => dispatch =>
+    dispatch(createAction(SET_BUTTONS, payload))
+
 export const initNewEvent = orgUnit => (dispatch, getState) => {
     const entityMetadata = getState().metadata.person
     const optionSets = getState().metadata.optionSets
@@ -85,7 +81,8 @@ const getCode = (orgUnit, orgUnits) => {
         }
     }
 }
-export const getExistingEvent = (orgUnit, tieId, eventId, editStatus, btnStatus) => async (
+
+export const getExistingEvent = (orgUnit, eventId) => async (
     dispatch,
     getState
 ) => {
@@ -94,7 +91,8 @@ export const getExistingEvent = (orgUnit, tieId, eventId, editStatus, btnStatus)
     const optionSets = state.metadata.optionSets
     const { trackedEntityTypeAttributes, rules } = state.metadata.person
     try {
-        const data = await existingRecord(programs, orgUnit, tieId, eventId)
+        const data = await existingRecord(programs, eventId)
+
         const [entityValues, attributes] = entityRules(
             { ...state.metadata.person.values, ...data.entityValues },
             trackedEntityTypeAttributes,
@@ -104,63 +102,49 @@ export const getExistingEvent = (orgUnit, tieId, eventId, editStatus, btnStatus)
                 uniques: [],
             }
         )
-        data.TeiID = tieId;
-        data.btnStatus=btnStatus;
-        data.editable = editStatus;
-        if(data.eventList.length==0){
-            data.entityValues = entityValues
-            data.entityAttributes = attributes
-            data.orgUnit = {
-                id: orgUnit,
-                code: getCode(orgUnit, state.metadata.orgUnits),
-            }
-            data.programs = state.metadata.programList
-            data.organisms = optionSets[ORGANISM_SET]
-            //  data.invalid = false
-            dispatch(createAction(EXISTING_TEI_DATA_RECEIVED, data))
-        } else{
-            data.eventRules = getRules(
-                state.metadata.eventRules,
-                data.program,
-                data.programStage.id
-            )
-            const [eventValues, programStage, invalid] = eventRules(
-                data.eventValues,
-                data.programStage,
-                {
-                    rules: data.eventRules,
-                    optionSets,
-                    pushChanges: !data.status.completed,
-                    updateValue: (key, value) =>
+        data.eventRules = getRules(
+            state.metadata.eventRules,
+            data.program,
+            data.programStage.id
+        )
+        const [eventValues, programStage, invalid] = eventRules(
+            data.eventValues,
+            data.programStage,
+            {
+                rules: data.eventRules,
+                optionSets,
+                pushChanges: !data.status.completed,
+                updateValue: (key, value) =>
                     updateEventValue(data.eventId, key, value),
-                }
-            )
-            data.entityValues = entityValues
-            data.entityAttributes = attributes
-            data.eventValues = eventValues
-            data.programStage = programStage
-            data.orgUnit = {
-                id: orgUnit,
-                code: getCode(orgUnit, state.metadata.orgUnits),
             }
-            data.programs = state.metadata.programList
-            data.organisms = optionSets[ORGANISM_SET]
-            data.invalid = invalid
-            data.rules = getRules(
-                state.metadata.eventRules,
-                data.program,
-                data.programStage.id
-            )
+        )
+        data.entityValues = entityValues
+        data.entityAttributes = attributes
+        data.eventValues = eventValues
+        data.programStage = programStage
+        data.orgUnit = {
+            id: orgUnit,
+            code: getCode(orgUnit, state.metadata.orgUnits),
+        }
+        data.programs = state.metadata.programList
+        data.organisms = optionSets[ORGANISM_SET]
+        data.invalid = invalid
+        data.rules = getRules(
+            state.metadata.eventRules,
+            data.program,
+            data.programStage.id
+        )
         dispatch(createAction(EXISTING_DATA_RECEIVED, data))
-        } 
     } catch (error) {
         console.error(error)
         dispatch(showAlert('Failed to get record.', { critical: true }))
         dispatch(createAction(EXISTING_DATA_ERRORED))
     }
 }
+
 export const createNewEvent = () => async (dispatch, getState) => {
     dispatch(disableButtons)
+
     const orgUnit = getState().data.orgUnit
     const entity = getState().data.entity
     const panel = getState().data.panel
@@ -194,7 +178,7 @@ export const createNewEvent = () => async (dispatch, getState) => {
                 optionSets: metadata.optionSets,
                 pushChanges: !data.status.completed,
                 updateValue: (name, value) =>
-                updateEventValue(data.eventId, name, value),
+                    updateEventValue(data.eventId, name, value),
             }
         )
         dispatch(
@@ -222,24 +206,13 @@ export const submitEvent = addMore => async (dispatch, getState) => {
             createAction(SET_BUTTON_LOADING, addMore ? 'submitAdd' : 'submit')
         )
     })
-    const eventId = getState().data.event.id;    
-    const eventValues = getState().data.event.values;
+    const eventId = getState().data.event.id
 
     try {
-        
         await setEventStatus(eventId, true)
         if (addMore) dispatch(createAction(RESET_PANEL_EVENT))
-        else {
-            if (eventValues[ORGANISM_DETECTED] == "Detected") {
-                dispatch(createAction(SET_PREVIOUS_EVENT, { eventValues }))
-                dispatch(createAction(PANEL_EDITABLE))
-                dispatch(createAction(RESET_PANEL_EVENT))
-            } else {
-                dispatch(createAction(EXIT))
-            }
-        }
+        else dispatch(createAction(EXIT))
         dispatch(createAction(SET_COMPLETED))
-
         dispatch(showAlert('Submitted successfully.', { success: true }))
     } catch (error) {
         console.error(error)
@@ -308,8 +281,10 @@ export const setEventValue = (key, value) => (dispatch, getState) => {
     const event = getState().data.event
     if (event.values[key] === value) return
     const optionSets = getState().metadata.optionSets
+
     updateEventValue(event.id, key, value)
-    // if (key === SAMPLE_ID_ELEMENT) dispatch(checkDuplicacy(value))
+
+    if (key === SAMPLE_ID_ELEMENT) dispatch(checkDuplicacy(value))
 
     const [values, programStage, invalid] = eventRules(
         { ...event.values, [key]: value },
@@ -331,16 +306,16 @@ export const setEventValue = (key, value) => (dispatch, getState) => {
     )
 }
 
-// export const checkDuplicacy = sampleId => async (dispatch, getState) => {
-//     dispatch(createAction(DUPLICACY, DUPLICATE_CHECKING))
-//     const event = getState().data.event.id
-//     const entity = getState().data.entity.id
-//     const organism = getState().data.panel.organism
-//     const duplicate = await isDuplicateRecord({
-//         event,
-//         entity,
-//         organism,
-//         sampleId,
-//     })
-//     dispatch(createAction(DUPLICACY, duplicate))
-// }
+export const checkDuplicacy = sampleId => async (dispatch, getState) => {
+    dispatch(createAction(DUPLICACY, DUPLICATE_CHECKING))
+    const event = getState().data.event.id
+    const entity = getState().data.entity.id
+    const organism = getState().data.panel.organism
+    const duplicate = await isDuplicateRecord({
+        event,
+        entity,
+        organism,
+        sampleId,
+    })
+    dispatch(createAction(DUPLICACY, duplicate))
+}

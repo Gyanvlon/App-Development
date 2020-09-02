@@ -3,6 +3,9 @@
 ## Apps
 
 -   [Data Entry](./apps/entry)
+-   [Isolate Transfer](./apps/isolate)
+-   [RC - Isolate Transfer](./apps/isolate-rc)
+-   [NC - Isolate Transfer](./apps/isolate-nc)
 
 ## Libs
 

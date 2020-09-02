@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { showAlert } from '@hisp-amr/app'
-import { getTEI } from 'api'
+import { getEvents } from 'api'
 
 const INITIAL_STATE = {
     rows: null,
@@ -67,7 +67,11 @@ export const useEvents = status => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const events = await getTEI(selected)
+                const events = await getEvents(
+                    categories.find(c => c.status === status),
+                    selected,
+                    user.username
+                )
                 dispatcher({
                     type: NEW_ROWS,
                     rows: events,

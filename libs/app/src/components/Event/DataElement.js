@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { string, object } from 'prop-types'
+import { string } from 'prop-types'
 import { Padding } from '../Padding'
 import { SAMPLE_ID_ELEMENT } from 'constants/dhis2'
 import {
@@ -10,17 +10,14 @@ import {
     SwitchInput,
     DateInput,
 } from '@hisp-amr/inputs'
-import { setEventValue,AddAndSubmit } from 'actions'
+import { setEventValue } from 'actions'
 import * as DUPLICACY from 'constants/duplicacy'
+
 export const DataElement = ({ id }) => {
     const dispatch = useDispatch()
     const optionSets = useSelector(state => state.metadata.optionSets)
     const completed = useSelector(state => state.data.event.status.completed)
-    var value = useSelector(state => state.data.event.values[id])
-    const preValues = useSelector(state => state.data.preValues)
-    const objLength = Object.keys(preValues).length
-    if((id === 'GpAu5HjWAEz') && (objLength >0))
-      {value =preValues.GpAu5HjWAEz}
+    const value = useSelector(state => state.data.event.values[id])
     const color = useSelector(
         state => state.data.event.programStage.dataElements[id].color
     )
@@ -55,20 +52,8 @@ export const DataElement = ({ id }) => {
     const duplicate =
         id === SAMPLE_ID_ELEMENT &&
         useSelector(state => state.data.event.duplicate)
-    const onChange = (key, value) => {
-        if((key == 'u8VDCIwa3w4') && (value == 'Detected'))
-        {
-         dispatch(AddAndSubmit(true))
-         dispatch(setEventValue(key, value))
-        }
-        else if((key == 'u8VDCIwa3w4') && (value == 'Sterile')) {
-         dispatch(AddAndSubmit(false))
-         dispatch(setEventValue(key, value))
-        }
-        else {
-            dispatch(setEventValue(key, value))
-        }
-    }
+
+    const onChange = (key, value) => dispatch(setEventValue(key, value))
 
     if (hide) return null
 

@@ -35,18 +35,18 @@ export const EventOverview = ({ match, history }) => {
     /**
      * Called when table row is clicked.
      */
-    const onEventClick = row => {
-        history.push(`/orgUnit/${row[6]}/trackedEntityInstances/${row[7]}`)
-    }
+    const onEventClick = row =>
+        history.push(`/orgUnit/${row[5]}/event/${row[6]}`)
 
     /**
      * On table add click.
      */
-    const onAddClick = () =>history.push(`/orgUnit/${selected.id}/event/`)
+    const onAddClick = () => history.push(`/orgUnit/${selected.id}/event/`)
+
     return (
         <MainSection>
             <TitleRow
-                // title={titles[status]}
+                title={titles[status]}
                 button={
                     <div title={title[addButtonDisabled]}>
                         <RichButton

@@ -6,31 +6,11 @@ import {
     SET_UNIQUE,
     SET_MODAL_LOADING,
     SET_EDITING,
-    RESET_PREVIOUS_ENTITY,
-    SET_PREVIOUS_ENTITY,
-    ADD_ENTITY
-
 } from '../types'
 import { showAlert } from '../alert'
 import { getPersonValues, checkUnique } from 'api'
 import { entityRules } from 'helpers'
-export const resetPreviousEntity = () => dispatch => dispatch(createAction(RESET_PREVIOUS_ENTITY))
-export const addPreviousEntity = () =>  (
-    dispatch,
-    getState
-) => {
-    const state = getState() 
-    const entity = state.data.entity;
-    dispatch(createAction(SET_PREVIOUS_ENTITY, {entity})) 
-}
-export const addEntity = () =>  (
-    dispatch,
-    getState
-) => {
-    const state = getState() 
-    const previousValues = state.data.previousValues;
-    dispatch(createAction(ADD_ENTITY, {previousValues})) 
-}
+
 export const getEntity = id => async (dispatch, getState) => {
     dispatch(createAction(SET_MODAL_LOADING, true))
     const optionSets = getState().metadata.optionSets
@@ -80,6 +60,7 @@ export const setEntityValue = (key, value) => (dispatch, getState) => {
     )
     dispatch(createAction(SET_ENTITY_VALUE, { values, attributes, valid }))
 }
+
 export const validateUnique = (id, value, label) => async (
     dispatch,
     getState

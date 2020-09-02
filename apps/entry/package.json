@@ -10,7 +10,7 @@
         "company": "HISP India"
     },
     "manifest.webapp": {
-        "name": "AMR Data Entry Tanda ",
+        "name": "AMR Data Entry",
         "description": "Enter AMR data.",
         "appType": "APP",
         "activities": {
@@ -25,10 +25,10 @@
         "48": "appicon-48x48.svg"
     },
     "scripts": {
-        "start": "cross-env REACT_APP_DHIS2_TABLE_CONFIG=tanda PORT=3001 react-scripts start",
+        "start": "REACT_APP_DHIS2_TABLE_CONFIG=tanda PORT=3001 react-scripts start",
         "build": "yarn build:icmr && yarn build:tanda",
-        "build:icmr": "env REACT_APP_DHIS2_TABLE_CONFIG=icmr react-scripts build",
-        "build:tanda": "env REACT_APP_DHIS2_TABLE_CONFIG=tanda react-scripts build",
+        "build:icmr": "REACT_APP_DHIS2_TABLE_CONFIG=icmr react-scripts build",
+        "build:tanda": "REACT_APP_DHIS2_TABLE_CONFIG=tanda react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "prebuild:icmr": "rimraf build ../../amr-entry-icmr.zip && d2-manifest package.json public/manifest.webapp",
@@ -38,15 +38,13 @@
         "analyze": "source-map-explorer build/static/js/*.js'"
     },
     "dependencies": {
-        "@dhis2/ui-core": "^3.12.0",
         "@hisp-amr/api": "*",
         "@hisp-amr/app": "*",
         "@hisp-amr/icons": "*",
         "@hisp-amr/inputs": "*",
         "@hisp-amr/org-unit-tree": "*",
-        "jquery": "^3.4.1",
+        "@dhis2/ui-core": "^3.12.0",
         "react": "^16.9.0",
-        "react-bootstrap-sweetalert": "^5.1.9",
         "react-dom": "^16.9.0"
     }
 }

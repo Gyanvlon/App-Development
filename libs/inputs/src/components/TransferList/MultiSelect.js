@@ -23,7 +23,8 @@ const StyledSelect = styled.select`
     }
 `
 
-const onDoubleClick = (n, m) =>console.log('here is value', n, m)
+const onDoubleClick = (n, m) => console.log(n, m)
+
 export const MultiSelect = ({ onChange, onDoubleClick, options }) => (
     <StyledSelect onChange={onChange} multiple>
         {options.map(({ label, value }) => (

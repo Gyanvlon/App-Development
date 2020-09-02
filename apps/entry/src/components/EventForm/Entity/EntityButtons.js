@@ -27,5 +27,6 @@ export const EntityButtons = () => {
             small: true,
         },
     ]
+
     return <ButtonRow buttons={buttons} />
 }

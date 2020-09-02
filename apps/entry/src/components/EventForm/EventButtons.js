@@ -16,33 +16,43 @@ const StyledButtonRow = styled(ButtonRow)`
 export const EventButtons = ({ history, existingEvent }) => {
     const dispatch = useDispatch()
     const buttonsDisabled = useSelector(state => state.data.buttonsDisabled)
-    var btnStatus = useSelector(state => state.data.btnStatus)
     const status = useSelector(state => state.data.event.status)
     const eventId = useSelector(state => state.data.event.id)
     const invalid = useSelector(state => state.data.event.invalid)
     const duplicate = useSelector(state => state.data.event.duplicate)
     const exit = useSelector(state => state.data.exit)
     const buttonLoading = useSelector(state => state.data.buttonLoading)
-    const pageFirst = useSelector(state => state.data.pageFirst)
-    const removeButtton = useSelector(state => state.data.removebtn)
+
     useEffect(() => {
         if (exit) history.goBack()
     }, [exit, history])
+
     const onSubmit = async addMore => await dispatch(submitEvent(addMore))
-    const submitExit = async () =>{
-        if(pageFirst){
-        await onSubmit(false)
-        } else{
-            window.location.reload(false)
-            await onSubmit(false)
-        }  
-    } 
+
+    const submitExit = async () => await onSubmit(false)
+
     const submitAdd = async () => await onSubmit(true)
+
     const onEdit = () => dispatch(editEvent())
+
+    const onDelete = () => dispatch(setDeletePrompt(true))
+
+    const deleteButton = {
+        label: 'Delete',
+        onClick: onDelete,
+        disabled: buttonsDisabled || !status.deletable,
+        icon: 'delete',
+        destructive: true,
+        tooltip:
+            buttonsDisabled || !status.deletable
+                ? 'You cannot delete records with an approval status'
+                : 'Permanently delete record',
+    }
+
     const editButton = {
         label: 'Edit',
         onClick: onEdit,
-        disabled: buttonsDisabled || !status.editable || btnStatus,
+        disabled: buttonsDisabled || !status.editable,
         icon: 'edit',
         primary: true,
         tooltip:
@@ -86,7 +96,8 @@ export const EventButtons = ({ history, existingEvent }) => {
         existingEvent
             ? !eventId
                 ? []
-                : [status.completed ? editButton : submitButton]
-            : removeButtton ? [submitButton]: [submitAddButton, submitButton]
+                : [deleteButton, status.completed ? editButton : submitButton]
+            : [submitAddButton, submitButton]
+
     return <StyledButtonRow buttons={buttons()} />
 }

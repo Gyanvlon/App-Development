@@ -28,15 +28,6 @@ import {
     DUPLICACY,
     EXIT,
     SET_BUTTON_LOADING,
-    SET_PREVIOUS_ENTITY,
-    RESET_PREVIOUS_ENTITY,
-    ADD_ENTITY,
-    PANEL_EDITABLE,
-    EXISTING_TEI_DATA_RECEIVED,
-    REMOVE_BUTTONS,
-    SET_PREVIOUS_EVENT,
-    SET_EVENT,
-    SET_PREVALUE
 } from '../actions/types'
 
 const INITIAL_EVENT = {
@@ -50,13 +41,6 @@ const INITIAL_EVENT = {
 }
 
 const INITIAL_STATE = {
-    previousValues: {},
-    btnStatus:false,
-    editable: false,
-    pageFirst:false,
-    removebtn: false,
-    eventEditable: false,
-    eventList:[],
     exit: false,
     entity: {
         values: null,
@@ -70,7 +54,6 @@ const INITIAL_STATE = {
         programStage: '',
         organism: '',
         sampleDate: '',
-        defaultProgram: [{value: "L7bu48EI54J", label: "Sample Testing"}],
         valid: false,
     },
     event: INITIAL_EVENT,
@@ -79,27 +62,7 @@ const INITIAL_STATE = {
 
 export const data = (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
-         case SET_PREVIOUS_ENTITY: 
-        return {
-            ...state,
-            previousValues: payload.entity
-        }
-        case SET_PREVALUE:
-            return {
-                ...state,
-                preValues: payload
-            }
-            case RESET_PREVIOUS_ENTITY:
-                return {
-                    ...state,
-                    previousValues: {}
-                }
-        case ADD_ENTITY:
-            return {
-                ...state,
-                entity: payload.previousValues
-            }
-            case SET_ENTITY:
+        case SET_ENTITY:
             return {
                 ...state,
                 entity: {
@@ -111,16 +74,16 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
                     modal: null,
                 },
             }
-            case SET_ENTITY_VALUE:
-                return {
-                    ...state,
-                    entity: {
-                        ...state.entity,
-                        values: payload.values,
-                        attributes: payload.attributes,
-                        valid: payload.valid,
-                    },
-                }
+        case SET_ENTITY_VALUE:
+            return {
+                ...state,
+                entity: {
+                    ...state.entity,
+                    values: payload.values,
+                    attributes: payload.attributes,
+                    valid: payload.valid,
+                },
+            }
         case SET_UNIQUE:
             return {
                 ...state,
@@ -152,7 +115,7 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
                     },
                 },
             }
-            case SET_EDITING:
+        case SET_EDITING:
             return {
                 ...state,
                 entity: {
@@ -164,11 +127,11 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 panel: {
-                    ...state.panel,
                     program: payload.program,
                     programStage: payload.programStage,
                     organism: payload.organism,
                     sampleDate: payload.sampleDate,
+                    programs: state.panel.programs,
                     organisms: payload.organisms,
                     valid: payload.valid,
                 },
@@ -198,7 +161,6 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
         case SET_ENTITY_AND_ORG_UNIT: {
             return {
                 ...state,
-                pageFirst:true,
                 entity: {
                     values: payload.values,
                     id: payload.id,
@@ -215,58 +177,9 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
             }
         }
         case RESET_DATA:
-            return {
-                ...state,
-                pageFirst:false,
-                editable: false,
-                eventEditable: false,
-                eventList:[],
-                exit: false,
-                entity: {
-                    values: null,
-                    id: null,
-                    attributes: null,
-                    uniques: [],
-                    valid: false,
-                },
-                panel: {
-                    program: '',
-                    programStage: '',
-                    organism: '',
-                    sampleDate: '',
-                    defaultProgram: [{value: "L7bu48EI54J", label: "Sample Testing"}],
-                    valid: false,
-                },
-                event: INITIAL_EVENT,
-                buttonLoading: false,
-            }
-         case PANEL_EDITABLE:
-            return {
-                ...state,
-                editable: true,
-            }
-            case EXISTING_TEI_DATA_RECEIVED:
-            return {
-                ...state,
-                btnStatus: payload.btnStatus, 
-                eventEditable: payload.editable,
-                eventList: payload.eventList,
-                entity: {
-                    values: payload.entityValues,
-                    id: payload.TeiID,
-                    attributes: payload.entityAttributes,
-                    uniques: {},
-                    valid: true,
-                    modal: null,
-                },
-                orgUnit: payload.orgUnit,
-            }
+            return INITIAL_STATE
         case EXISTING_DATA_RECEIVED:
             return {
-                ...state,
-                btnStatus: payload.btnStatus, 
-                eventEditable: payload.editable,
-                eventList: payload.eventList,
                 entity: {
                     values: payload.entityValues,
                     id: payload.entityId,
@@ -276,7 +189,6 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
                     modal: null,
                 },
                 panel: {
-                    ...state.panel,
                     program: payload.program,
                     programStage: payload.programStage.id,
                     organism: payload.eventValues[ORGANISM_ELEMENT],
@@ -312,23 +224,6 @@ export const data = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 buttonsDisabled: false,
             }
-       case REMOVE_BUTTONS:
-                return {
-                    ...state,
-                    removebtn: payload,
-                }
-        case SET_EVENT:
-                    return {
-                        ...state,
-                        event: payload
-                    }
-        case SET_PREVIOUS_EVENT: 
-                return {
-                    ...state,
-                    previousValues: payload.eventValues
-                }
-        
-
         case RESET_PANEL_EVENT:
             return {
                 ...state,

@@ -1,6 +1,5 @@
 import { get, post, del, put, request, postEvent } from '@hisp-amr/api'
 import { getRecord } from './getRecord'
-import { getAllEvents, getPersonVal } from './getAllEvents'
 import {
     ORGANISM_ELEMENT,
     SAMPLE_ID_ELEMENT,
@@ -21,15 +20,13 @@ import * as DUPLICACY from 'constants/duplicacy'
  * @returns {boolean} - False if unique, tracked entity instance ID otherwise.
  */
 export const checkUnique = async (property, value, ou) => {
-    const entities = (
-        await get(
-            request('trackedEntityInstances', {
-                fields: 'trackedEntityInstance',
-                filters: `${property}:eq:${value}`,
-                options: [`ou=${ou}`, `trackedEntityType=${PERSON_TYPE}`],
-            })
-        )
-    ).trackedEntityInstances
+    const entities = (await get(
+        request('trackedEntityInstances', {
+            fields: 'trackedEntityInstance',
+            filters: `${property}:eq:${value}`,
+            options: [`ou=${ou}`, `trackedEntityType=${PERSON_TYPE}`],
+        })
+    )).trackedEntityInstances
     return !entities
         ? false
         : entities.length > 0
@@ -43,22 +40,21 @@ export const checkUnique = async (property, value, ou) => {
  * @returns {Object} Values.
  */
 export const getPersonValues = async entityId => {
-    const attributes = (
-        await get(
-            request(`trackedEntityInstances/${entityId}`, {
-                fields:
-                    'attributes[code,displayName,valueType,attribute,value]',
-                options: ['ouMode=ALL'],
-            })
-        )
-    ).attributes
+    const attributes = (await get(
+        request(`trackedEntityInstances/${entityId}`, {
+            fields: 'attributes[code,displayName,valueType,attribute,value]',
+            options: ['ouMode=ALL'],
+        })
+    )).attributes
 
     if (!attributes) return null
 
     const values = {}
     attributes.forEach(a => (values[a.attribute] = a.value))
+
     return values
 }
+
 /**
  * Adds a new person..
  * @param {Object} values - Values
@@ -128,29 +124,20 @@ export const newRecord = async (
         initialValues,
         { completed: false }
     )
+
     return { programStage, eventValues, status, eventId, entityId }
 }
 
-export const existingRecord = async (programs, ou, teiId, evId) => {
-    const allEvents = await getAllEvents(ou, teiId)
-    var eventList = allEvents.events;
-    if(evId === undefined) {
-        if(allEvents.events.length >0){
-            var eventId = allEvents.events[0].event
-            var record = await getRecord(programs, eventId)
-        }
-    } else {
-        var record = await getRecord(programs, evId)
-    }
-    if(teiId != undefined) {
-        var entityValues = await getPersonValues(teiId)
-    }
+export const existingRecord = async (programs, eventId) => {
+    const record = await getRecord(programs, eventId)
+    const entityValues = await getPersonValues(record.entityId)
+
     return {
-        eventList,
         ...record,
         entityValues,
     }
 }
+
 export const addPersonWithEvent = async (
     eventValues,
     programId,
@@ -221,16 +208,16 @@ export const addEvent = async (
         },
         eventValues
     )
+
     if (entityValues) await updatePerson(entityId, entityValues)
+
     // Enrolling if not already enrolled.
     let enrollments = []
-    enrollments = (
-        await get(
-            request(`trackedEntityInstances/${entityId}`, {
-                fields: 'enrollments[program]',
-            })
-        )
-    ).enrollments
+    enrollments = (await get(
+        request(`trackedEntityInstances/${entityId}`, {
+            fields: 'enrollments[program]',
+        })
+    )).enrollments
     if (!enrollments.find(enrollment => enrollment.program === programId)) {
         await post('enrollments', {
             trackedEntityInstance: entityId,
@@ -240,7 +227,9 @@ export const addEvent = async (
             incidentDate: sampleDate,
         })
     }
+
     const eventId = await postEvent(event)
+
     return {
         entityId,
         eventId,
@@ -249,8 +238,10 @@ export const addEvent = async (
 
 export const setEventStatus = async (eventId, completed) => {
     const url = `events/${eventId}`
+
     let event = await get(url)
     event.status = completed ? 'COMPLETED' : 'ACTIVE'
+
     const values = {}
     event.dataValues.forEach(
         dataValue => (values[dataValue.dataElement] = dataValue.value)
@@ -264,8 +255,10 @@ export const setEventStatus = async (eventId, completed) => {
         values[L2_REVISION_REASON] = ''
     }
     event = await setEventValues(event, values)
+
     await put(url, event)
 }
+
 export const updateEventValue = (eventId, dataElementId, value) =>
     put(`events/${eventId}/${dataElementId}`, {
         dataValues: [{ dataElement: dataElementId, value: value }],
@@ -277,16 +270,14 @@ export const isDuplicateRecord = async ({
     organism,
     sampleId,
 }) => {
-    let events = (
-        await get(
-            request('events', {
-                order: 'created:asc',
-                fields: 'event,dataValues[dataElement,value]',
-                filters: `${SAMPLE_ID_ELEMENT}&eq:${sampleId}`,
-                options: [`trackedEntityInstance=${entity}`],
-            })
-        )
-    ).events
+    let events = (await get(
+        request('events', {
+            order: 'created:asc',
+            fields: 'event,dataValues[dataElement,value]',
+            filters: `${SAMPLE_ID_ELEMENT}:eq:${sampleId}`,
+            options: [`trackedEntityInstance=${entity}`],
+        })
+    )).events
 
     if (!events) return false
     if (events.length < 1) return false

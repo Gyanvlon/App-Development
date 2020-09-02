@@ -1,10 +1,6 @@
 import { createAction } from '../createAction'
-import { SET_PANEL, SET_PANEL_VALUE, RESET_PANEL,PANEL_EDITABLE } from '../types'
-// export const panelEditable = () => dispatch => dispatch(createAction("Editable"))
-export const panelEditable = () => dispatch => dispatch(createAction(PANEL_EDITABLE))
-export const setPanel = () =>async(dispatch,getState) =>{
-    dispatch(createAction(RESET_PANEL_EVENT))
-}
+import { SET_PANEL, SET_PANEL_VALUE, RESET_PANEL } from '../types'
+
 export const setProgram = program => (dispatch, getState) => {
     const { programOrganisms, optionSets, stageLists } = getState().metadata
     const organisms = []
@@ -31,12 +27,13 @@ export const setPanelValue = (key, value) => (dispatch, getState) => {
         program,
         programStage,
         organism,
-        organisms,
         sampleDate,
     } = getState().data.panel
-    const values = { program, programStage, sampleDate }
+    const values = { program, programStage, organism, sampleDate }
+
     if (values[key] === value) return
     const valid = !Object.values({ ...values, [key]: value }).includes('')
+
     dispatch(
         createAction(SET_PANEL_VALUE, {
             key,

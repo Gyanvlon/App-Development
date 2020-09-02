@@ -1,33 +1,30 @@
 export const tanda = {
-    // titles: {
-    //     complete: 'Completed records',
-    //     incomplete: 'Incomplete records',
-    // },
+    titles: {
+        complete: 'Completed records',
+        incomplete: 'Incomplete records',
+    },
     headers: [
         {
-            name: 'CR Number',
+            name: 'CR number',
         },
         {
-            name: 'Name of the Patient',
+            name: 'Organism group',
         },
         {
-            name: 'Ward',
+            name: 'Organism',
         },
         {
-            name: 'Age',
+            name: 'Created',
         },
         {
-            name: 'Sex',
-        },
-        {
-            name: 'Address',
+            name: 'Updated',
         },
         {
             name: 'Organisation unit ID',
             options: { display: false },
         },
         {
-            name: 'Tracked Entity Instance ID',
+            name: 'Event',
             options: { display: false },
         },
     ],

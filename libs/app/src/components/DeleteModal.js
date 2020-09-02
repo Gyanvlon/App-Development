@@ -47,14 +47,14 @@ export const DeleteModal = ({ secondaryAction, onDeleteSucccess, type }) => {
                         label="Cancel"
                         disabled={loading}
                     />
-                    {/* <RichButton
+                    <RichButton
                         destructive
                         onClick={() => onDeleteConfirmation(true)}
                         loading={loading}
                         icon="delete"
                         label="Delete"
                         initialFocus
-                    /> */}
+                    />
                 </ButtonStrip>
             </Modal.Actions>
         </Modal>

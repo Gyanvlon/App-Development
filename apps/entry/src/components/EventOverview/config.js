@@ -1,7 +1,7 @@
-// export const titles = {
-//     complete: 'Completed records',
-//     incomplete: 'Incomplete records',
-// }
+export const titles = {
+    complete: 'Completed records',
+    incomplete: 'Incomplete records',
+}
 
 export const headers = [
     {

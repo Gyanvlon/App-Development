@@ -12,7 +12,6 @@ import { PanelButtons } from './PanelButtons'
  */
 export const Panel = ({ showEdit }) => {
     const entityValid = useSelector(state => state.data.entity.valid)
-    const editable = useSelector(state => state.data.editable)
     const dispatch = useDispatch()
     const { stageLists } = useSelector(state => state.metadata)
     const {
@@ -22,16 +21,13 @@ export const Panel = ({ showEdit }) => {
         sampleDate,
         valid,
         programs,
-        defaultProgram,
         organisms,
     } = useSelector(state => state.data.panel)
-  
+
     /**
      * Called when a new program is selected.
      */
-    const onProgramChange = async (name, value) =>{
-        dispatch(setProgram(value))
-    }
+    const onProgramChange = async (name, value) => dispatch(setProgram(value))
 
     /**
      * Called when something other than program is changed
@@ -48,16 +44,6 @@ export const Panel = ({ showEdit }) => {
             required: true,
         }
         switch (id) {
-            case `defaultProgram`: 
-            return getInput({
-                ...common,
-                id: 'program',
-                name: 'program',
-                label: 'Organism group',
-                objects: defaultProgram,
-                onChange: onProgramChange,
-                value: program
-            })
             case 'program':
                 return getInput({
                     ...common,
@@ -125,13 +111,13 @@ export const Panel = ({ showEdit }) => {
         <CardSection heading="Panel" buttons={showEdit && <PanelButtons />}>
             <Grid container spacing={0}>
                 <Grid item xs>
-                    {(defaultProgram.length && !editable) ?  getDataElement('defaultProgram'): getDataElement('program')}
+                    {getDataElement('program')}
                     {program &&
-                        stageLists[program].length >= 1 &&
+                        stageLists[program].length > 1 &&
                         getDataElement('programStage')}
                 </Grid>
                 <Grid item xs>
-                    {(program && organisms.length) ? getDataElement('organism') : ""}
+                    {program && getDataElement('organism')}
                     {getDataElement('sampleDate')}
                 </Grid>
             </Grid>
